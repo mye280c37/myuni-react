@@ -9,7 +9,6 @@ import FormGroup from '@mui/material/FormGroup';
 
 import AdditionalFormItem from './AdditionalForm/AdditionalFormItem';
 
-
 export default function AdditionalForm() {
   return (
     <React.Fragment>

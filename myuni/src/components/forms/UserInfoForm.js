@@ -6,8 +6,6 @@ import { FormControl, Select, MenuItem, InputLabel, FormLabel } from '@mui/mater
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import FormGroup from '@mui/material/FormGroup';
-import ScoreForm from './ScoreForm';
-import UniversityForm from './UniversityForm';
 
 export default function UserInfoForm() {
   return (

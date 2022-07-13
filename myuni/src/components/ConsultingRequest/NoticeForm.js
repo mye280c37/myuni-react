@@ -10,7 +10,7 @@ import FormGroup from '@mui/material/FormGroup';
 import RadioGroup from '@mui/material/RadioGroup';
 import Radio from '@mui/material/Radio';
 
-export default function ConsultingNoticeForm() {
+export default function NoticeForm() {
   return (
     <React.Fragment>
         <Typography variant="h6" gutterBottom>

@@ -2,9 +2,9 @@ import './App.css';
 import React from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import Consulting from './containers/Consulting';
-import Header from './components/Header';
-import Footer from './components/Footer';
+import ConsultingRequest from './pages/ConsultingRequest';
+import Header from './components/common/Header';
+import Footer from './components/common/Footer';
 
 const theme = createTheme();
 
@@ -14,7 +14,7 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Header/>
-        <Consulting />
+        <ConsultingRequest/>
         <Footer />
       </ThemeProvider>
     </div>

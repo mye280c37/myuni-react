@@ -11,26 +11,27 @@ import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
-import ConsultingForm from '../Consulting/ConsultingForm';
-import AdditionalForm from '../Consulting/AdditionalForm';
-import ConsultingNoticeForm from '../Consulting/ConsultingNoticeForm';
+
+import EssentialForm from '../components/ConsultingRequest/EssentialForm';
+import AdditionalForm from '../components/ConsultingRequest/AdditionalForm';
+import NoticeForm from '../components/ConsultingRequest/NoticeForm';
 
 const steps = ['필수 정보', '추가 정보', '공지사항 확인'];
 
 function getStepContent(step) {
   switch (step) {
     case 0:
-      return <ConsultingForm />;
+      return <EssentialForm />;
     case 1:
       return <AdditionalForm/>;
     case 2:
-      return <ConsultingNoticeForm/>;
+      return <NoticeForm/>;
     default:
       throw new Error('Unknown step');
   }
 }
 
-export default function Consulting() {
+export default function ConsultingRequest() {
   const [activeStep, setActiveStep] = React.useState(0);
 
   const handleNext = () => {

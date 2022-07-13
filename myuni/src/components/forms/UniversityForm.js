@@ -7,7 +7,8 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import FormGroup from '@mui/material/FormGroup';
 import { Container } from '@mui/system';
-import UniversityFormItem from './UniversityForm/UniversityFormItem';
+
+import UniversityFormItem from './UniversityForm/UniverstiyFormItem';
 
 function getUniveristyFormItemArray(num) {
   let arr = [];
