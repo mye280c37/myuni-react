@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from "react";
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
@@ -13,6 +13,7 @@ import ScoreForm from '../forms/ScoreForm';
 import UniversityForm from '../forms/UniversityForm';
 
 export default function EssentialForm() {
+
   return (
     <React.Fragment>
       <Typography variant="body1" sx={{ color: "darkred", mb: 5 }} gutterBottom>

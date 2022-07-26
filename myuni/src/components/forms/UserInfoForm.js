@@ -7,7 +7,12 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import FormGroup from '@mui/material/FormGroup';
 
+import useUserInfo from '../../hooks/useUserInfo';
+
 export default function UserInfoForm() {
+  const { form, onChange } = useUserInfo();
+  const { name, sex, age, phone } = form;
+
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
@@ -20,6 +25,8 @@ export default function UserInfoForm() {
             id="name"
             name="name"
             label="이름"
+            value={name}
+            onChange={onChange}
             fullWidth
             autoComplete="given-name"
             variant="standard"
@@ -31,12 +38,13 @@ export default function UserInfoForm() {
             <Select
               labelId="sex_label"
               id="sex"
-              // value={age}
+              name="sex"
               label="성별"
-              // onChange={handleChange}
+              value={sex}
+              onChange={onChange}
             >
-              <MenuItem value={0}>남</MenuItem>
-              <MenuItem value={1}>여</MenuItem>
+              <MenuItem value='m'>남</MenuItem>
+              <MenuItem value='w'>여</MenuItem>
             </Select>
           </FormControl>
         </Grid>
@@ -46,6 +54,8 @@ export default function UserInfoForm() {
             id="age"
             name="age"
             label="나이"
+            value={age}
+            onChange={onChange}
             fullWidth
             autoComplete="family-name"
             variant="standard"
@@ -57,6 +67,8 @@ export default function UserInfoForm() {
             id="phone"
             name="phone"
             label="전화번호"
+            value={phone}
+            onChange={onChange}
             fullWidth
             autoComplete="shipping address-line1"
             variant="standard"

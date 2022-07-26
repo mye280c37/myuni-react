@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from "react";
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
@@ -8,9 +8,15 @@ import Checkbox from '@mui/material/Checkbox';
 import FormGroup from '@mui/material/FormGroup';
 import { Container } from '@mui/system';
 
-export default function UniversityFormItem({ priority }) {
+import useUniversity from "../../../hooks/useUniversity";
+
+export default function UniversityFormItem({ priority, getData }) {
   const uniId = "uni" + priority;
   const subjectId = "subject" + priority;
+
+  const { form, onChange } = useUniversity();
+  const { uni, sub } = form;
+
   return (
     <React.Fragment>
       <Grid container spacing={3}>
@@ -23,6 +29,8 @@ export default function UniversityFormItem({ priority }) {
             id={uniId}
             name={uniId}
             label="대학교"
+            value={uni}
+            onChange={onChange}
             fullWidth
             autoComplete="shipping country"
             variant="standard"
@@ -34,6 +42,8 @@ export default function UniversityFormItem({ priority }) {
             id={subjectId}
             name={subjectId}
             label="학과"
+            value={sub}
+            onChange={onChange}
             fullWidth
             autoComplete="shipping country"
             variant="standard"

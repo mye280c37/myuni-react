@@ -7,7 +7,12 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import FormGroup from '@mui/material/FormGroup';
 
+import useScore from '../../hooks/useScore';
+
 export default function ScoreForm() {
+  const { form, onChange } = useScore();
+  const { korean, english, math, society, science, history, optional, average } = form;
+
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom sx={{ mt: 4 }}>
@@ -20,6 +25,8 @@ export default function ScoreForm() {
             id="korean"
             name="korean"
             label="국어"
+            value={korean}
+            onChange={onChange}
             fullWidth
             autoComplete="shipping country"
             variant="standard"
@@ -31,6 +38,8 @@ export default function ScoreForm() {
             id="english"
             name="english"
             label="영어"
+            value={english}
+            onChange={onChange}
             fullWidth
             autoComplete="shipping country"
             variant="standard"
@@ -42,6 +51,8 @@ export default function ScoreForm() {
             id="math"
             name="math"
             label="수학"
+            value={math}
+            onChange={onChange}
             fullWidth
             autoComplete="shipping country"
             variant="standard"
@@ -53,6 +64,8 @@ export default function ScoreForm() {
             id="society"
             name="society"
             label="사회"
+            value={society}
+            onChange={onChange}
             fullWidth
             autoComplete="shipping country"
             variant="standard"
@@ -64,6 +77,8 @@ export default function ScoreForm() {
             id="science"
             name="science"
             label="과학"
+            value={science}
+            onChange={onChange}
             fullWidth
             autoComplete="shipping country"
             variant="standard"
@@ -75,6 +90,8 @@ export default function ScoreForm() {
             id="history"
             name="history"
             label="한국사"
+            value={history}
+            onChange={onChange}
             fullWidth
             autoComplete="shipping country"
             variant="standard"
@@ -86,6 +103,8 @@ export default function ScoreForm() {
             id="optional"
             name="optional"
             label="선택"
+            value={optional}
+            onChange={onChange}
             fullWidth
             autoComplete="shipping country"
             variant="standard"
@@ -97,6 +116,8 @@ export default function ScoreForm() {
                 id="average"
                 name="average"
                 label="평균 점수"
+                value={average}
+                onChange={onChange}
                 fullWidth
                 autoComplete="shipping country"
                 variant="standard"
