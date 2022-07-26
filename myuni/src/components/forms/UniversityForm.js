@@ -2,23 +2,36 @@ import React, { useState } from "react";
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
-import { FormControl, Select, MenuItem, InputLabel, FormLabel } from '@mui/material';
+import { FormControl, Select, MenuItem, InputLabel, FormLabel, formControlClasses } from '@mui/material';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import FormGroup from '@mui/material/FormGroup';
 import { Container } from '@mui/system';
 
 import UniversityFormItem from './UniversityForm/UniverstiyFormItem';
+import useUniversity from "../../hooks/useUniversity";
 
-function getUniveristyFormItemArray(num) {
-  let arr = [];
-  for(let i = 1; i <= num; i++){
-    arr.push(<UniversityFormItem priority={i}/>)
+export default function UniversityForm({ onConsultingChange }) {
+  const { form, onReasonChange, onUniListChange } = useUniversity();
+  const { uni_list, reason } = form;
+  
+  const setUniList = (uni) => {
+    onUniListChange(uni);
+    onConsultingChange('uni_info', form);
   }
-  return arr;
-}
 
-export default function UniversityForm() {
+  const setReason = (e) => {
+    onReasonChange(e);
+    onConsultingChange('uni_info', form);
+  }
+
+  const getUniveristyFormItemArray = (num) => {
+    let arr = [];
+    for(let i = 1; i <= num; i++){
+      arr.push(<UniversityFormItem priority={i} setUniList={setUniList} />);
+    }
+    return arr;
+  }
 
   return (
     <React.Fragment>
@@ -38,6 +51,8 @@ export default function UniversityForm() {
               required
               id="reason"
               name="reason"
+              value={reason}
+              onChange={setReason}
               label="학교 및 학과 선정 이유"
               fullWidth
               multiline

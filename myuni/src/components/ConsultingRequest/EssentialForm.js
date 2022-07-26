@@ -12,17 +12,17 @@ import ConsultingForm from '../forms/ConsultingFrom';
 import ScoreForm from '../forms/ScoreForm';
 import UniversityForm from '../forms/UniversityForm';
 
-export default function EssentialForm() {
+export default function EssentialForm({onConsultingChange}) {
 
   return (
     <React.Fragment>
       <Typography variant="body1" sx={{ color: "darkred", mb: 5 }} gutterBottom>
         해당 페이지의 정보는 모두 필수사항입니다. 빠짐없이 채워주세요.
       </Typography>
-      <UserInfoForm/>
+      <UserInfoForm onConsultingChange={onConsultingChange}/>
       <ConsultingForm/>
       <ScoreForm/>
-      <UniversityForm/>
+      <UniversityForm onConsultingChange={onConsultingChange}/>
       <React.Fragment>
         <Typography variant="h6" gutterBottom sx={{ mt: 4 }}>
           참고사항

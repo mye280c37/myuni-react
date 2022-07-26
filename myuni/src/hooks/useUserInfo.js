@@ -8,7 +8,7 @@ export default function useUserInfo() {
         phone: ""
     });
 
-    const onChange = (e) => {
+    const onUserInfoChange = (e) => {
         setForm({
             ...form,
             [e.target.name]: e.target.value,
@@ -17,6 +17,6 @@ export default function useUserInfo() {
 
     return{
         form,
-        onChange
+        onUserInfoChange
     };
 }

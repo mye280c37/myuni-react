@@ -21,9 +21,9 @@ export default function ConsultingForm() {
                     </Typography>
                     <FormControl required variant="standard" fullWidth>
                     <FormGroup>
-                        <FormControlLabel control={<Checkbox />} label="수시 지원" />
-                        <FormControlLabel control={<Checkbox />} label="자기소개서 컨설팅" />
-                        <FormControlLabel control={<Checkbox />} label="면접 컨설팅" />
+                        <FormControlLabel control={<Checkbox name="consulting_option" value={"수시 지원"} />} label="수시 지원" />
+                        <FormControlLabel control={<Checkbox name="consulting_option" value={"자기소개서 컨설팅"} />} label="자기소개서 컨설팅" />
+                        <FormControlLabel control={<Checkbox name="consulting_option" value={"면접 컨설팅"} />} label="면접 컨설팅" />
                     </FormGroup>
                     </FormControl>
                 </Grid>
@@ -40,10 +40,10 @@ export default function ConsultingForm() {
                     </Typography>
                     <FormControl required variant="standard" fullWidth>
                         <FormGroup>
-                            <FormControlLabel control={<Checkbox />} label="학생부 교과(검정고시 성적)" />
-                            <FormControlLabel control={<Checkbox />} label="학생부 교과 면접(검정고시 성적 + 면접)" />
-                            <FormControlLabel control={<Checkbox />} label="정시(수능)" />
-                            <FormControlLabel control={<Checkbox />} label="기타" />
+                            <FormControlLabel control={<Checkbox name="application_type" value={"학생부 교과(검정고시 성적)"} />} label="학생부 교과(검정고시 성적)" />
+                            <FormControlLabel control={<Checkbox name="application_type" value={"학생부 교과 면접(검정고시 성적 + 면접)"} />} label="학생부 교과 면접(검정고시 성적 + 면접)" />
+                            <FormControlLabel control={<Checkbox name="application_type" value={"정시(수능)"} />} label="정시(수능)" />
+                            <FormControlLabel control={<Checkbox name="application_type" value={"기타"} />} label="기타" />
                         </FormGroup>
                     </FormControl>
                 </Grid>
@@ -82,9 +82,9 @@ export default function ConsultingForm() {
                             // onChange={handleChange}
                         >
                             <MenuItem value={0}>2022-07-29 16:00</MenuItem>
-                            <MenuItem value={0}>2022-07-30 15:00</MenuItem>
-                            <MenuItem value={0}>2022-07-30 16:00</MenuItem>
-                            <MenuItem value={0}>2022-08-01 15:00</MenuItem>
+                            <MenuItem value={1}>2022-07-30 15:00</MenuItem>
+                            <MenuItem value={2}>2022-07-30 16:00</MenuItem>
+                            <MenuItem value={3}>2022-08-01 15:00</MenuItem>
                         </Select>
                     </FormControl>
                 </Grid>

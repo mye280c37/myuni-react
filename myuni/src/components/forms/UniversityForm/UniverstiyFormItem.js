@@ -7,15 +7,23 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import FormGroup from '@mui/material/FormGroup';
 import { Container } from '@mui/system';
+import useUniversityItem from "../../../hooks/useUniversityItem";
 
-import useUniversity from "../../../hooks/useUniversity";
-
-export default function UniversityFormItem({ priority, getData }) {
+export default function UniversityFormItem({ priority, setUniList }) {
   const uniId = "uni" + priority;
   const subjectId = "subject" + priority;
 
-  const { form, onChange } = useUniversity();
-  const { uni, sub } = form;
+  const { uni, onUniChange, onSubjectChange } = useUniversityItem(priority);
+
+  const setUni = (e) => {
+    onUniChange(e);
+    setUniList(uni);
+  };
+
+  const setSubject = (e) => {
+    onSubjectChange(e);
+    setUniList(uni);
+  }
 
   return (
     <React.Fragment>
@@ -29,8 +37,8 @@ export default function UniversityFormItem({ priority, getData }) {
             id={uniId}
             name={uniId}
             label="대학교"
-            value={uni}
-            onChange={onChange}
+            value={uni.university}
+            onChange={setUni}
             fullWidth
             autoComplete="shipping country"
             variant="standard"
@@ -42,8 +50,8 @@ export default function UniversityFormItem({ priority, getData }) {
             id={subjectId}
             name={subjectId}
             label="학과"
-            value={sub}
-            onChange={onChange}
+            value={uni.subject}
+            onChange={setSubject}
             fullWidth
             autoComplete="shipping country"
             variant="standard"
