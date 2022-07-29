@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from "react";
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
@@ -6,9 +6,10 @@ import { FormControl, Select, MenuItem, InputLabel, FormLabel } from '@mui/mater
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import FormGroup from '@mui/material/FormGroup';
+import EtcCheckBox from "../common/EtcCheckBox";
 
 export default function ConsultingForm() {
-  return (
+    return (
     <React.Fragment>
         <React.Fragment>
             <Typography variant="h6" gutterBottom>
@@ -43,7 +44,7 @@ export default function ConsultingForm() {
                             <FormControlLabel control={<Checkbox name="application_type" value={"학생부 교과(검정고시 성적)"} />} label="학생부 교과(검정고시 성적)" />
                             <FormControlLabel control={<Checkbox name="application_type" value={"학생부 교과 면접(검정고시 성적 + 면접)"} />} label="학생부 교과 면접(검정고시 성적 + 면접)" />
                             <FormControlLabel control={<Checkbox name="application_type" value={"정시(수능)"} />} label="정시(수능)" />
-                            <FormControlLabel control={<Checkbox name="application_type" value={"기타"} />} label="기타" />
+                            <EtcCheckBox name="application_type"/>
                         </FormGroup>
                     </FormControl>
                 </Grid>
