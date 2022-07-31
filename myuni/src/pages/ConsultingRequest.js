@@ -15,14 +15,14 @@ import Typography from '@mui/material/Typography';
 import EssentialForm from '../components/ConsultingRequest/EssentialForm';
 import AdditionalForm from '../components/ConsultingRequest/AdditionalForm';
 import NoticeForm from '../components/ConsultingRequest/NoticeForm';
-import useConsulting from '../hooks/useConsulting';
+import useConsultingRequest from '../hooks/useConsultingRequest';
 
 const steps = ['필수 정보', '추가 정보', '공지사항 확인'];
 
 function getStepContent(step, onChange) {
   switch (step) {
     case 0:
-      return <EssentialForm onConsultingChange={onChange} />;
+      return <EssentialForm onConsultingRequestChange={onChange} />;
     case 1:
       return <AdditionalForm/>;
     case 2:
@@ -35,7 +35,7 @@ function getStepContent(step, onChange) {
 export default function ConsultingRequest() {
   const [activeStep, setActiveStep] = React.useState(0);
 
-  const { form, onConsultingChange } = useConsulting();
+  const { form, onConsultingRequestChange } = useConsultingRequest();
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
@@ -72,7 +72,7 @@ export default function ConsultingRequest() {
             </React.Fragment>
           ) : (
             <React.Fragment>
-              {getStepContent(activeStep, onConsultingChange)}
+              {getStepContent(activeStep, onConsultingRequestChange)}
               <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
                 {activeStep !== 0 && (
                   <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>

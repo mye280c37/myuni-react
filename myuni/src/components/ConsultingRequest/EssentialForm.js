@@ -8,21 +8,21 @@ import Checkbox from '@mui/material/Checkbox';
 import FormGroup from '@mui/material/FormGroup';
 
 import UserInfoForm from '../forms/UserInfoForm';
-import ConsultingForm from '../forms/ConsultingFrom';
+import ConsultingForm from '../forms/ConsultingForm';
 import ScoreForm from '../forms/ScoreForm';
 import UniversityForm from '../forms/UniversityForm';
 
-export default function EssentialForm({onConsultingChange}) {
+export default function EssentialForm({onConsultingRequestChange}) {
 
   return (
     <React.Fragment>
       <Typography variant="body1" sx={{ color: "darkred", mb: 5 }} gutterBottom>
         해당 페이지의 정보는 모두 필수사항입니다. 빠짐없이 채워주세요.
       </Typography>
-      <UserInfoForm onConsultingChange={onConsultingChange}/>
-      <ConsultingForm/>
+      <UserInfoForm onConsultingRequestgChange={onConsultingRequestChange}/>
+      <ConsultingForm onConsultingRequestChange={onConsultingRequestChange} />
       <ScoreForm/>
-      <UniversityForm onConsultingChange={onConsultingChange}/>
+      <UniversityForm onConsultingRequestChange={onConsultingRequestChange}/>
       <React.Fragment>
         <Typography variant="h6" gutterBottom sx={{ mt: 4 }}>
           참고사항

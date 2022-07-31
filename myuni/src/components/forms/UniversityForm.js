@@ -11,18 +11,18 @@ import { Container } from '@mui/system';
 import UniversityFormItem from './UniversityForm/UniverstiyFormItem';
 import useUniversity from "../../hooks/useUniversity";
 
-export default function UniversityForm({ onConsultingChange }) {
+export default function UniversityForm({ onConsultingRequestChange }) {
   const { form, onReasonChange, onUniListChange } = useUniversity();
   const { uni_list, reason } = form;
   
   const setUniList = (uni) => {
     onUniListChange(uni);
-    onConsultingChange('uni_info', form);
+    onConsultingRequestChange('uni_info', form);
   }
 
   const setReason = (e) => {
     onReasonChange(e);
-    onConsultingChange('uni_info', form);
+    onConsultingRequestChange('uni_info', form);
   }
 
   const getUniveristyFormItemArray = (num) => {

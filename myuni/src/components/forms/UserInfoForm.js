@@ -9,13 +9,13 @@ import FormGroup from '@mui/material/FormGroup';
 
 import useUserInfo from '../../hooks/useUserInfo';
 
-export default function UserInfoForm({ onConsultingChange }) {
+export default function UserInfoForm({ onConsultingRequestChange }) {
   const { form, onUserInfoChange } = useUserInfo();
   const { name, sex, age, phone } = form;
 
   const onChange = (e) => {
     onUserInfoChange(e);
-    onConsultingChange('user_info', form);
+    onConsultingRequestChange('user_info', form);
   }
 
   return (

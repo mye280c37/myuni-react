@@ -8,9 +8,12 @@ import Checkbox from '@mui/material/Checkbox';
 import FormGroup from '@mui/material/FormGroup';
 
 import AdditionalFormItem from './AdditionalForm/AdditionalFormItem';
-import EtcCheckBox from '../common/EtcCheckBox';
+import CheckBoxFormTemplate from '../forms/CheckBoxFormTemplate';
 
 export default function AdditionalForm() {
+
+  const route_known_values=["센터 대학입시 설명회", "유튜브 채널", "지인 소개", "기타"];
+
   return (
     <React.Fragment>
       <AdditionalFormItem
@@ -32,14 +35,7 @@ export default function AdditionalForm() {
             <Typography variant="body2" sx={{ color: "text.secondary", textAlign: "left" }} gutterBottom>
               중복선택 가능
             </Typography>
-            <FormControl required variant="standard" fullWidth>
-              <FormGroup>
-                <FormControlLabel control={<Checkbox name="route_known" />} label="센터 대학입시 설명회" />
-                <FormControlLabel control={<Checkbox name="route_known" />} label="유튜브 채널" />
-                <FormControlLabel control={<Checkbox name="route_known" />} label="지인 소개" />
-                <EtcCheckBox name="route_known"/>
-              </FormGroup>
-            </FormControl>
+            <CheckBoxFormTemplate name="route_known" values={route_known_values} etcIdx={3}/>
           </Grid>
         </Grid>
       </React.Fragment>

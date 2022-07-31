@@ -3,18 +3,25 @@ import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 
-export default function EtcCheckBox({name}) {
+export default function CustomCheckBox({name, value, isEtc=false, onChange, onEtcChange}) {
     const [ isChecked, setIsChecked ] = useState(false);
-    const changeCheck = () => {
-        setIsChecked((isChecked) => !isChecked);
-    };
-    const showAdditionalTextField = () => {
+
+    const changeCheck = (e) => {
+        setIsChecked(!isChecked);
         if(isChecked){
+            console.log(e.target.value);
+        }
+        onChange(isChecked, e.target.value);
+    };
+
+    const showAdditionalTextField = () => {
+        if(isEtc && isChecked){
             return(
                 <TextField
                 required
                 id="etc"
                 name="etc"
+                onChange={onEtcChange}
                 label="기타"
                 fullWidth
                 />
@@ -35,10 +42,10 @@ export default function EtcCheckBox({name}) {
                 <Checkbox 
                 name={name}
                 onChange={changeCheck} 
-                value={"기타"} 
+                value={value}
                 />
             } 
-            label="기타" 
+            label={value}
         />
         {showAdditionalTextField()}
         </React.Fragment>

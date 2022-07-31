@@ -6,9 +6,29 @@ import { FormControl, Select, MenuItem, InputLabel, FormLabel } from '@mui/mater
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import FormGroup from '@mui/material/FormGroup';
-import EtcCheckBox from "../common/EtcCheckBox";
+import EtcCheckBox from "../common/CustomCheckBox";
+import useConsulting from "../../hooks/useConsulting";
+import CheckBoxFormTemplate from "./CheckBoxFormTemplate";
 
-export default function ConsultingForm() {
+export default function ConsultingForm({onConsultingRequestChange}) {
+
+    const { form, onConsultingChange } = useConsulting();
+    const {consulting_option, application_type, reason, date} = form;
+
+    const consulting_option_values=["수시 지원", "자기소개서 컨설팅", "면접 컨설팅"];
+    const application_type_values=["학생부 교과(검정고시 성적)", "학생부 교과 면접(검정고시 성적 + 면접)", "정시(수능)", "기타"];
+
+    const onCheckBoxChange = (name, value) => {
+        onConsultingChange(name, value);
+        console.log(value);
+        onConsultingRequestChange("consulting", form);
+    }
+    
+    const onChange = (e) => {
+        onConsultingChange(e.target.name, e.target.value);
+        onConsultingRequestChange("consulting", form);
+    }
+    
     return (
     <React.Fragment>
         <React.Fragment>
@@ -20,13 +40,7 @@ export default function ConsultingForm() {
                     <Typography variant="body2" sx={{ color: "text.secondary", textAlign: "left" }} gutterBottom>
                     중복선택 가능
                     </Typography>
-                    <FormControl required variant="standard" fullWidth>
-                    <FormGroup>
-                        <FormControlLabel control={<Checkbox name="consulting_option" value={"수시 지원"} />} label="수시 지원" />
-                        <FormControlLabel control={<Checkbox name="consulting_option" value={"자기소개서 컨설팅"} />} label="자기소개서 컨설팅" />
-                        <FormControlLabel control={<Checkbox name="consulting_option" value={"면접 컨설팅"} />} label="면접 컨설팅" />
-                    </FormGroup>
-                    </FormControl>
+                    <CheckBoxFormTemplate name="consulting_option" values={consulting_option_values} onParentChange={onCheckBoxChange}/>
                 </Grid>
             </Grid>
         </React.Fragment>
@@ -39,14 +53,7 @@ export default function ConsultingForm() {
                     <Typography variant="body2" sx={{ color: "text.secondary", textAlign: "left" }} gutterBottom>
                     중복선택 가능
                     </Typography>
-                    <FormControl required variant="standard" fullWidth>
-                        <FormGroup>
-                            <FormControlLabel control={<Checkbox name="application_type" value={"학생부 교과(검정고시 성적)"} />} label="학생부 교과(검정고시 성적)" />
-                            <FormControlLabel control={<Checkbox name="application_type" value={"학생부 교과 면접(검정고시 성적 + 면접)"} />} label="학생부 교과 면접(검정고시 성적 + 면접)" />
-                            <FormControlLabel control={<Checkbox name="application_type" value={"정시(수능)"} />} label="정시(수능)" />
-                            <EtcCheckBox name="application_type"/>
-                        </FormGroup>
-                    </FormControl>
+                    <CheckBoxFormTemplate name="application_type" etcIdx={3} values={application_type_values} onParentChange={onCheckBoxChange}/>
                 </Grid>
                 <Grid item xs={12}>
                     <TextField
@@ -54,6 +61,8 @@ export default function ConsultingForm() {
                     id="reason"
                     name="reason"
                     label="지원 전형 선택 이유"
+                    onChange={onChange}
+                    value={reason}
                     fullWidth
                     multiline
                     rows={4}
@@ -78,14 +87,15 @@ export default function ConsultingForm() {
                         <Select
                             labelId="date"
                             id="date"
-                            // value={age}
+                            name="date"
+                            value={date}
                             label="컨설팅 날짜"
-                            // onChange={handleChange}
+                            onChange={onChange}
                         >
-                            <MenuItem value={0}>2022-07-29 16:00</MenuItem>
-                            <MenuItem value={1}>2022-07-30 15:00</MenuItem>
-                            <MenuItem value={2}>2022-07-30 16:00</MenuItem>
-                            <MenuItem value={3}>2022-08-01 15:00</MenuItem>
+                            <MenuItem value={"2022-07-29 16:00"}>2022-07-29 16:00</MenuItem>
+                            <MenuItem value={"2022-07-30 15:00"}>2022-07-30 15:00</MenuItem>
+                            <MenuItem value={"2022-07-30 16:00"}>2022-07-30 16:00</MenuItem>
+                            <MenuItem value={"2022-08-01 15:00"}>2022-08-01 15:00</MenuItem>
                         </Select>
                     </FormControl>
                 </Grid>
