@@ -1,15 +1,11 @@
 import * as React from 'react';
-import CssBaseline from '@mui/material/CssBaseline';
-import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-import Toolbar from '@mui/material/Toolbar';
 import Paper from '@mui/material/Paper';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
-import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 
 import EssentialForm from '../components/ConsultingRequest/EssentialForm';
@@ -19,14 +15,30 @@ import useConsultingRequest from '../hooks/useConsultingRequest';
 
 const steps = ['필수 정보', '추가 정보', '공지사항 확인'];
 
-function getStepContent(step, onChange) {
+function getStepContent(step, form, onConsultingRequestChange, onTextFieldChange) {
+
+  const { user_info, consulting, score, uni_info, reference, additional_info, route_known, refund_account } = form;
+
   switch (step) {
     case 0:
-      return <EssentialForm onConsultingRequestChange={onChange} />;
+      return <EssentialForm
+                user_info={user_info}
+                consulting={consulting}
+                score={score}
+                uni_info={uni_info}
+                reference={reference} 
+                onConsultingRequestChange={onConsultingRequestChange} 
+                onReferenceChange={onTextFieldChange} />;
     case 1:
-      return <AdditionalForm/>;
+      return <AdditionalForm
+                additional_info={additional_info}
+                route_known={route_known}
+                onConsultingRequestChange={onConsultingRequestChange} />;
     case 2:
-      return <NoticeForm/>;
+      return <NoticeForm
+                refund_account={refund_account}
+                onRefundAccountChange={onTextFieldChange}
+                onConsultingRequestChange={onConsultingRequestChange} />;
     default:
       throw new Error('Unknown step');
   }
@@ -35,10 +47,11 @@ function getStepContent(step, onChange) {
 export default function ConsultingRequest() {
   const [activeStep, setActiveStep] = React.useState(0);
 
-  const { form, onConsultingRequestChange } = useConsultingRequest();
+  const { form, onConsultingRequestChange, onTextFieldChange } = useConsultingRequest();
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
+    console.log(form);
   };
 
   const handleBack = () => {
@@ -46,9 +59,9 @@ export default function ConsultingRequest() {
   };
 
   return (
-    <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
+    <Container component="main" maxWidth="md" sx={{ mb: 4 }}>
       <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
-        <Typography component="h1" variant="h4" align="center">
+        <Typography component="h1" variant="h4" align="center" sx={{ my: { xs: 1, md: 3 }, p: { xs: 1, md: 2 } }}>
           컨설팅 신청
         </Typography>
         <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
@@ -72,11 +85,11 @@ export default function ConsultingRequest() {
             </React.Fragment>
           ) : (
             <React.Fragment>
-              {getStepContent(activeStep, onConsultingRequestChange)}
+              {getStepContent(activeStep, form, onConsultingRequestChange, onTextFieldChange)}
               <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
                 {activeStep !== 0 && (
                   <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
-                    Back
+                    이전
                   </Button>
                 )}
 
@@ -85,7 +98,7 @@ export default function ConsultingRequest() {
                   onClick={handleNext}
                   sx={{ mt: 3, ml: 1 }}
                 >
-                  {activeStep === steps.length - 1 ? 'Place order' : 'Next'}
+                  {activeStep === steps.length - 1 ? '신청' : '다음'}
                 </Button>
               </Box>
             </React.Fragment>

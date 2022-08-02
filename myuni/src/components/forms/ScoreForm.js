@@ -1,24 +1,24 @@
-import * as React from 'react';
+import React, { useEffect } from "react";
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
-import { FormControl, Select, MenuItem, InputLabel, FormLabel } from '@mui/material';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import FormGroup from '@mui/material/FormGroup';
 
 import useScore from '../../hooks/useScore';
 
-export default function ScoreForm() {
-  const { form, onChange } = useScore();
+export default function ScoreForm({ values, onConsultingRequestChange }) {
+  const { form, onChange } = useScore(values);
   const { korean, english, math, society, science, history, optional, average } = form;
+
+  useEffect(()=>{
+    onConsultingRequestChange('score', form);
+  }, [korean, english, math, society, science, history, optional, average]); 
 
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom sx={{ mt: 4 }}>
         과목별 점수 및 평균
       </Typography>
-      <Grid container spacing={3}>
+      <Grid container spacing={3} sx={{ mb: 10 }}>
         <Grid item xs={12} sm={6}>
           <TextField
             required

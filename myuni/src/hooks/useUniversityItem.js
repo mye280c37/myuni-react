@@ -1,10 +1,9 @@
 import { useState } from "react";
 
-export default function useUniversityItem(priority) {
+export default function useUniversityItem(values=null) {
     const [ uni, setUni ] = useState({
-        priority: priority,
-        university: "",
-        subject: ""
+        university: (values === null)? "": values.university,
+        subject: (values === null)? "": values.subject
     });
 
     const onUniChange = (e) => {

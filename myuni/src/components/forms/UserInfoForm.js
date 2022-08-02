@@ -1,22 +1,18 @@
-import * as React from 'react';
+import React, { useEffect } from "react";
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
-import { FormControl, Select, MenuItem, InputLabel, FormLabel } from '@mui/material';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import FormGroup from '@mui/material/FormGroup';
+import { FormControl, Select, MenuItem, InputLabel } from '@mui/material';
 
 import useUserInfo from '../../hooks/useUserInfo';
 
-export default function UserInfoForm({ onConsultingRequestChange }) {
-  const { form, onUserInfoChange } = useUserInfo();
+export default function UserInfoForm({ values, onConsultingRequestChange }) {
+  const { form, onUserInfoChange } = useUserInfo(values);
   const { name, sex, age, phone } = form;
 
-  const onChange = (e) => {
-    onUserInfoChange(e);
+  useEffect(()=>{
     onConsultingRequestChange('user_info', form);
-  }
+  }, [name, sex, age, phone]); 
 
   return (
     <React.Fragment>
@@ -31,7 +27,7 @@ export default function UserInfoForm({ onConsultingRequestChange }) {
             name="name"
             label="이름"
             value={name}
-            onChange={onChange}
+            onChange={onUserInfoChange}
             fullWidth
             autoComplete="given-name"
             variant="standard"
@@ -46,7 +42,7 @@ export default function UserInfoForm({ onConsultingRequestChange }) {
               name="sex"
               label="성별"
               value={sex}
-              onChange={onChange}
+              onChange={onUserInfoChange}
             >
               <MenuItem value='m'>남</MenuItem>
               <MenuItem value='w'>여</MenuItem>
@@ -60,20 +56,20 @@ export default function UserInfoForm({ onConsultingRequestChange }) {
             name="age"
             label="나이"
             value={age}
-            onChange={onChange}
+            onChange={onUserInfoChange}
             fullWidth
             autoComplete="family-name"
             variant="standard"
           />
         </Grid>
-        <Grid item xs={12} sx={{ mb: 4 }}>
+        <Grid item xs={12} sx={{ mb: 10 }}>
           <TextField
             required
             id="phone"
             name="phone"
             label="전화번호"
             value={phone}
-            onChange={onChange}
+            onChange={onUserInfoChange}
             fullWidth
             autoComplete="shipping address-line1"
             variant="standard"

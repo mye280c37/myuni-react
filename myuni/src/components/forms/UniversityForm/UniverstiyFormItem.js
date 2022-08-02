@@ -1,29 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
-import { FormControl, Select, MenuItem, InputLabel, FormLabel } from '@mui/material';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import FormGroup from '@mui/material/FormGroup';
-import { Container } from '@mui/system';
 import useUniversityItem from "../../../hooks/useUniversityItem";
 
-export default function UniversityFormItem({ priority, setUniList }) {
+export default function UniversityFormItem({ priority, values, setUniList }) {
   const uniId = "uni" + priority;
   const subjectId = "subject" + priority;
 
-  const { uni, onUniChange, onSubjectChange } = useUniversityItem(priority);
+  const { uni, onUniChange, onSubjectChange } = useUniversityItem(values);
+  const { university, subject } = uni;
 
-  const setUni = (e) => {
-    onUniChange(e);
-    setUniList(uni);
-  };
-
-  const setSubject = (e) => {
-    onSubjectChange(e);
-    setUniList(uni);
-  }
+  useEffect(()=>{
+    console.log('useEffect');
+    setUniList(priority, uni);
+  }, [university, subject]); 
 
   return (
     <React.Fragment>
@@ -37,10 +27,9 @@ export default function UniversityFormItem({ priority, setUniList }) {
             id={uniId}
             name={uniId}
             label="대학교"
-            value={uni.university}
-            onChange={setUni}
+            value={university}
+            onChange={onUniChange}
             fullWidth
-            autoComplete="shipping country"
             variant="standard"
           />
         </Grid>
@@ -50,10 +39,9 @@ export default function UniversityFormItem({ priority, setUniList }) {
             id={subjectId}
             name={subjectId}
             label="학과"
-            value={uni.subject}
-            onChange={setSubject}
+            value={subject}
+            onChange={onSubjectChange}
             fullWidth
-            autoComplete="shipping country"
             variant="standard"
           />
         </Grid>

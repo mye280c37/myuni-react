@@ -1,11 +1,11 @@
 import { useState } from "react";
 
-export default function useConsulting() {
+export default function useConsulting(values=null) {
     const [ form, setForm ] = useState({
-        consulting_option: "",
-        application_type: "",
-        reason: "",
-        date: "",
+        consulting_option: values === null? "": values.consulting_option,
+        application_type: values === null? "": values.application_type,
+        reason: values === null? "": values.reason,
+        date: values === null? "": values.date,
     });
 
     const onConsultingChange = (name, value) => {

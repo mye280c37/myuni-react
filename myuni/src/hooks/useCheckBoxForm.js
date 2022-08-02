@@ -1,26 +1,23 @@
 import { useState } from "react";
 
-export default function useCheckBoxForm() {
-    const [checkedList, setCheckedList] = useState([]);
+export default function useCheckBoxForm(values=null) {
+    const [form, setForm] = useState({
+        checked: (values === null)? {}: values.checked,
+        labels: (values === null)? []: values.labels,
+        etc: (values === null)? "": values.etc
+    });
 
-    const [form, setForm] = useState([{
-        values: checkedList,
-        etc: ""
-    }]);
-
-    const onListChange = (isChecked, value)=>{
-        if(isChecked){
-            setCheckedList(checkedList.concat(value));
-        }
-        else{
-            setCheckedList(checkedList.filter(item=>item!==value));
-        }
-        console.log(checkedList);
+    const onCheckedChange = (e) => {
         setForm({
-            ...form,
-            ["values"]: checkedList,
+          ...form,
+          checked:{
+            ...form.checked,
+            [e.target.name]: e.target.checked,
+          }
+          
         });
-    }
+        console.log(form);
+      };
 
     const onEtcChange = (e) =>{
         console.log(e.target.value);
@@ -30,10 +27,9 @@ export default function useCheckBoxForm() {
         });
     }
 
-
     return{
         form,
-        onListChange,
+        onCheckedChange,
         onEtcChange
     };
 }

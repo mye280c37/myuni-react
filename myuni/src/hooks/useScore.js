@@ -1,15 +1,15 @@
 import { useState } from "react";
 
-export default function useScore() {
+export default function useScore(values=null) {
     const [ form, setForm ] = useState({
-        korean: "",
-        english: "",
-        math: "",
-        society: "",
-        science: "",
-        history: "",
-        optional: "",
-        average: ""
+        korean: values === null? "": values.korean,
+        english: values === null? "": values.english,
+        math: values === null? "": values.math,
+        society: values === null? "": values.society,
+        science: values === null? "": values.science,
+        history: values === null? "": values.history,
+        optional: values === null? "": values.optional,
+        average: values === null? "": values.average
     });
 
     const onChange = (e) => {

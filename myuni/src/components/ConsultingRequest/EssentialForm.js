@@ -1,28 +1,24 @@
-import React, { useState } from "react";
+import React from "react";
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
-import { FormControl, Select, MenuItem, InputLabel, FormLabel } from '@mui/material';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import FormGroup from '@mui/material/FormGroup';
 
 import UserInfoForm from '../forms/UserInfoForm';
 import ConsultingForm from '../forms/ConsultingForm';
 import ScoreForm from '../forms/ScoreForm';
 import UniversityForm from '../forms/UniversityForm';
 
-export default function EssentialForm({onConsultingRequestChange}) {
+export default function EssentialForm({user_info, consulting, score, uni_info, reference, onConsultingRequestChange, onReferenceChange}) {
 
   return (
     <React.Fragment>
       <Typography variant="body1" sx={{ color: "darkred", mb: 5 }} gutterBottom>
         해당 페이지의 정보는 모두 필수사항입니다. 빠짐없이 채워주세요.
       </Typography>
-      <UserInfoForm onConsultingRequestgChange={onConsultingRequestChange}/>
-      <ConsultingForm onConsultingRequestChange={onConsultingRequestChange} />
-      <ScoreForm/>
-      <UniversityForm onConsultingRequestChange={onConsultingRequestChange}/>
+      <UserInfoForm values={user_info} onConsultingRequestChange={onConsultingRequestChange}/>
+      <ConsultingForm values={consulting} onConsultingRequestChange={onConsultingRequestChange} />
+      <ScoreForm values={score} onConsultingRequestChange={onConsultingRequestChange}/>
+      <UniversityForm values={uni_info} onConsultingRequestChange={onConsultingRequestChange}/>
       <React.Fragment>
         <Typography variant="h6" gutterBottom sx={{ mt: 4 }}>
           참고사항
@@ -34,6 +30,8 @@ export default function EssentialForm({onConsultingRequestChange}) {
               id="reference"
               name="reference"
               label="참고사항"
+              value={reference}
+              onChange={onReferenceChange}
               multiline
               rows={4}
               fullWidth

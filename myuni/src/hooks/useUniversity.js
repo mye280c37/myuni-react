@@ -1,12 +1,37 @@
 import { useState } from "react";
 
-export default function useUniversity() {
+export default function useUniversity(values=null) {
+    const uniList = (values === null)? {
+        1:{
+            university: "",
+            subject: ""
+        },
+        2:{
+            university: "",
+            subject: ""
+        },
+        3:{
+            university: "",
+            subject: ""
+        },
+        4:{
+            university: "",
+            subject: ""
+        },
+        5:{
+            university: "",
+            subject: ""
+        },
+        6:{
+            university: "",
+            subject: ""
+        }
 
-    const [ uniList, setUniList ] = useState([]);
+    }: values.uni_list;
 
     const [ form, setForm ] = useState({
         uni_list: uniList,
-        reason: ""
+        reason: values === null? "": values.reason
       });
 
     const onReasonChange = (e) => {
@@ -17,26 +42,17 @@ export default function useUniversity() {
         });
     };
 
-    const onUniListChange = (uni) => {
-        const {priority, university, subject } = uni;
-        // console.log(uni);
-        const targ = uniList.filter(item=>item.priority===priority);
-        if (targ.length !== 0){
-            setUniList(
-                uniList.map(
-                    item => item.priority === priority ? {...item, university: university, subject: subject } : item
-                )
-            );
-        }
-        else{
-            setUniList(uniList.concat(uni));
-        }
-        
+    const onUniListChange = (priority, uni) => {
         setForm({
             ...form,
-            uni_list: uniList
+            uni_list: {
+                ...form.uni_list,
+                [priority]: uni
+            }
         });
     };
+
+    console.log(values);
 
     return{
         form,

@@ -1,19 +1,28 @@
-import * as React from 'react';
+import React, { useEffect } from "react";
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
-import { FormControl, Select, MenuItem, InputLabel, FormLabel } from '@mui/material';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import FormGroup from '@mui/material/FormGroup';
+import useAdditionalInfoItem from "../../../hooks/usdAdditionalInfoItem";
 
-export default function AdditionalFormItem({ header, title, example }) {
+export default function AdditionalFormItem({ header, title, example, name, value="", onParentChange }) {
+
+  const {form, onChange} = useAdditionalInfoItem({
+    header: header,
+    title: title,
+    example: example,
+    value: value
+  });
+
+  useEffect(()=>{
+    onParentChange(name, form);
+  }, [form]);
+
   return (
     <React.Fragment>
       <Typography variant="h6" sx={{ color:"darkred" }} gutterBottom>
         {header}
       </Typography>
-      <Grid container spacing={3}>
+      <Grid container spacing={3} sx={{ mb: 10 }}>
         <Grid item xs={12} textAlign="left">
             <Typography variant="body1" gutterBottom>
                 {title}
@@ -24,9 +33,11 @@ export default function AdditionalFormItem({ header, title, example }) {
         </Grid>
         <Grid item xs={12} sx={{ mb: 4 }}>
             <TextField
-                id="option1"
-                name="option1"
+                id={name}
+                name={name}
                 label={title}
+                value={form.value}
+                onChange={onChange}
                 fullWidth
                 autoComplete="given-name"
                 variant="standard"
