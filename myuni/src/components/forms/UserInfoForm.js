@@ -10,6 +10,11 @@ export default function UserInfoForm({ values, onConsultingRequestChange }) {
   const { form, onUserInfoChange } = useUserInfo(values);
   const { name, sex, age, phone } = form;
 
+  const validation =()=>{
+    let check = /[~!@#$%^&*()_+|<>?:{}.,/;='"ㄱ-ㅎ | ㅏ-ㅣ |가-힣]/;
+    return check.test(phone);
+  };
+
   useEffect(()=>{
     onConsultingRequestChange('user_info', form);
   }, [name, sex, age, phone]); 
@@ -28,6 +33,7 @@ export default function UserInfoForm({ values, onConsultingRequestChange }) {
             label="이름"
             value={name}
             onChange={onUserInfoChange}
+            error={name===""?true:false}
             fullWidth
             autoComplete="given-name"
             variant="standard"
@@ -42,6 +48,7 @@ export default function UserInfoForm({ values, onConsultingRequestChange }) {
               name="sex"
               label="성별"
               value={sex}
+              error={sex===""?true:false}
               onChange={onUserInfoChange}
             >
               <MenuItem value='m'>남</MenuItem>
@@ -56,6 +63,8 @@ export default function UserInfoForm({ values, onConsultingRequestChange }) {
             name="age"
             label="나이"
             value={age}
+            error={age===null?true:false}
+            helperText="helper text"
             onChange={onUserInfoChange}
             fullWidth
             autoComplete="family-name"
@@ -69,6 +78,8 @@ export default function UserInfoForm({ values, onConsultingRequestChange }) {
             name="phone"
             label="전화번호"
             value={phone}
+            error={validation()}
+            helperText={validation() ? "특수기호나 한글은 입력 하실 수 없습니다.":""}
             onChange={onUserInfoChange}
             fullWidth
             autoComplete="shipping address-line1"
