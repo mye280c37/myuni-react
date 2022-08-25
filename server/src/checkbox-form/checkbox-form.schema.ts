@@ -1,14 +1,14 @@
 import {Prop, Schema, SchemaFactory} from '@nestjs/mongoose';
-import {Document, ObjectId} from 'mongoose';
+import {Document, ObjectId, SchemaTypes, Types} from 'mongoose';
 
 export type CheckBoxFormDocument = CheckBoxForm & Document;
 
 @Schema()
 export class CheckBoxForm {
-    @Prop()
-    _id: ObjectId;
+    @Prop({ type: SchemaTypes.ObjectId })
+    _id: Types.ObjectId;
     @Prop({ required: true })
-    labels: Array<String>;
+    labels: Types.Array<String>;
     @Prop({ required: true })
     haveEtc: Boolean;
     

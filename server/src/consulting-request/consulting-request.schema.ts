@@ -1,12 +1,12 @@
 import {Prop, Schema, SchemaFactory} from '@nestjs/mongoose';
-import {Document, ObjectId} from 'mongoose';
+import {Document, ObjectId, SchemaTypes, Types} from 'mongoose';
 
 export type ConsultingRequestDocument = ConsultingRequest & Document;
 
 @Schema()
 export class ConsultingRequest {
-    @Prop()
-    _id: ObjectId;
+    @Prop({ type: SchemaTypes.ObjectId })
+    _id: Types.ObjectId;
     @Prop({ required: true })
     name: String;
     @Prop({ required: true })

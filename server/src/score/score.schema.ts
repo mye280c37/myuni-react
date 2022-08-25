@@ -1,12 +1,12 @@
 import {Prop, Schema, SchemaFactory} from '@nestjs/mongoose';
-import {Document, ObjectId} from 'mongoose';
+import {Document, ObjectId, SchemaTypes, Types} from 'mongoose';
 
 export type ScoreDocument = Score & Document;
 
 @Schema()
 export class Score {
-    @Prop()
-    _id: ObjectId;
+    @Prop({ type: SchemaTypes.ObjectId })
+    _id: Types.ObjectId;
     @Prop({ required: true })
     korean: Number;
     @Prop({ required: true })
