@@ -29,5 +29,5 @@ export class ConsultingRequestService {
     
     async getAll(): Promise<ConsultingRequest[]> {ConsultingRequest
         return await this.consultingRequestModel.find().exec();
-      }
+    }
 }
