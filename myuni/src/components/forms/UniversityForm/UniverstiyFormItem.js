@@ -5,15 +5,15 @@ import useUniversityItem from "../../../hooks/useUniversityItem";
 
 export default function UniversityFormItem({ priority, values, setUniList }) {
   const uniId = "uni" + priority;
-  const subjectId = "subject" + priority;
+  const majorId = "major" + priority;
 
   const { uni, onUniChange, onSubjectChange } = useUniversityItem(values);
-  const { university, subject } = uni;
+  const { university, major } = uni;
 
   useEffect(()=>{
     console.log('useEffect');
     setUniList(priority, uni);
-  }, [university, subject]); 
+  }, [university, major]); 
 
   return (
     <React.Fragment>
@@ -36,10 +36,10 @@ export default function UniversityFormItem({ priority, values, setUniList }) {
         <Grid item xs={12} sm={5}>
           <TextField
             required
-            id={subjectId}
-            name={subjectId}
+            id={majorId}
+            name={majorId}
             label="학과"
-            value={subject}
+            value={major}
             onChange={onSubjectChange}
             fullWidth
             variant="standard"
