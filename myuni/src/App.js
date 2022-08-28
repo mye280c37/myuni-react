@@ -5,6 +5,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import ConsultingRequest from './pages/ConsultingRequest';
 import Header from './components/common/Header';
 import Footer from './components/common/Footer';
+import Dashboard from './pages/DashBoard';
 
 const theme = createTheme();
 
@@ -13,8 +14,9 @@ function App() {
     <div className="App">
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Header/>
-        <ConsultingRequest/>
+        {/* <Header/> */}
+        {/* <ConsultingRequest/> */}
+        <Dashboard/>
         <Footer />
       </ThemeProvider>
     </div>
