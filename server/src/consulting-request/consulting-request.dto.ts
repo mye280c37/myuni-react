@@ -1,4 +1,5 @@
 import { IsNumber, IsString } from "class-validator";
+import { DesiredUni } from "src/desired-uni/desired-uni.schema";
 import { Score } from "src/score/score.schema";
 
 export class ConsultingRequestDto {
@@ -10,13 +11,20 @@ export class ConsultingRequestDto {
     age: Number;
     @IsString()
     phone: String;
-    consulting: Object;
+    @IsString()
+    consultingOption: String;
+    @IsString()
+    applicationType: String;
+    @IsString()
+    reason: String;
+    @IsString()
+    date: String;
     score: Score;
-    uniInfo: Object;
+    uniInfo: DesiredUni;
     @IsString()
     reference: String;
     additionalInfo: Object;
-    routeKnown: Object;
+    routeKnown: Array<String>;
     @IsString()
     refundAccount: String;
   }

@@ -1,5 +1,6 @@
 import {Prop, Schema, SchemaFactory} from '@nestjs/mongoose';
 import {Document, ObjectId, SchemaTypes, Types} from 'mongoose';
+import { User } from 'src/user/user.schema';
 
 export type ConsultingRequestDocument = ConsultingRequest & Document;
 
@@ -7,16 +8,11 @@ export type ConsultingRequestDocument = ConsultingRequest & Document;
 export class ConsultingRequest {
     @Prop({ type: SchemaTypes.ObjectId })
     _id: Types.ObjectId;
-    @Prop({ required: true })
-    name: String;
-    @Prop({ required: true })
-    sex: String;
-    @Prop({ required: true })
-    age: Number;
-    @Prop({ required: true })
-    phone: String;
-    @Prop({ required: true })
-    refundAccount: String;
+    @Prop({ type: SchemaTypes.ObjectId, required: true, ref: 'User' })
+    user: User;
+    reference: String;
+    additionalInfo: String;
+    routeKnown: String;
 }
 
 export const ConsultingRequestSchema = SchemaFactory.createForClass(ConsultingRequest);
