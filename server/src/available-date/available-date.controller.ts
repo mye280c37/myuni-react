@@ -1,17 +1,21 @@
 import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Res } from '@nestjs/common';
+import { ApiCreatedResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { AvailableDateDto } from './available-date.dto';
 import { AvailableDateService } from './available-date.service';
 
-@Controller('available-date')
+@Controller('v2/available-date')
+@ApiTags('컨설팅 가능 날짜 API')
 export class AvailableDateController {
     constructor(private readonly availableDateService: AvailableDateService) { }
 
     @Post()
+    @ApiOperation({ summary: '신청 가능 날짜 생성 API', description: '컨설팅 신청 가능 날짜를 생성한다.' })
+    @ApiCreatedResponse({ description: '신청 가능 날짜를 생성한다.', type: String })
     async create (@Res() response, @Body() availableDateDto: AvailableDateDto) {
         try {
             const newDate = await this.availableDateService.create(availableDateDto);
             return response.status(HttpStatus.CREATED).json({
-                message: 'Student has been created successfully',
+                message: 'Date has been created successfully',
                 newDate,
             });
         } catch (err) {
@@ -24,6 +28,7 @@ export class AvailableDateController {
     }
 
     @Put('/:id')
+    @ApiOperation({ summary: '신청 가능 날짜 수정 API', description: '컨설팅 신청 가능 날짜를 수정한다.' })
     async update (@Res() response, @Param('id') dateId: string, @Body() availableDateDto: AvailableDateDto) {
         try {
             const existingDate = await this.availableDateService.update(dateId, availableDateDto);
@@ -37,12 +42,13 @@ export class AvailableDateController {
     }
 
     @Get()
+    @ApiOperation({ summary: '신청 가능 날짜 리스트 API', description: '신청 가능 날짜 리스트를 가져온다.' })
     async getAll (@Res() response) {
         try {
-            const availableDateData = await this.availableDateService.getAll();
+            const availableDates = await this.availableDateService.getAll();
             return response.status(HttpStatus.OK).json({
                 message: 'All students data found successfully',
-                availableDateData,
+                availableDates,
             });
         } catch (err) {
             return response.status(err.status).json(err.response);
@@ -50,6 +56,7 @@ export class AvailableDateController {
     }
 
     @Get('/:id')
+    @ApiOperation({ summary: '신청 가능 날짜 GET API', description: '특정 신청 가능 날짜 하나를 가져온다.' })
     async get (@Res() response, @Param('id') dateId: string) {
         try {
             const existingDate = await this.availableDateService.get(dateId);
@@ -63,6 +70,7 @@ export class AvailableDateController {
     }
 
     @Delete('/:id')
+    @ApiOperation({ summary: '신청 가능 날짜 삭제 API', description: '특정 신청 가능 날짜 하나를 삭제한다.' })
     async delete (@Res() response, @Param('id') dateId: string)
     {
         try {

@@ -5,6 +5,6 @@ export class AvailableDateDto {
     date: String;
     @IsString()
     timeFrom: String;
-    @IsNumber()
-    timeTo: Number;
+    @IsString()
+    timeTo: String;
 }
