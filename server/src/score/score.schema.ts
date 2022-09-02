@@ -6,8 +6,6 @@ export type ScoreDocument = Score & Document;
 
 @Schema()
 export class Score {
-    @Prop({ type: SchemaTypes.ObjectId })
-    _id: Types.ObjectId;
     @Prop({ type: SchemaTypes.ObjectId, required: true, ref: 'User' })
     user: User;
     @Prop({ required: true })
@@ -20,6 +18,8 @@ export class Score {
     society: Number;
     @Prop({ required: true })
     science: Number;
+    @Prop({ required: true })
+    history: Number;
     @Prop({ required: true })
     optional: Number;
     @Prop({ required: true })
