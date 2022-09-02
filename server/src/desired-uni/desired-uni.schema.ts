@@ -4,16 +4,13 @@ import { User } from 'src/user/user.schema';
 
 export type DesiredUniDocument = DesiredUni & Document;
 
-const uniItem = {
+export const uniItem = {
     university: { type: String },
-    subject: { type: String },
-    priority: { type: Number }
+    major: { type: String }
 };
 
 @Schema()
 export class DesiredUni {
-    @Prop({ type: SchemaTypes.ObjectId })
-    _id: Types.ObjectId;
     @Prop({ type: SchemaTypes.ObjectId, required: true, ref: 'User' })
     user: User;
     @Prop(raw(uniItem))
@@ -28,6 +25,8 @@ export class DesiredUni {
     5: Record<string, any>;
     @Prop(raw(uniItem))
     6: Record<string, any>;
+    @Prop({required: true})
+    reason: String;
 }
 
 export const DesiredUnichema = SchemaFactory.createForClass(DesiredUni);
