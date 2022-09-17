@@ -7,7 +7,7 @@ import { AdditionalInfoForm } from './dto/additional-info-form.dto';
 
 export type ConsultingRequestDocument = ConsultingRequest & Document;
 
-@Schema()
+@Schema({versionKey: false})
 export class ConsultingRequest {
     @Prop({ type: SchemaTypes.ObjectId, required: true, ref: 'User' })
     user: User;

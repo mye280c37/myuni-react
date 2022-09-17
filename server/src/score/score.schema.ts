@@ -4,7 +4,7 @@ import { User } from 'src/user/user.schema';
 
 export type ScoreDocument = Score & Document;
 
-@Schema()
+@Schema({versionKey: false})
 export class Score {
     @Prop({ type: SchemaTypes.ObjectId, required: true, ref: 'User' })
     user: User;

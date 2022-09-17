@@ -3,7 +3,7 @@ import {Document, ObjectId, SchemaTypes, Types} from 'mongoose';
 
 export type AvailableDateDocument = AvailableDate & Document;
 
-@Schema()
+@Schema({versionKey: false})
 export class AvailableDate {
     @Prop({ required: true })
     date: String; // 'YYYY-MM-DD'

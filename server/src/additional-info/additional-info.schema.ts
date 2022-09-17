@@ -3,7 +3,7 @@ import {Document, ObjectId, SchemaTypes, Types} from 'mongoose';
 
 export type AdditionalInfoDocument = AdditionalInfo & Document;
 
-@Schema()
+@Schema({versionKey: false})
 export class AdditionalInfo {
     @Prop({ required: true })
     header: String;

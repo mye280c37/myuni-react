@@ -3,7 +3,7 @@ import {Document, ObjectId, SchemaTypes, Types} from 'mongoose';
 
 export type CheckBoxFormDocument = CheckBoxForm & Document;
 
-@Schema()
+@Schema({versionKey: false})
 export class CheckBoxForm {
     @Prop({ type: SchemaTypes.ObjectId })
     _id: Types.ObjectId;
@@ -11,7 +11,6 @@ export class CheckBoxForm {
     labels: Types.Array<String>;
     @Prop({ required: true })
     haveEtc: Boolean;
-    
 }
 
 export const CheckBoxFormSchema = SchemaFactory.createForClass(CheckBoxForm);

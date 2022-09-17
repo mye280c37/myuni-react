@@ -9,7 +9,7 @@ export const uniItem = {
     major: { type: String }
 };
 
-@Schema()
+@Schema({versionKey: false})
 export class DesiredUni {
     @Prop({ type: SchemaTypes.ObjectId, required: true, ref: 'User' })
     user: User;
