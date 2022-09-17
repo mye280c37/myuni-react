@@ -5,13 +5,12 @@ export type AdditionalInfoDocument = AdditionalInfo & Document;
 
 @Schema()
 export class AdditionalInfo {
-    @Prop({ type: SchemaTypes.ObjectId })
-    _id: Types.ObjectId;
     @Prop({ required: true })
-    labels: Types.Array<String>;
+    header: String;
     @Prop({ required: true })
-    haveEtc: Boolean;
-    
+    title: String;
+    @Prop({ required: true })
+    example: String;
 }
 
 export const AdditionalInfoSchema = SchemaFactory.createForClass(AdditionalInfo);

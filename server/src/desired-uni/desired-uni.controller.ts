@@ -35,7 +35,7 @@ export class DesiredUniController {
             const uni = await this.desiredUniService.update(uniId, uniDto);
             return response.status(HttpStatus.OK).json({
                 message: 'Desired Uni has been successfully updated',
-                score: uni,
+                uni,
             });
         } catch (err) {
             return response.status(err.status).json(err.response);
@@ -46,10 +46,10 @@ export class DesiredUniController {
     @ApiOperation({ summary: '희망 대학 리스트 API', description: '모든 희망 대학 리스트를 가져온다.' })
     async getAll (@Res() response) {
         try {
-            const scores = await this.desiredUniService.getAll();
+            const unis = await this.desiredUniService.getAll();
             return response.status(HttpStatus.OK).json({
                 message: 'All scores data found successfully',
-                scores,
+                unis,
             });
         } catch (err) {
             return response.status(err.status).json(err.response);

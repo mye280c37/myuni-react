@@ -29,4 +29,4 @@ export class DesiredUni {
     reason: String;
 }
 
-export const DesiredUnichema = SchemaFactory.createForClass(DesiredUni);
+export const DesiredUniSchema = SchemaFactory.createForClass(DesiredUni);
