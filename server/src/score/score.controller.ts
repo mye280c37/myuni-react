@@ -3,7 +3,7 @@ import { ApiCreatedResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { ScoreDto } from './score.dto';
 import { ScoreService } from './score.service';
 
-@Controller('v1/score')
+@Controller('v2/score')
 @ApiTags('시험 점수 API')
 export class ScoreController {
     constructor(private readonly scoreService: ScoreService) { }
