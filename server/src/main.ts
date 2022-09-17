@@ -12,13 +12,18 @@ async function bootstrap() {
       transform : true
     })
   );
-  const config = new DocumentBuilder()
-    .setTitle('MyUni API')
-    .setDescription('MyUni API description')
-    .setVersion('2.0')
-    .build();
-  const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
+  
+  const isDev = process.env.MODE === 'dev' ? true : false;
+  if (isDev) {
+    const config = new DocumentBuilder()
+      .setTitle('MyUni API')
+      .setDescription('MyUni API description')
+      .setVersion('2.0')
+      .build();
+    const document = SwaggerModule.createDocument(app, config);
+    SwaggerModule.setup('api', app, document);
+  }
+  
   await app.listen(8000);
 }
 bootstrap();
