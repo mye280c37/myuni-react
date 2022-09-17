@@ -12,6 +12,7 @@ import { ConfigModule } from '@nestjs/config';
 import { DesiredUniModule } from './desired-uni/desired-uni.module';
 import { AdditionalInfoModule } from './additional-info/additional-info.module';
 import { AvailableDateModule } from './available-date/available-date.module';
+import { ReviewModule } from './review/review.module';
 import mongoose from 'mongoose';
 
 @Module({
@@ -28,7 +29,8 @@ import mongoose from 'mongoose';
     ConsultingRequestModule,
     DesiredUniModule,
     AdditionalInfoModule,
-    AvailableDateModule
+    AvailableDateModule,
+    ReviewModule
   ],
   controllers: [AppController],
   providers: [AppService],
