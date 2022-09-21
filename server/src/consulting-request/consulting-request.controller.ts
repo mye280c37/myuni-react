@@ -1,7 +1,6 @@
 import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Res } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { ConsultingRequestDto } from './dto/consulting-request.dto';
-import { ConsultingRequest } from './consulting-request.schema';
 import { ConsultingRequestService } from './consulting-request.service';
 
 @Controller('v2/consulting-request')

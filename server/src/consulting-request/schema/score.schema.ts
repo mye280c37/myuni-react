@@ -1,10 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsNumber, Min, Max, IsString } from "class-validator";
+import { IsNumber, Min, Max } from "class-validator";
 
-export class ScoreDto {
-    @IsString()
-    @ApiProperty({example: '63106701510ba1474d737a11'})
-    user: String;
+export class Score {
     @IsNumber()
     @Min(0)
     @Max(100)

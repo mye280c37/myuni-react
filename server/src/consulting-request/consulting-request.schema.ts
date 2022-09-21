@@ -1,9 +1,9 @@
 import {Prop, Schema, SchemaFactory} from '@nestjs/mongoose';
 import {Document, ObjectId, SchemaTypes, Types} from 'mongoose';
-import { DesiredUni } from 'src/desired-uni/desired-uni.schema';
-import { Score } from 'src/score/score.schema';
+import { Score } from './schema/score.schema';
 import { User } from 'src/user/user.schema';
-import { AdditionalInfoForm } from './dto/additional-info-form.dto';
+import { AdditionalInfoForm } from './schema/additional-info-form.schema';
+import { DesiredUni } from './schema/desired-uni.schema';
 
 export type ConsultingRequestDocument = ConsultingRequest & Document;
 
@@ -11,9 +11,9 @@ export type ConsultingRequestDocument = ConsultingRequest & Document;
 export class ConsultingRequest {
     @Prop({ type: SchemaTypes.ObjectId, required: true, ref: 'User' })
     user: User;
-    @Prop({ type: SchemaTypes.ObjectId, required: true, ref: 'Score' })
+    @Prop({ required: true })
     score: Score;
-    @Prop({ type: SchemaTypes.ObjectId, required: true, ref: 'DesiredUni' })
+    @Prop({ required: true })
     uni: DesiredUni;
     @Prop({required: true})
     desiredDate: String;

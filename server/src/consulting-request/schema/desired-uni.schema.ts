@@ -1,10 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsString, IsObject } from "class-validator";
+import { IsObject, IsString } from "class-validator";
 
-export class DesiredUniDto {
-    @IsString()
-    @ApiProperty({example: '63106701510ba1474d737a11'})
-    user: String;
+export class DesiredUni {
     @IsObject()
     @ApiProperty({example: {university: '서강대학교', major: '컴퓨터공학과'}})
     1: Record<string, any>;
