@@ -17,8 +17,8 @@ export class Converter {
     standard: Array<number>;
     @Prop({ required: true })
     result: Array<number>;
-    @Prop({ required: true })
-    func: Function;
+    @Prop()
+    func: string;
     @Prop({ required: true })
     link: string;
 }

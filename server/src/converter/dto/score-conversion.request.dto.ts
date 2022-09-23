@@ -2,6 +2,17 @@ import { ApiProperty } from "@nestjs/swagger";
 import { IsNumber, Min, Max } from "class-validator";
 
 export class ScoreConversionRequestDto {
+
+    constructor (korean: number, english: number, math: number, society: number, science: number,  history: number, select: number) {
+        this.korean = korean;
+        this.english = english;
+        this.math = math;
+        this.society = society;
+        this.science = science;
+        this.history = history;
+        this.select = select;
+    }
+
     @IsNumber()
     @Min(0)
     @Max(100)
@@ -36,5 +47,5 @@ export class ScoreConversionRequestDto {
     @Min(0)
     @Max(100)
     @ApiProperty({example: 87})
-    optional: number;
+    select: number;
 }

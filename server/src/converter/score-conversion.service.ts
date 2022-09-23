@@ -15,13 +15,12 @@ export class ScoreConversionService {
         // avg 구해서 함수 통과시키기
 
         const conversions = [];
-        await this.converterModel.find({ type: 0 })
+        await this.converterModel.find({ type: 0 }).exec()
         .then((documents) => {
-            return documents.map(doc => {
+            documents.map(doc => {
                 const avg = (kor * doc.weight[0] + eng * doc.weight[1] +
                     his * doc.weight[2] + math * doc.weight[3] + society * doc.weight[4] + science * doc.weight[5] + select * doc.weight[6]) / (doc.weight.reduce((a, b) => a + b, 0));
-                
-                const converted = doc.func(avg);
+                const converted = Function(doc.func)(avg);
                 conversions.push(new ScoreConversionResponseDto(doc, converted));
             });
         })
@@ -36,9 +35,9 @@ export class ScoreConversionService {
         // avg 구해서 함수 통과시키기
         const conversions = [];
         let scores = [kor, eng, math, society, science, his, select];
-        await this.converterModel.find({ type: 1 })
+        await this.converterModel.find({ type: 1 }).exec()
             .then((documents) => {
-                return documents.map(doc => {
+                documents.map(doc => {
                     let hab = 0, idx = 0;
     
                     const resultScore = scores.map(score => {
@@ -62,7 +61,6 @@ export class ScoreConversionService {
             .catch(err => {
                 console.log(err);
             });
-
         return conversions;
     }
 
@@ -70,9 +68,9 @@ export class ScoreConversionService {
     async getTypeTwo(kor: number, eng: number, his: number, math: number, society: number, science: number, select: number): Promise<ScoreConversionResponseDto[]>{
         let scores = [kor, eng, math, society, science, his, select];
         const conversions = [];
-        await this.converterModel.find({ type: 2 })
+        await this.converterModel.find({ type: 2 }).exec()
             .then((documents) => {
-                return documents.map(doc => {
+                documents.map(doc => {
                     let thisScores = scores.map(score => score);
                     let hab = 0, weightHab = 0;
                     
@@ -103,10 +101,10 @@ export class ScoreConversionService {
         let scores = [kor, eng, math, society, science, his, select];
         const conversions = [];
 
-        await this.converterModel.find({ type: 3 })
+        await this.converterModel.find({ type: 3 }).exec()
             .then((documents) => {
 
-                return documents.map(doc => {
+                documents.map(doc => {
                     let gradeSum = 0, weightSum = 0;
                     let grade = scores.map(score => {
                         for (var i = 0; i < doc.standard.length; i++) {
@@ -135,10 +133,10 @@ export class ScoreConversionService {
     async getTypeFour(kor: number, eng: number, his: number, math: number, society: number, science: number, select: number): Promise<ScoreConversionResponseDto[]> {
         let scores: number[] = [kor, eng, math, his, society, science, select];
         const conversions = [];
-        await this.converterModel.find({type:4})
+        await this.converterModel.find({type:4}).exec()
             .then((documents) => {
     
-                return documents.map(doc => {
+                documents.map(doc => {
                     let hab = 0, weightHab = 0, thisScores = scores.map(x=>x);
                     // weight 곱하기 + type 4니까 avg grade ㄱㄱ
                     for (var i = 0; i < scores.length; i++) {
@@ -171,13 +169,11 @@ export class ScoreConversionService {
         const conversions: ScoreConversionResponseDto[] = [];
         // avg 구해서 함수 통과시키기
         await this.converterModel.find({ type: 5 })
-            .then((document) => {
-    
-                return document.map(doc => {
+            .then((documents) => {
+                documents.map(doc => {
                     const totalWeightedScore: number = (kor * doc.weight[0] + eng * doc.weight[1] +
                         his * doc.weight[2] + math * doc.weight[3] + society * doc.weight[4] + science * doc.weight[5] + select * doc.weight[6]);
-                    
-                    const converted = doc.func(totalWeightedScore);
+                        const converted = totalWeightedScore / 700 * 212 + 188;
 
                     conversions.push(new ScoreConversionResponseDto(doc, converted));
                 });
@@ -191,13 +187,13 @@ export class ScoreConversionService {
     
     async getByScore(scoreConversionReqDto: ScoreConversionRequestDto): Promise<ScoreConversionResponseDto[]> {
         const conversions = [];
-        const {korean, english, math, society, science, history, optional} = scoreConversionReqDto;
-        conversions.push(await this.getTypeZero(korean, english, math, society, science, history, optional));
-        conversions.push(await this.getTypeOne(korean, english, math, society, science, history, optional));
-        conversions.push(await this.getTypeTwo(korean, english, math, society, science, history, optional));
-        conversions.push(await this.getTypeThree(korean, english, math, society, science, history, optional));
-        conversions.push(await this.getTypeFour(korean, english, math, society, science, history, optional));
-        conversions.push(await this.getTypeFive(korean, english, math, society, science, history, optional));
+        const {korean, english, math, society, science, history, select} = scoreConversionReqDto;
+        conversions.push(...await this.getTypeZero(korean, english, math, society, science, history, select));
+        conversions.push(...await this.getTypeOne(korean, english, math, society, science, history, select));
+        conversions.push(...await this.getTypeTwo(korean, english, math, society, science, history, select));
+        conversions.push(...await this.getTypeThree(korean, english, math, society, science, history, select));
+        conversions.push(...await this.getTypeFour(korean, english, math, society, science, history, select));
+        conversions.push(...await this.getTypeFive(korean, english, math, society, science, history, select));
         return conversions;
     }
 }
