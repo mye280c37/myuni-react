@@ -3,7 +3,7 @@ import { useState } from "react";
 export default function useUniversityItem(values=null) {
     const [ uni, setUni ] = useState({
         university: (values === null)? "": values.university,
-        subject: (values === null)? "": values.subject
+        major: (values === null)? "": values.major
     });
 
     const onUniChange = (e) => {

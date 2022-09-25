@@ -45,27 +45,27 @@ export default function useConsultingRequest() {
             uni_list:{
                 1:{
                     university: "",
-                    subject: ""
+                    major: ""
                 },
                 2:{
                     university: "",
-                    subject: ""
+                    major: ""
                 },
                 3:{
                     university: "",
-                    subject: ""
+                    major: ""
                 },
                 4:{
                     university: "",
-                    subject: ""
+                    major: ""
                 },
                 5:{
                     university: "",
-                    subject: ""
+                    major: ""
                 },
                 6:{
                     university: "",
-                    subject: ""
+                    major: ""
                 }
             },
             reason: ""
