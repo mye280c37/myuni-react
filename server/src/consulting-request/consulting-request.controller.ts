@@ -62,7 +62,7 @@ export class ConsultingRequestController {
             const consultingRequest = await this.consultingRequestService.get(requestId);
             return response.status(HttpStatus.OK).json({
                 message: 'Consulting Request found successfully',
-                consultingRequest,
+                ...consultingRequest,
             });
         } catch (err) {
             return response.status(err.status).json(err.response);

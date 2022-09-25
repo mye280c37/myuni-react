@@ -1,8 +1,8 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { IsNumber, IsString, IsObject, IsArray } from "class-validator";
 import { AdditionalInfo } from "src/additional-info/additional-info.schema";
-import { DesiredUni } from "../schema/desired-uni.schema";
-import { Score } from "../schema/score.schema";
+import { DesiredUni } from "../schemas/desired-uni.schema";
+import { Score } from "../schemas/score.schema";
 
 export class ConsultingRequestDto {
     @IsString()

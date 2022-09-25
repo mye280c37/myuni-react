@@ -1,9 +1,9 @@
 import {Prop, Schema, SchemaFactory} from '@nestjs/mongoose';
 import {Document, ObjectId, SchemaTypes, Types} from 'mongoose';
-import { Score } from './schema/score.schema';
+import { Score } from './score.schema';
 import { User } from 'src/user/user.schema';
-import { AdditionalInfoForm } from './schema/additional-info-form.schema';
-import { DesiredUni } from './schema/desired-uni.schema';
+import { AdditionalInfoForm } from './additional-info-form.schema';
+import { DesiredUni } from './desired-uni.schema';
 
 export type ConsultingRequestDocument = ConsultingRequest & Document;
 

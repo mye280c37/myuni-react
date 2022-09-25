@@ -3,7 +3,8 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
 import { User } from 'src/user/user.schema';
 import { ConsultingRequestDto } from './dto/consulting-request.dto';
-import { ConsultingRequest } from './consulting-request.schema';
+import { ConsultingRequest } from './schemas/consulting-request.schema';
+import { ConsultingRequestResponseDto } from './dto/consulting-request.response.dto';
 
 @Injectable()
 export class ConsultingRequestService {
@@ -52,12 +53,16 @@ export class ConsultingRequestService {
         return requests;
     }
 
-    async get(requestId: string): Promise<ConsultingRequest> {
+    async get(requestId: string): Promise<ConsultingRequestResponseDto> {
         const existingRequest = await this.consultingRequestModel.findById(requestId).exec();
         if (!existingRequest) {
             throw new NotFoundException(`consulting request #${requestId} not found`);
         }
-        return existingRequest;
+        const existingUser = await this.userModel.findById(existingRequest.user).exec();
+        if (!existingUser) {
+            throw new NotFoundException(`The User in consulting request #${requestId} not found`);
+        }
+        return new ConsultingRequestResponseDto(existingUser,existingRequest);
     }
 
     async getByUser(userId: string): Promise<ConsultingRequest[]> {
