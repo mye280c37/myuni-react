@@ -13,8 +13,6 @@ export class User {
     age: Number;
     @Prop({ required: true })
     phone: String;
-    @Prop({ required: true })
-    refundAccount: String;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

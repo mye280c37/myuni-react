@@ -19,8 +19,7 @@ export class ConsultingRequestService {
             name,
             sex,
             age,
-            phone,
-            refundAccount
+            phone
         }).save();
         return await new this.consultingRequestModel({
             user: newUser,
@@ -32,8 +31,8 @@ export class ConsultingRequestService {
             reason: reason,
             reference: reference,
             additionalInfo: additionalInfo,
-            routeKnown: routeKnown
-
+            routeKnown: routeKnown,
+            refundAccount: refundAccount
         }).save();
     }
     

@@ -29,6 +29,8 @@ export class ConsultingRequest {
     additionalInfo: AdditionalInfoForm;
     @Prop({required: true})
     routeKnown: Array<String>;
+    @Prop({ required: true })
+    refundAccount: String;
 }
 
 export const ConsultingRequestSchema = SchemaFactory.createForClass(ConsultingRequest);

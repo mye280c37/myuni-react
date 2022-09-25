@@ -14,7 +14,4 @@ export class UserDto {
     @IsString()
     @ApiProperty({example: '01011112222'})
     phone: String;
-    @IsString()
-    @ApiProperty({example: '1002-987-123456 00은행 아무개'})
-    refundAccount: String;
 }
