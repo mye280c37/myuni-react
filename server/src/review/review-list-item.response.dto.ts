@@ -8,7 +8,7 @@ export class ReviewListItemDto {
         this._id = review._id;
         this.title = review.title;
         this.author = review.author;
-        this.createdTime = review.createdTime;
+        this.consultingTime = review.consultingTime;
     }
 
     @IsString()
@@ -22,5 +22,5 @@ export class ReviewListItemDto {
     author: String;
     @IsString()
     @ApiProperty({example: '2020-09-09T13:30'})
-    createdTime: String;
+    consultingTime: String;
 }

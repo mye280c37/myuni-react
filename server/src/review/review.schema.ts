@@ -14,7 +14,7 @@ export class Review {
     @Prop({required: true})
     @IsString()
     @ApiProperty({example: '2020-09-08T14:30'})
-    createdTime: String;
+    consultingTime: String;
     @Prop({required: true})
     @IsString()
     @ApiProperty({example: '후기 제목'})
