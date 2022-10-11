@@ -14,9 +14,9 @@ function App() {
     <div className="App">
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        {/* <Header/> */}
-        {/* <ConsultingRequest/> */}
-        <Dashboard/>
+        <Header/>
+        <ConsultingRequest/>
+        {/* <Dashboard/> */}
         <Footer />
       </ThemeProvider>
     </div>
