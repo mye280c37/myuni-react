@@ -54,7 +54,7 @@ function preventDefault(event) {
   event.preventDefault();
 }
 
-export default function ConsultingRequests() {
+export default function ConsultingRequestList() {
   return (
     <React.Fragment>
       <Title>컨설팅 신청</Title>

@@ -20,7 +20,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import { mainListItems } from '../components/DashBoard/listItems';
 import Chart from '../components/DashBoard/Chart';
 import Deposits from '../components/DashBoard/Deposits';
-import ConsultingRequests from '../components/DashBoard/ConultingRequests';
+import ConsultingRequestList from '../components/DashBoard/ConultingRequestList';
 
 const drawerWidth = 240;
 
@@ -176,7 +176,7 @@ function DashboardContent() {
               {/* Recent Orders */}
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <ConsultingRequests />
+                  <ConsultingRequestList />
                 </Paper>
               </Grid>
             </Grid>
