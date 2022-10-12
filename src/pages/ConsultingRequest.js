@@ -1,6 +1,5 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
 import Paper from '@mui/material/Paper';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
@@ -59,8 +58,7 @@ export default function ConsultingRequest() {
   };
 
   return (
-    <Container component="main" maxWidth="md" sx={{ mt: 15, mb: 4 }}>
-      <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
+    <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
         <Typography component="h1" variant="h4" align="center" sx={{ my: { xs: 1, md: 3 }, p: { xs: 1, md: 2 } }}>
           컨설팅 신청
         </Typography>
@@ -105,6 +103,5 @@ export default function ConsultingRequest() {
           )}
         </React.Fragment>
       </Paper>
-    </Container>
   );
 }
