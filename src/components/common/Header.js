@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -15,7 +16,8 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 
 const drawerWidth = 240;
-const navItems = ['비교내신환산', '진학컨설팅', '대학입시소양교육'];
+const navItems = ['myUni', '비교내신환산', '진학컨설팅', '대학입시소양교육'];
+const linkTo = ['/', '/', '/consulting-introduction', '/'];
 
 function Header(props) {
     const { window } = props;
@@ -32,12 +34,14 @@ function Header(props) {
         </Typography>
         <Divider />
         <List>
-            {navItems.map((item) => (
-            <ListItem key={item} disablePadding>
-                <ListItemButton sx={{ textAlign: 'center' }}>
-                    <ListItemText primary={item} />
-                </ListItemButton>
-            </ListItem>
+            {navItems.map((item, index) => (
+                <Link to={linkTo[index]}>
+                <ListItem key={item} disablePadding>
+                    <ListItemButton sx={{ textAlign: 'center' }}>
+                        <ListItemText primary={item} />
+                    </ListItemButton>
+                </ListItem>
+                </Link>
             ))}
         </List>
         </Box>
@@ -66,10 +70,12 @@ function Header(props) {
                     MYUNI
                 </Typography>
                 <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-                    {navItems.map((item) => (
-                        <Button key={item} sx={{ color: '#fff' }}>
-                        {item}
-                        </Button>
+                    {navItems.map((item, index) => (
+                        <Link to={linkTo[index]}>
+                            <Button key={item} sx={{ color: '#fff' }}>
+                                {item}
+                            </Button>
+                        </Link>
                     ))}
                 </Box>
             </Toolbar>
