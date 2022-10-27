@@ -76,6 +76,9 @@ export default function TabContainer({ labels, contents }) {
             <Tabs
                 value={value}
                 onChange={handleChange}
+                variant="scrollable"
+                scrollButtons
+                allowScrollButtonsMobile
                 indicatorColor="secondary"
                 textColor="inherit"
 
