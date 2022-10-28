@@ -7,6 +7,7 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import { Button } from "@mui/material";
 import CompareArrowsIcon from '@mui/icons-material/CompareArrows';
+import axios from 'axios';
 
 import PageLayout from './PageLayout';
 import ScoreForm from '../components/forms/ScoreForm';
@@ -16,10 +17,10 @@ import StickyHeadTable from '../components/common/StickyHeaderTable';
 
 
 const columns = [
-    { id: 'name', label: '대학명', minWidth: 170 },
-    { id: 'region', label: '지역', minWidth: 100 },
+    { id: 'university', label: '대학명', minWidth: 170 },
+    { id: 'area', label: '지역', minWidth: 100 },
     {
-        id: 'result',
+        id: 'converted',
         label: '내신환산',
         minWidth: 170,
         align: 'right',
@@ -45,24 +46,6 @@ function createData(name, region, link, a) {
     return { name, region, link, result};
 }
 
-const rows = [
-    createData('India', 'IN', 1324171354, 3287263),
-    createData('China', 'CN', 1403500365, 9596961),
-    createData('Italy', 'IT', 60483973, 301340),
-    createData('United States', 'US', 327167434, 9833520),
-    createData('Canada', 'CA', 37602103, 9984670),
-    createData('Australia', 'AU', 25475400, 7692024),
-    createData('Germany', 'DE', 83019200, 357578),
-    createData('Ireland', 'IE', 4857000, 70273),
-    createData('Mexico', 'MX', 126577691, 1972550),
-    createData('Japan', 'JP', 126317000, 377973),
-    createData('France', 'FR', 67022000, 640679),
-    createData('United Kingdom', 'GB', 67545757, 242495),
-    createData('Russia', 'RU', 146793744, 17098246),
-    createData('Nigeria', 'NG', 200962417, 923768),
-    createData('Brazil', 'BR', 210147125, 8515767),
-];
-
 const titleStyle = {
     mt: 8,
     mb: 2
@@ -79,13 +62,36 @@ export default function GradeConversion() {
         return (value<0)||(value>100);
     };
 
+    async function getResult() {
+        await axios.get(
+            "https://api.hellomyuni.com/v2/converter/score",
+            { params: {
+                korean: korean,
+                english: english,
+                math: math,
+                society: society,
+                science: science,
+                history: history,
+                select: optional
+            } },
+            { withCredentials: true }
+        )
+        .then((res) => {
+            console.log(res.data.result);
+            setData(res.data.result);
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+    }
+
     return (
         <PageLayout title={"비교내신환산"}>
             <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
                 <Typography variant="h5" gutterBottom sx={{ mt: 4 }}>
                     점수입력
                 </Typography>
-                <Typography variant='body2' color={'text.secondary'}>반영과목 및 비율은 전과목으로 선택되어 점수가 환산됩니다.</Typography>
+                <Typography variant='body2' color={'text.secondary'} sx={{ mb: 3 }}>반영과목 및 비율은 전과목으로 선택되어 점수가 환산됩니다.</Typography>
                 <Grid container spacing={3} sx={{ mb: 10 }}>
                     <Grid item xs={12} sm={6}>
                     <TextField
@@ -198,9 +204,7 @@ export default function GradeConversion() {
                     size='large'
                     sx={{fontWeight: 700}}
                     endIcon={<CompareArrowsIcon />}
-                    onClick={() => {
-                        alert(console.log(data));
-                    }}
+                    onClick={() => getResult()}
                 >
                     환산하기
                 </Button>
@@ -210,6 +214,8 @@ export default function GradeConversion() {
                 <Box>
                     <Typography variant='h5' sx={titleStyle}>환산 결과</Typography>
                     <StickyHeadTable columns={columns} rows={data} />
+                    <Typography variant='body2' color={'text.secondary'} sx={{textAlign: 'left'}}>* 예체능계열의 환산 결과와는 다를 수 있습니다.</Typography>
+                    <Typography variant='body2' color={'text.secondary'} sx={{textAlign: 'left'}}>* 비교내신 등급환산 프로그램은 지원자의 등급계산 및 예전년도 성적자료와의 비교를 돕기 위한 단순 참고용이며, 실제 성적반영은 각 전형별 만점기준에 따른 환산 점수로 반영됩니다.</Typography>
                 </Box> 
                 :<React.Fragment></React.Fragment> 
             }
