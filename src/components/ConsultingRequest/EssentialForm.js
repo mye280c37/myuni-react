@@ -17,7 +17,7 @@ export default function EssentialForm({user_info, consulting, score, uni_info, r
       </Typography>
       <UserInfoForm values={user_info} onConsultingRequestChange={onConsultingRequestChange}/>
       <ConsultingForm values={consulting} onConsultingRequestChange={onConsultingRequestChange} />
-      <ScoreForm values={score} onConsultingRequestChange={onConsultingRequestChange}/>
+      <ScoreForm values={score} toParent={onConsultingRequestChange}/>
       <UniversityForm values={uni_info} onConsultingRequestChange={onConsultingRequestChange}/>
       <React.Fragment>
         <Typography variant="h6" gutterBottom sx={{ mt: 4 }}>

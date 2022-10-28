@@ -1,16 +1,17 @@
 import React, { useEffect } from "react";
+import PropTypes from 'prop-types';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 
 import useScore from '../../hooks/useScore';
 
-export default function ScoreForm({ values, onConsultingRequestChange }) {
-  const { form, onChange } = useScore(values);
+function ScoreForm(props) {
+  const { form, onChange } = useScore(props.values);
   const { korean, english, math, society, science, history, optional, average } = form;
 
   useEffect(()=>{
-    onConsultingRequestChange('score', form);
+    props.toParent('score', form);
   }, [korean, english, math, society, science, history, optional, average]); 
 
   return (
@@ -127,3 +128,10 @@ export default function ScoreForm({ values, onConsultingRequestChange }) {
     </React.Fragment>
   );
 }
+
+ScoreForm.propTypes = {
+  values: PropTypes.object,
+  toParent: PropTypes.func
+}
+
+export default ScoreForm;
