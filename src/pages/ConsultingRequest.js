@@ -7,6 +7,7 @@ import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
+import PageLayout from './PageLayout';
 import EssentialForm from '../components/ConsultingRequest/EssentialForm';
 import AdditionalForm from '../components/ConsultingRequest/AdditionalForm';
 import NoticeForm from '../components/ConsultingRequest/NoticeForm';
@@ -50,7 +51,7 @@ export default function ConsultingRequest() {
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
-    console.log(form);
+    console.log(form); 
   };
 
   const handleBack = () => {
@@ -58,7 +59,8 @@ export default function ConsultingRequest() {
   };
 
   return (
-    <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
+    <PageLayout>
+        <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
         <Typography component="h1" variant="h4" align="center" sx={{ my: { xs: 1, md: 3 }, p: { xs: 1, md: 2 } }}>
           컨설팅 신청
         </Typography>
@@ -103,5 +105,6 @@ export default function ConsultingRequest() {
           )}
         </React.Fragment>
       </Paper>
+    </PageLayout>
   );
 }
