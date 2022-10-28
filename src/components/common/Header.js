@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -15,9 +14,11 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 
+import CustomLink from './CustomLink';
+
 const drawerWidth = 240;
-const navItems = ['myUni', '비교내신환산', '진학컨설팅', '대학입시소양교육'];
-const linkTo = ['/', '/', '/consulting-introduction', '/'];
+const navItems = ['MyUni', '비교내신환산', '진학컨설팅', '대학입시소양교육'];
+const linkTo = ['/', '/grade-conversion', '/consulting-introduction', '/'];
 
 function Header(props) {
     const { window } = props;
@@ -35,13 +36,13 @@ function Header(props) {
         <Divider />
         <List>
             {navItems.map((item, index) => (
-                <Link to={linkTo[index]}>
                 <ListItem key={item} disablePadding>
                     <ListItemButton sx={{ textAlign: 'center' }}>
-                        <ListItemText primary={item} />
+                        <CustomLink to={linkTo[index]}>
+                            <ListItemText primary={item} />
+                        </CustomLink>
                     </ListItemButton>
                 </ListItem>
-                </Link>
             ))}
         </List>
         </Box>
@@ -60,7 +61,7 @@ function Header(props) {
                     onClick={handleDrawerToggle}
                     sx={{ mr: 2, display: { sm: 'none' } }}
                 >
-                    <MenuIcon />
+                    <MenuIcon /> 
                 </IconButton>
                 <Typography
                     variant="h6"
@@ -71,11 +72,9 @@ function Header(props) {
                 </Typography>
                 <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
                     {navItems.map((item, index) => (
-                        <Link to={linkTo[index]}>
-                            <Button key={item} sx={{ color: '#fff' }}>
-                                {item}
-                            </Button>
-                        </Link>
+                        <Button key={item} sx={{ color: '#fff' }}>
+                            <CustomLink to={linkTo[index]}>{item}</CustomLink>
+                        </Button>
                     ))}
                 </Box>
             </Toolbar>
