@@ -18,7 +18,7 @@ import CustomLink from './CustomLink';
 
 const drawerWidth = 240;
 const navItems = ['MyUni', '비교내신환산', '진학컨설팅', '대학입시소양교육'];
-const linkTo = ['/', '/grade-conversion', '/consulting-introduction', '/'];
+const linkTo = ['/', '/grade-conversion', '/consulting-introduction', '/lectures'];
 
 function Header(props) {
     const { window } = props;
