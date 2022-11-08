@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 export default function useUniversity(values=null) {
-    const uniList = (values === null)? {
+    const [ form, setForm ] = useState((values === null)? values: {
         1:{
             university: "",
             major: ""
@@ -25,14 +25,9 @@ export default function useUniversity(values=null) {
         6:{
             university: "",
             major: ""
-        }
-
-    }: values.uni_list;
-
-    const [ form, setForm ] = useState({
-        uni_list: uniList,
-        reason: values === null? "": values.reason
-      });
+        },
+        reason: ""
+    });
 
     const onReasonChange = (e) => {
         const { name, value } = e.target;
@@ -45,10 +40,7 @@ export default function useUniversity(values=null) {
     const onUniListChange = (priority, uni) => {
         setForm({
             ...form,
-            uni_list: {
-                ...form.uni_list,
-                [priority]: uni
-            }
+            [priority]: uni
         });
     };
 

@@ -15,8 +15,8 @@ export default function useUniversityItem(values=null) {
     
     const onSubjectChange = (e) => {
         setUni({
-          ...uni,
-          subject: e.target.value
+            ...uni,
+            subject: e.target.value
         });
     };
 

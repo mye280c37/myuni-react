@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 export default function useScore(values=null) {
-    const [ form, setForm ] = useState({
+    const [ score, setScore ] = useState({
         korean: values === null? "": values.korean,
         english: values === null? "": values.english,
         math: values === null? "": values.math,
@@ -12,16 +12,16 @@ export default function useScore(values=null) {
         average: values === null? "": values.average
     });
 
-    const onChange = (e) => {
+    const onScoreChange = (e) => {
         const { name, value } = e.target;
-        setForm({
-            ...form,
+        setScore({
+            ...score,
             [name]: value,
         });
     }
 
     return{
-        form,
-        onChange
+        form: score,
+        onScoreChange
     };
 }
