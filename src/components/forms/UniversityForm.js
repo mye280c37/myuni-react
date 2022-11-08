@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React from "react";
+import PropTypes from 'prop-types';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
@@ -6,19 +7,23 @@ import TextField from '@mui/material/TextField';
 import UniversityFormItem from './UniversityForm/UniverstiyFormItem';
 import useUniversity from "../../hooks/useUniversity";
 
-export default function UniversityForm({ values, onConsultingRequestChange }) {
-  const { form, onReasonChange, onUniListChange } = useUniversity(values);
-  const { uni_list, reason } = form;
+function UniversityForm(props) {
+  const { form, onReasonChange, onUniListChange } = useUniversity(props.values);
 
-  useEffect(()=>{
-    console.log('useEffect2')
-    onConsultingRequestChange('uni_info', form);
-  }, [uni_list, reason]); 
+  const reasonHandler = (e) => {
+    onReasonChange(e);
+    props.handler.reason(e);
+  }
+
+  const listHandler = (priority, uni) => {
+    onUniListChange(priority, uni);
+    props.handler.list(priority, uni);
+  }
   
   const getUniveristyFormItemArray = (num) => {
     let arr = [];
     for(let i = 1; i <= num; i++){
-      arr.push(<UniversityFormItem priority={i} values={uni_list[i]} setUniList={onUniListChange} />);
+      arr.push(<UniversityFormItem priority={i} values={form[i]} setUniList={listHandler} />);
     }
     return arr;
   };
@@ -41,8 +46,8 @@ export default function UniversityForm({ values, onConsultingRequestChange }) {
               required
               id="reason"
               name="reason"
-              value={reason}
-              onChange={onReasonChange}
+              value={form.reason}
+              onChange={reasonHandler}
               label="학교 및 학과 선정 이유"
               fullWidth
               multiline
@@ -56,3 +61,10 @@ export default function UniversityForm({ values, onConsultingRequestChange }) {
     </React.Fragment>
   );
 }
+
+UniversityForm.propsType = {
+  values: PropTypes.object,
+  handler: PropTypes.object
+}
+
+export default UniversityForm;

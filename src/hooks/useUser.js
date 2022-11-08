@@ -19,7 +19,7 @@ export default function useUser(values=null) {
     console.assert(values);
 
     return{
-        form: user,
+        user,
         onUserChange
     };
 }

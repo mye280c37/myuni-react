@@ -1,4 +1,5 @@
 import * as React from 'react';
+import PropTypes from 'prop-types';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
@@ -7,7 +8,14 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import RadioGroup from '@mui/material/RadioGroup';
 import Radio from '@mui/material/Radio';
 
-export default function NoticeForm({ refund_account, onRefundAccountChange, onConsultingRequestChange }) {
+function NoticeForm(props) {
+  const [refundAccount, setRefundAccount] =  React.useState(props.values);
+
+  const refundAccountHandler = (e) => {
+    setRefundAccount(e.target.value);
+    props.handler(e.target.value);
+  }
+
   return (
     <React.Fragment>
         <Typography variant="h6" sx={{ mb: 4 }} gutterBottom>
@@ -81,11 +89,11 @@ export default function NoticeForm({ refund_account, onRefundAccountChange, onCo
           <Grid item xs={12}>
             <TextField
               required
-              id="refund_account"
-              name="refund_account"
-              value={refund_account}
+              id="refundAccount"
+              name="refundAccount"
+              value={refundAccount}
               label="환불계좌"
-              onChange={onRefundAccountChange}
+              onChange={refundAccountHandler}
               fullWidth
               autoComplete="shipping address-line1"
             />
@@ -99,3 +107,10 @@ export default function NoticeForm({ refund_account, onRefundAccountChange, onCo
     </React.Fragment>
   );
 }
+
+NoticeForm.propTypes = {
+  values: PropTypes.string,
+  handler: PropTypes.func
+}
+
+export default NoticeForm;

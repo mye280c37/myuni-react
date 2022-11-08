@@ -13,16 +13,16 @@ export default function useUniversityItem(values=null) {
         });
     };
     
-    const onSubjectChange = (e) => {
+    const onMajorChange = (e) => {
         setUni({
             ...uni,
-            subject: e.target.value
+            major: e.target.value
         });
     };
 
     return{
         uni,
         onUniChange,
-        onSubjectChange
+        onMajorChange
     };
 }

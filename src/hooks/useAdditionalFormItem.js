@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function useAdditionalInfoItem(values=null) {
+export default function useAdditionalFormItem(values=null) {
     const [form, setForm] = useState({
         header: values.header,
         title: values.title,
@@ -10,10 +10,9 @@ export default function useAdditionalInfoItem(values=null) {
 
     const onChange = (e) => {
         setForm({
-          ...form,
-          value: e.target.value
+            ...form,
+            value: e.target.value
         });
-        console.log(form);
     };
 
     return{

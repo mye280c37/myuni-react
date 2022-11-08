@@ -13,36 +13,38 @@ import Container from '@mui/material/Container';
 import EssentialForm from '../components/ConsultingRequest/EssentialForm';
 import AdditionalForm from '../components/ConsultingRequest/AdditionalForm';
 import NoticeForm from '../components/ConsultingRequest/NoticeForm';
-import useConsultingRequest from '../hooks/useConsultingRequest';
 import CustomLink from '../components/common/CustomLink';
 import axios from 'axios';
 
+import useUser from '../hooks/useUser';
+import useUniversity from '../hooks/useUniversity';
+import useScore from '../hooks/useScore';
+import useEssentialForm from '../hooks/useEssentialForm';
+import useAdditionalForm from '../hooks/useAdditionalForm';
+
 const steps = ['필수 정보', '추가 정보', '공지사항 확인'];
 
-function getStepContent(step, form, onConsultingRequestChange, onTextFieldChange) {
+function getStepContent(step, form, formHandler) {
 
-  const { user_info, consulting, score, uni_info, reference, additional_info, route_known, refund_account } = form;
+  const { essential, additional, notice } = form;
+  const { essential: essentialHandler, additional: additionalHandler, notice: noticeHandler} = formHandler;
 
   switch (step) {
     case 0:
       return <EssentialForm
-                user_info={user_info}
-                consulting={consulting}
-                score={score}
-                uni_info={uni_info}
-                reference={reference} 
-                onConsultingRequestChange={onConsultingRequestChange} 
-                onReferenceChange={onTextFieldChange} />;
+                values={essential}
+                handler={essentialHandler}
+                />;
     case 1:
       return <AdditionalForm
-                additional_info={additional_info}
-                route_known={route_known}
-                onConsultingRequestChange={onConsultingRequestChange} />;
+                values={additional}
+                handler={additionalHandler}
+                />;
     case 2:
       return <NoticeForm
-                refund_account={refund_account}
-                onRefundAccountChange={onTextFieldChange}
-                onConsultingRequestChange={onConsultingRequestChange} />;
+                values={notice}
+                handler={noticeHandler}
+              />;
     default:
       throw new Error('Unknown step');
   }
@@ -51,11 +53,52 @@ function getStepContent(step, form, onConsultingRequestChange, onTextFieldChange
 export default function ConsultingRequest() {
   const [activeStep, setActiveStep] = React.useState(0);
 
-  const { form, onConsultingRequestChange, onTextFieldChange } = useConsultingRequest();
+  const {user, onUserChange} = useUser();
+  const {score, onScoreChange} = useScore();
+  const {form: desiredUni, onReasonChange, onUniListChange} = useUniversity();
+  const {form: essentialForm, onChange: onEssentialChange, onCheckBoxFormChange} = useEssentialForm();
+  const {form: additionalForm, onChange: onAdditionalChange} = useAdditionalForm();
+  const [refundAccount, setRefundAccount] = React.useState("");
+
+  const essentialFormSet = {
+    user: user,
+    score: score,
+    uni: desiredUni,
+    ...essentialForm
+  };
+
+  const essentialFormHandler = {
+    user: onUserChange,
+    score: onScoreChange,
+    uni: {
+      list: onUniListChange,
+      reason: onReasonChange
+    },
+    onEssentialChange: onEssentialChange,
+    onCheckBoxFormChange: onCheckBoxFormChange
+  };
+
+  const consultingRequestForm = {
+    essential: essentialFormSet,
+    additional: additionalForm,
+    notice: refundAccount
+  };
+
+  const consulitngRequestHandler = {
+    essential: essentialFormHandler,
+    additional: onAdditionalChange,
+    notice: setRefundAccount
+  };
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
-    console.log(form); 
+    console.log({
+      user: user,
+      score: score,
+      uni: desiredUni,
+      ...essentialForm,
+      ...additionalForm
+    });
   };
 
   const handleBack = () => {
@@ -65,14 +108,23 @@ export default function ConsultingRequest() {
   const onSubmit = () => {
     alert("신청");
     console.log("신청");
-    console.log(form);
-    axios.post(
-      "https://api.hellomyuni.com/v2/consulting-request", {
-        user: form.user,
-        score: form.score,
-        uni: form.uni,
-      }
-    )
+    // axios.post(
+    //   "https://api.hellomyuni.com/v2/consulting-request", {
+    //     user: user,
+    //     score: score,
+    //     uni: desiredUni,
+    //     ...essentialForm,
+    //     ...additionalForm
+    //   }
+    // );
+    console.log({
+      user: user,
+      score: score,
+      uni: desiredUni,
+      ...essentialForm,
+      ...additionalForm,
+      refundAccount: refundAccount
+    });
   };
 
   return (
@@ -106,7 +158,7 @@ export default function ConsultingRequest() {
             ))}
           </Stepper>
           <React.Fragment>
-            {getStepContent(activeStep, form, onConsultingRequestChange, onTextFieldChange)}
+            {getStepContent(activeStep, consultingRequestForm, consulitngRequestHandler)}
             <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
               {activeStep !== 0 && (
                 <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>

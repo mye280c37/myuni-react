@@ -1,29 +1,27 @@
-import React, { useEffect } from "react";
+import React from "react";
+import PropTypes from 'prop-types';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
 import AdditionalFormItem from './AdditionalForm/AdditionalFormItem';
 import CheckBoxFormTemplate from '../forms/CheckBoxFormTemplate';
-import useAdditionalInfo from "../../hooks/useAdditionalInfo";
+import useAdditionalForm from "../../hooks/useAdditionalForm";
 
-export default function AdditionalForm({additional_info, route_known, onConsultingRequestChange}) {
+function AdditionalForm(props) {
 
-  const {forms, onChange} = useAdditionalInfo(additional_info);
-
-  useEffect(()=>{
-      onConsultingRequestChange("additional_info", forms);
-  }, [forms]);
+  const {form, onChange} = useAdditionalForm(props.values);
+  const {additionalInfo, routeKnown} = form;
 
   const getAdditionalFormItemArray = ()=>{
     const additionalFromItemArray = [];
-    for (let key in forms){
+    for (let key in additionalInfo){
       additionalFromItemArray.push(
         <AdditionalFormItem
-        header={forms[key].header}
-        title={forms[key].title}
-        example={forms[key].example}
+        header={additionalInfo[key].header}
+        title={additionalInfo[key].title}
+        example={additionalInfo[key].example}
         name={key}
-        value={forms[key].value}
+        value={additionalInfo[key].value}
         onParentChange={onChange}
         />
       );
@@ -43,10 +41,17 @@ export default function AdditionalForm({additional_info, route_known, onConsulti
             <Typography variant="body2" sx={{ color: "text.secondary", textAlign: "left" }} gutterBottom>
               중복선택 가능
             </Typography>
-            <CheckBoxFormTemplate name="route_known" values={route_known} etcIdx={3} onParentChange={onConsultingRequestChange}/>
+            <CheckBoxFormTemplate name="routeKnown" values={routeKnown} etcIdx={3} onParentChange={props.handler}/>
           </Grid>
         </Grid>
       </React.Fragment>
     </React.Fragment>
   );
 }
+
+AdditionalForm.propTypes = {
+  values: PropTypes.object,
+  handler: PropTypes.func
+}
+
+export default AdditionalForm;

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import TextField from '@mui/material/TextField';
 import { FormControl } from '@mui/material';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -11,9 +11,15 @@ export default function CheckBoxFormTemplate({ name, etcIdx=-1, values, onParent
   const {form, onCheckedChange, onEtcChange} = useCheckBoxForm(values);
   const {checked, labels, etc} = form;
 
-  useEffect(()=>{
-      onParentChange(name, form);
-  }, [checked, etc]);
+  const checkedHandler = (e) => {
+    onCheckedChange(e);
+    onParentChange(name, form);
+  }
+
+  const etcHandler = (e) => {
+    onEtcChange(e);
+    onParentChange(name, form);
+  }
   
   const showAdditionalTextField = () => {
       if(etcIdx!==-1 && checked[etcIdx]){
@@ -22,7 +28,8 @@ export default function CheckBoxFormTemplate({ name, etcIdx=-1, values, onParent
               required
               id="etc"
               name="etc"
-              onChange={onEtcChange}
+              value={etc}
+              onChange={etcHandler}
               label="기타"
               fullWidth
               />
@@ -38,7 +45,7 @@ export default function CheckBoxFormTemplate({ name, etcIdx=-1, values, onParent
         checkboxList.push(
           <FormControlLabel
             control={
-              <Checkbox name={idx} checked={checked[idx]} onChange={onCheckedChange}/>
+              <Checkbox name={idx} checked={checked[idx]} onChange={checkedHandler}/>
             }
             label={value}
           />
@@ -50,7 +57,7 @@ export default function CheckBoxFormTemplate({ name, etcIdx=-1, values, onParent
           <React.Fragment>
             <FormControlLabel
               control={
-                <Checkbox name={idx} checked={checked[idx]} onChange={onCheckedChange}/>
+                <Checkbox name={idx} checked={checked[idx]} onChange={checkedHandler}/>
               }
               label={value}
             />

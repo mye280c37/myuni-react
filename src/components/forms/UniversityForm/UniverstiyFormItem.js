@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import useUniversityItem from "../../../hooks/useUniversityItem";
@@ -7,13 +7,13 @@ export default function UniversityFormItem({ priority, values, setUniList }) {
   const uniId = "uni" + priority;
   const majorId = "major" + priority;
 
-  const { uni, onUniChange, onSubjectChange } = useUniversityItem(values);
+  const { uni, onUniChange, onMajorChange } = useUniversityItem(values);
   const { university, major } = uni;
 
   useEffect(()=>{
-    console.log('useEffect');
     setUniList(priority, uni);
   }, [university, major]); 
+
 
   return (
     <React.Fragment>
@@ -40,7 +40,7 @@ export default function UniversityFormItem({ priority, values, setUniList }) {
             name={majorId}
             label="학과"
             value={major}
-            onChange={onSubjectChange}
+            onChange={onMajorChange}
             fullWidth
             variant="standard"
           />

@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-export default function useEssentialForm() {
-    const [ form, setForm ] = useState({
+export default function useEssentialForm(values=null) {
+    const [ form, setForm ] = useState(values===null? {
         consultingOption: {
             checked:{
                 0: false,
@@ -24,6 +24,12 @@ export default function useEssentialForm() {
         reason: "",
         desiredDate: "",
         reference: "",
+    }: {
+        consultingOption: values.consultingOption,
+        applicationType: values.applicationType,
+        reason: values.reason,
+        desiredDate: values.desiredDate,
+        reference: values.reference
     });
 
     const onChange = (e) => {
@@ -33,8 +39,16 @@ export default function useEssentialForm() {
         });
     };
 
+    const onCheckBoxFormChange = (name, value) => {
+        setForm({
+            ...form,
+            [name]: value,
+        });
+    }
+
     return{
         form,
-        onChange
+        onChange,
+        onCheckBoxFormChange
     };
 }

@@ -1,21 +1,30 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
+import { FormControl, Select, MenuItem, InputLabel } from '@mui/material';
 
-import FormTitle from "../common/FormTitle";
 import GridFormTemplate from "../common/GridFromTemplate";
-
+import CheckBoxFormTemplate from "../forms/CheckBoxFormTemplate";
 import ScoreForm from '../forms/ScoreForm';
 import UniversityForm from '../forms/UniversityForm';
 import useUser from "../../hooks/useUser";
-import useScore from "../../hooks/useScore";
 import useEssentialForm from "../../hooks/useEssentialForm";
 
-export default function EssentialForm({score, uni_info, onConsultingRequestChange }) {
-  const { user, onUserChange } = useUser();
-  const { score, onScoreChange } = useScore();
-  const { form, onChange } = useEssentialForm();
+function EssentialForm(props) {
+  const { user, onUserChange } = useUser(props.values.user);
+  const { form, onChange } = useEssentialForm(props.values);
+
+  const userHandler = (e) => {
+    onUserChange(e);
+    props.handler.userHandler(e);
+  }
+
+  const formHandler = (e) => {
+    onChange(e);
+    props.handler.onEssentialChange(e);
+  }
 
   return (
     <React.Fragment>
@@ -31,7 +40,7 @@ export default function EssentialForm({score, uni_info, onConsultingRequestChang
             name="name"
             label="이름"
             value={user.name}
-            onChange={onUserChange}
+            onChange={userHandler}
             fullWidth
             autoComplete="given-name"
             variant="standard"
@@ -46,7 +55,7 @@ export default function EssentialForm({score, uni_info, onConsultingRequestChang
               name="sex"
               label="성별"
               value={user.sex}
-              onChange={onUserChange}
+              onChange={userHandler}
             >
               <MenuItem value='m'>남</MenuItem>
               <MenuItem value='w'>여</MenuItem>
@@ -60,7 +69,7 @@ export default function EssentialForm({score, uni_info, onConsultingRequestChang
             name="age"
             label="나이"
             value={user.age}
-            onChange={onUserChange}
+            onChange={userHandler}
             fullWidth
             autoComplete="family-name"
             variant="standard"
@@ -73,7 +82,7 @@ export default function EssentialForm({score, uni_info, onConsultingRequestChang
             name="phone"
             label="전화번호"
             value={user.phone}
-            onChange={onUserChange}
+            onChange={userHandler}
             fullWidth
             autoComplete="shipping address-line1"
             variant="standard"
@@ -85,7 +94,7 @@ export default function EssentialForm({score, uni_info, onConsultingRequestChang
           <Typography variant="body2" sx={{ color: "text.secondary", textAlign: "left" }} gutterBottom>
             중복선택 가능
           </Typography>
-          <CheckBoxFormTemplate name="consulting_option" values={form.consultingOption} onParentChange={onConsultingChange}/>
+          <CheckBoxFormTemplate name="consultingOption" values={form.consultingOption} onParentChange={props.handler.onCheckBoxFormChange}/>
         </Grid>
       </GridFormTemplate>
       <GridFormTemplate title={'지원 전형'}>
@@ -93,7 +102,7 @@ export default function EssentialForm({score, uni_info, onConsultingRequestChang
             <Typography variant="body2" sx={{ color: "text.secondary", textAlign: "left" }} gutterBottom>
             중복선택 가능
             </Typography>
-            <CheckBoxFormTemplate name="application_type" etcIdx={3} values={form.applicationType} onParentChange={onConsultingChange}/>
+            <CheckBoxFormTemplate name="applicationType" etcIdx={3} values={form.applicationType} onParentChange={props.handler.onCheckBoxFormChange}/>
         </Grid>
         <Grid item xs={12}>
             <TextField
@@ -101,7 +110,7 @@ export default function EssentialForm({score, uni_info, onConsultingRequestChang
             id="reason"
             name="reason"
             label="지원 전형 선택 이유"
-            onChange={onChange}
+            onChange={formHandler}
             value={form.reason}
             fullWidth
             multiline
@@ -120,12 +129,12 @@ export default function EssentialForm({score, uni_info, onConsultingRequestChang
             <FormControl required variant="standard" fullWidth>
                 <InputLabel id="date">컨설팅 날짜</InputLabel>
                 <Select
-                    labelId="date"
-                    id="date"
-                    name="date"
+                    labelId="desiredDate"
+                    id="desiredDate"
+                    name="desiredDate"
                     value={form.desiredDate}
                     label="컨설팅 날짜"
-                    onChange={onChange}
+                    onChange={formHandler}
                 >
                     <MenuItem value={"2022-07-29 16:00"}>2022-07-29 16:00</MenuItem>
                     <MenuItem value={"2022-07-30 15:00"}>2022-07-30 15:00</MenuItem>
@@ -135,8 +144,9 @@ export default function EssentialForm({score, uni_info, onConsultingRequestChang
             </FormControl>
         </Grid>
       </GridFormTemplate>
-      <ScoreForm values={score} toParent={onScoreChange}/>
-      <UniversityForm values={uni_info} onConsultingRequestChange={onConsultingRequestChange}/>
+      <ScoreForm values={props.values.score} handler={props.handler.score}/>
+      {/* 내부 로직 수정해야 함 */}
+      <UniversityForm values={props.values.uni} handler={props.handler.uni}/>
       <GridFormTemplate title={'참고사항'}>
         <Grid item xs={12}>
           <TextField
@@ -145,7 +155,7 @@ export default function EssentialForm({score, uni_info, onConsultingRequestChang
             name="reference"
             label="참고사항"
             value={form.reference}
-            onChange={onChange}
+            onChange={formHandler}
             multiline
             rows={4}
             fullWidth
@@ -159,3 +169,10 @@ export default function EssentialForm({score, uni_info, onConsultingRequestChang
     </React.Fragment>
   );
 }
+
+EssentialForm.propTypes = {
+  values: PropTypes.object,
+  handler: PropTypes.object
+}
+
+export default EssentialForm;
