@@ -75,7 +75,7 @@ function EssentialForm(props) {
             variant="standard"
           />
         </Grid>
-        <Grid item xs={12} sx={{ mb: 10 }}>
+        <Grid item xs={12}>
           <TextField
             required
             id="phone"

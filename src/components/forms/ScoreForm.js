@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 
 import useScore from '../../hooks/useScore';
+import GridFormTemplate from "../common/GridFromTemplate";
 
 function ScoreForm(props) {
   const { score: form, onScoreChange: onChange } = useScore(props.values);
@@ -16,11 +16,7 @@ function ScoreForm(props) {
   }
 
   return (
-    <React.Fragment>
-      <Typography variant="h6" gutterBottom sx={{ mt: 4 }}>
-        과목별 점수 및 평균
-      </Typography>
-      <Grid container spacing={3} sx={{ mb: 10 }}>
+    <GridFormTemplate title={"과목별 점수 및 평균"}>
         <Grid item xs={12} sm={6}>
           <TextField
             required
@@ -125,8 +121,7 @@ function ScoreForm(props) {
                 variant="standard"
             />
         </Grid>
-      </Grid>
-    </React.Fragment>
+    </GridFormTemplate>
   );
 }
 
