@@ -21,8 +21,30 @@ import useUniversity from '../hooks/useUniversity';
 import useScore from '../hooks/useScore';
 import useEssentialForm from '../hooks/useEssentialForm';
 import useAdditionalForm from '../hooks/useAdditionalForm';
+import ConsultingRequestValidation from '../components/ConsultingRequest/ConsultingRequestValidation';
 
 const steps = ['필수 정보', '추가 정보', '공지사항 확인'];
+
+function getTrueLabelList(form) {
+  const result = [];
+  for (let i=0; i<form.checked.length; i++) {
+    if(form.checked[i]){
+      if(form.labels[i] === "기타"){
+        result.push(form.etc);
+      }
+      else{result.push(form.labels[i]);}
+    }
+  }
+  return result;
+}
+
+function deleteExample(additionalInfo) {
+  const result = additionalInfo;
+  for(let key in result){
+    delete result[key].example;
+  }
+  return result;
+}
 
 function getStepContent(step, form, formHandler) {
 
@@ -92,13 +114,6 @@ export default function ConsultingRequest() {
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
-    console.log({
-      user: user,
-      score: score,
-      uni: desiredUni,
-      ...essentialForm,
-      ...additionalForm
-    });
   };
 
   const handleBack = () => {
@@ -108,23 +123,39 @@ export default function ConsultingRequest() {
   const onSubmit = () => {
     alert("신청");
     console.log("신청");
-    // axios.post(
-    //   "https://api.hellomyuni.com/v2/consulting-request", {
-    //     user: user,
-    //     score: score,
-    //     uni: desiredUni,
-    //     ...essentialForm,
-    //     ...additionalForm
-    //   }
-    // );
-    console.log({
+    const body = {
       user: user,
       score: score,
       uni: desiredUni,
-      ...essentialForm,
-      ...additionalForm,
+      desiredDate: essentialForm.desiredDate,
+      consultingOption: getTrueLabelList(essentialForm.consultingOption),
+      applicationType: getTrueLabelList(essentialForm.applicationType),
+      reason: essentialForm.reason,
+      reference: essentialForm.reference,
+      additionalInfo: deleteExample(additionalForm.additionalInfo),
+      routeKnown: getTrueLabelList(additionalForm.routeKnown),
       refundAccount: refundAccount
-    });
+    };
+
+    const {messages, isValid} = ConsultingRequestValidation(body);
+    
+    if(isValid){
+      axios.post(
+        "https://api.hellomyuni.com/v2/consulting-request", body
+      ).then(function (res) {
+        console.log(res.status);
+        if(res.status !== 201) {
+          alert("신청에 실패했습니다.");
+        }
+        console.log(res.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    }
+    
+
+    console.log(body);
   };
 
   return (
