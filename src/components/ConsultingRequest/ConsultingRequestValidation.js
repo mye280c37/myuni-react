@@ -19,6 +19,10 @@ function userValidation(user) {
             }
         }
     }
+    return {
+        messages: [],
+        isValid: true
+    }
 }
 
 function scoreValidation(score) {
@@ -29,6 +33,10 @@ function scoreValidation(score) {
                 isValid: false
             }
         }
+    }
+    return {
+        messages: [],
+        isValid: true
     }
 }
 
@@ -54,11 +62,15 @@ function uniValidation(uni) {
 }
 
 export default function ConsultingRequestValidation(body) {
-    const messages = [];
+    let messages = [];
     let isValid = true;
     let result = null;
 
     for(let key in body){
+        result = {
+            messages: [],
+            isValid: true
+        }
         if(key === "additionalInfo") continue;
         if(key === "user") {
             result = userValidation(body.user);
@@ -69,7 +81,7 @@ export default function ConsultingRequestValidation(body) {
         else if(key === "uni") {
             result = uniValidation(body.uni);
         }
-        else if(body[key].isArray()){
+        else if(Array.isArray(body[key])){
             if(body[key].length === 0){
                 result = {
                     messages: [itemName[key] + ": 필수 항목입니다."],
@@ -85,8 +97,8 @@ export default function ConsultingRequestValidation(body) {
                 }
             }
         }
-        if(!result.isValid){
-            messages.concat(result.messages);
+        if(!result[isValid]){
+            messages = messages.concat(result.messages);
             isValid = false;
         }
     }
