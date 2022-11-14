@@ -52,7 +52,7 @@ const titleStyle = {
 };
 
 export default function GradeConversion() {
-    const { form, onChange } = useScore();
+    const { score:form, onScoreChange:onChange } = useScore();
     const { korean, english, math, society, science, history, optional, average } = form;
     const helperText="0과 100사이의 유효한 점수를 입력해주세요.";
 
