@@ -16,8 +16,6 @@ export default function useUser(values=null) {
         });
     };
 
-    console.assert(values);
-
     return{
         user,
         onUserChange
