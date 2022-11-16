@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
@@ -13,9 +13,10 @@ export default function AdditionalFormItem({ header, title, example, name, value
     value: value
   });
 
-  useEffect(()=>{
+  const additionalFormItemHandler = (e) => {
+    onChange(e);
     onParentChange(name, form);
-  }, [form]);
+  }
 
   return (
     <React.Fragment>
@@ -37,7 +38,7 @@ export default function AdditionalFormItem({ header, title, example, name, value
                 name={name}
                 label={title}
                 value={form.value}
-                onChange={onChange}
+                onChange={additionalFormItemHandler}
                 fullWidth
                 autoComplete="given-name"
                 variant="standard"

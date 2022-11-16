@@ -18,7 +18,7 @@ function EssentialForm(props) {
 
   const userHandler = (e) => {
     onUserChange(e);
-    props.handler.userHandler(e);
+    props.handler.user(e);
   }
 
   const formHandler = (e) => {
@@ -145,7 +145,6 @@ function EssentialForm(props) {
         </Grid>
       </GridFormTemplate>
       <ScoreForm values={props.values.score} handler={props.handler.score}/>
-      {/* 내부 로직 수정해야 함 */}
       <UniversityForm values={props.values.uni} handler={props.handler.uni}/>
       <GridFormTemplate title={'참고사항'}>
         <Grid item xs={12}>

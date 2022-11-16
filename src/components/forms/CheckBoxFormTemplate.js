@@ -9,20 +9,29 @@ import useCheckBoxForm from "../../hooks/useCheckBoxForm";
 export default function CheckBoxFormTemplate({ name, etcIdx=-1, values, onParentChange }) {
 
   const {form, onCheckedChange, onEtcChange} = useCheckBoxForm(values);
-  const {checked, labels, etc} = form;
 
   useEffect(()=>{
     onParentChange(name, form);
-  }, [checked, etc, form, name, onParentChange]); 
+  }, [form]); 
+
+  // const checkedHandler = (e) => {
+  //   onCheckedChange(e);
+  //   onParentChange(name, form);
+  // }
+
+  // const etcHandler = (e) => {
+  //   onEtcChange(e);
+  //   onParentChange(name, form);
+  // }
   
   const showAdditionalTextField = () => {
-      if(etcIdx!==-1 && checked[etcIdx]){
+      if(etcIdx!==-1 && form.checked[etcIdx]){
           return(
               <TextField
               required
               id="etc"
               name="etc"
-              value={etc}
+              value={form.etc}
               onChange={onEtcChange}
               label="기타"
               fullWidth
@@ -36,12 +45,12 @@ export default function CheckBoxFormTemplate({ name, etcIdx=-1, values, onParent
         <FormControl required variant="standard" fullWidth>
           <FormGroup>
               {
-                labels.map((value, idx) => {
+                form.labels.map((value, idx) => {
                   return (
                     <React.Fragment>
                       <FormControlLabel
                         control={
-                          <Checkbox name={idx} checked={checked[idx]} onChange={onCheckedChange}/>
+                          <Checkbox name={idx} checked={form.checked[idx]} onChange={onCheckedChange}/>
                         }
                         label={value}
                       />

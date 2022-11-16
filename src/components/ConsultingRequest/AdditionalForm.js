@@ -5,24 +5,20 @@ import Typography from '@mui/material/Typography';
 
 import AdditionalFormItem from './AdditionalForm/AdditionalFormItem';
 import CheckBoxFormTemplate from '../forms/CheckBoxFormTemplate';
-import useAdditionalForm from "../../hooks/useAdditionalForm";
 
 function AdditionalForm(props) {
 
-  const {form, onChange} = useAdditionalForm(props.values);
-  const {additionalInfo, routeKnown} = form;
-
   const getAdditionalFormItemArray = ()=>{
     const additionalFromItemArray = [];
-    for (let key in additionalInfo){
+    for (let key in props.values.additionalInfo){
       additionalFromItemArray.push(
         <AdditionalFormItem
-        header={additionalInfo[key].header}
-        title={additionalInfo[key].title}
-        example={additionalInfo[key].example}
+        header={props.values.additionalInfo[key].header}
+        title={props.values.additionalInfo[key].title}
+        example={props.values.additionalInfo[key].example}
         name={key}
-        value={additionalInfo[key].value}
-        onParentChange={onChange}
+        value={props.values.additionalInfo[key].value}
+        onParentChange={props.handler.additionalInfo}
         />
       );
     }
@@ -41,7 +37,7 @@ function AdditionalForm(props) {
             <Typography variant="body2" sx={{ color: "text.secondary", textAlign: "left" }} gutterBottom>
               중복선택 가능
             </Typography>
-            <CheckBoxFormTemplate name="routeKnown" values={routeKnown} etcIdx={3} onParentChange={props.handler}/>
+            <CheckBoxFormTemplate name="routeKnown" values={props.values.routeKnown} etcIdx={3} onParentChange={props.handler.routeKnown}/>
           </Grid>
         </Grid>
       </React.Fragment>
@@ -51,7 +47,7 @@ function AdditionalForm(props) {
 
 AdditionalForm.propTypes = {
   values: PropTypes.object,
-  handler: PropTypes.func
+  handler: PropTypes.object
 }
 
 export default AdditionalForm;

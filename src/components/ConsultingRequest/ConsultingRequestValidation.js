@@ -97,7 +97,7 @@ export default function ConsultingRequestValidation(body) {
                 }
             }
         }
-        if(!result[isValid]){
+        if(!result.isValid){
             messages = messages.concat(result.messages);
             isValid = false;
         }
