@@ -16,11 +16,9 @@ export default function useCheckBoxForm(values=null) {
           }
           
         });
-        console.log(form);
       };
 
     const onEtcChange = (e) =>{
-        console.log(e.target.value);
         setForm({
             ...form,
             [e.target.name]: e.target.value,
