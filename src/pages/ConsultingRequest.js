@@ -9,9 +9,6 @@ import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import Snackbar from '@mui/material/Snackbar';
-import Alert from '@mui/material/Alert';
-import AlertTitle from '@mui/material/AlertTitle';
 
 import EssentialForm from '../components/ConsultingRequest/EssentialForm';
 import AdditionalForm from '../components/ConsultingRequest/AdditionalForm';
@@ -25,8 +22,12 @@ import useScore from '../hooks/useScore';
 import useEssentialForm from '../hooks/useEssentialForm';
 import useAdditionalForm from '../hooks/useAdditionalForm';
 import ConsultingRequestValidation from '../components/ConsultingRequest/ConsultingRequestValidation';
+import CustomSnackBar from '../components/common/CustomSnackBar';
 
 const steps = ['필수 정보', '추가 정보', '공지사항 확인'];
+
+// const url = "https://api.hellomyuni.com";
+const url = "http://localhost:8000";
 
 function getTrueLabelList(form) {
   const keys = Object.keys(form.checked);
@@ -146,18 +147,21 @@ export default function ConsultingRequest() {
     };
 
     const {messages, isValid} = ConsultingRequestValidation(body);
-    const url = "https://api.hellomyuni.com/v2/consulting-request";
+    
     if(isValid){
       axios.post(
-        url, body
+        url+"/v2/consulting-request", body
       ).then(function (res) {
-        if(res.status !== 201) {
-          alert("신청에 실패했습니다.");
+        if(res.status === 201) {
+          setComplete(true);
         }
-        setComplete(true);
       })
       .catch(function (error) {
-        console.log(error);
+        if(error.response.status === 404 || error.response.status === 400) {
+          setErrorMsgs([error.response.data.message]);
+          setAlertOpen(true);
+        }
+        alert("신청에 실패했습니다.");
       });
     }
     else{
@@ -175,16 +179,13 @@ export default function ConsultingRequest() {
 
   return (
     <React.Fragment>
-      <Snackbar open={alertOpen} autoHideDuration={6000} onClose={handleClose} anchorOrigin={{ vertical:'top', horizontal:'center' }}>
-          <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
-            <AlertTitle sx={{mb: 1.5, fontSize: 20}}>신청 양식이 유효하지 않습니다!</AlertTitle>
-            {errorMsgs.map(
-              (msg) => {
-                return <Typography sx={{textAlign: 'left', mb: 1, fontSize: 16}}>- {msg}</Typography>
-              }
-            )}
-          </Alert>
-      </Snackbar>
+      <CustomSnackBar open={alertOpen} onClose={handleClose} title={"신청 양식이 유효하지 않습니다!"}>
+        {errorMsgs.map(
+          (msg) => {
+            return <Typography sx={{textAlign: 'left', mb: 1, fontSize: 16}}>- {msg}</Typography>
+          }
+        )}
+      </CustomSnackBar>
       <AppBar
         color="default"
         elevation={0}

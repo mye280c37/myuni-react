@@ -1,9 +1,10 @@
-import React from "react";
+import React, {useState, useEffect, useCallback} from "react";
 import PropTypes from 'prop-types';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import { FormControl, Select, MenuItem, InputLabel } from '@mui/material';
+import axios from 'axios';
 
 import GridFormTemplate from "../common/GridFromTemplate";
 import CheckBoxFormTemplate from "../forms/CheckBoxFormTemplate";
@@ -11,10 +12,35 @@ import ScoreForm from '../forms/ScoreForm';
 import UniversityForm from '../forms/UniversityForm';
 import useUser from "../../hooks/useUser";
 import useEssentialForm from "../../hooks/useEssentialForm";
+import CustomSnackBar from "../common/CustomSnackBar";
+
+// const url = "https://api.hellomyuni.com";
+const url = "http://localhost:8000";
 
 function EssentialForm(props) {
   const { user, onUserChange } = useUser(props.values.user);
   const { form, onChange } = useEssentialForm(props.values);
+  const [ availableDateList, setAvailableDateList ] = useState([]);
+  const [ snackBarOpen, setSnackBarOpen ] = useState(false);
+  const [ getData, setGetData ] = useState(false);
+
+  const getAvailableDateList = useCallback(async () => {
+    await axios.get(url+"/v2/available-date")
+    .then(function (res) {
+      if(res.status === 200) {
+        setAvailableDateList(res.data.result.map((value)=>{
+          return {
+            key: value._id,
+            value: value.date + " " + value.timeFrom + "~" + value.timeTo
+          };
+        }));
+        if(availableDateList.length === 0) setSnackBarOpen(true);
+      }
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }, [availableDateList]);
 
   const userHandler = (e) => {
     onUserChange(e);
@@ -26,8 +52,16 @@ function EssentialForm(props) {
     props.handler.onEssentialChange(e);
   }
 
+  useEffect(()=>{
+    if (!getData){
+      getAvailableDateList();
+    }
+    setGetData(true);
+  },[getData, getAvailableDateList]);
+
   return (
     <React.Fragment>
+      <CustomSnackBar open={snackBarOpen} onClose={()=>setSnackBarOpen(false)} title={"신청 가능한 날짜가 없어 현재 신청이 불가능합니다."} ></CustomSnackBar>
       <Typography variant="body1" sx={{ color: "darkred", mb: 5 }} gutterBottom>
         해당 페이지의 정보는 모두 필수사항입니다. 빠짐없이 채워주세요.
       </Typography>
@@ -120,14 +154,13 @@ function EssentialForm(props) {
         </Grid>
       </GridFormTemplate>
       <GridFormTemplate title={'컨설팅 날짜'}>
-        <Grid item xs={12} textAlign="left">
-            <Typography variant="body1" sx={{ color: "text.secondary" }} gutterBottom>
-                희망 날짜를 선택하시면 이를 기반으로 컨설턴트와 협의 후 날짜가 확정될 예정입니다.
-            </Typography>
-        </Grid>
         <Grid item xs={12}>
             <FormControl required variant="standard" fullWidth>
                 <InputLabel id="date">컨설팅 날짜</InputLabel>
+                {availableDateList.length === 0
+                ? <Typography variant="body2" color={"darkred"}>선택 가능한 날짜가 없습니다.</Typography>
+                : <Typography variant="body2" color={"text.secondary"}>희망하시는 컨설팅 날짜를 선택하시면 이를 바탕으로 협의 후 컨설팅 날짜가 정해집니다.</Typography>
+                }
                 <Select
                     labelId="desiredDate"
                     id="desiredDate"
@@ -136,10 +169,9 @@ function EssentialForm(props) {
                     label="컨설팅 날짜"
                     onChange={formHandler}
                 >
-                    <MenuItem value={"2022-07-29 16:00"}>2022-07-29 16:00</MenuItem>
-                    <MenuItem value={"2022-07-30 15:00"}>2022-07-30 15:00</MenuItem>
-                    <MenuItem value={"2022-07-30 16:00"}>2022-07-30 16:00</MenuItem>
-                    <MenuItem value={"2022-08-01 15:00"}>2022-08-01 15:00</MenuItem>
+                  {availableDateList.map((item)=>{
+                    return <MenuItem key={item.key} value={item.key}>{item.value}</MenuItem>
+                  })}
                 </Select>
             </FormControl>
         </Grid>
