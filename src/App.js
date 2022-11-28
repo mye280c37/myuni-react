@@ -10,6 +10,7 @@ import MyUni from './pages/MyUni';
 import ConsultingIntroduction from './pages/ConsultingIntroduction';
 import GradeConversion from './pages/GradeConversion';
 import YouTubeMaterials from './pages/YoutubeMaterials';
+import Reviews from './pages/Reviews';
 
 const theme = createTheme();
 
@@ -25,6 +26,7 @@ function App() {
           <Route path="/consulting-introduction" element={<ConsultingIntroduction/>}></Route>
           <Route path="/consulting-request" element={<ConsultingRequest/>}></Route>
           <Route path="/lectures" element={<YouTubeMaterials/>}></Route>
+          <Route path="/reviews" element={<Reviews/>}></Route>
           <Route path="/admin" element={<Dashboard/>}></Route>
         </Routes>
       </ThemeProvider>
