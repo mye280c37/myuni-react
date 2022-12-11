@@ -1,7 +1,11 @@
 import React, {useState, useEffect} from "react";
 import StickyHeadTable from '../components/common/StickyHeaderTable';
 import PageLayout from './PageLayout';
-import axios from 'axios';
+import axios from 'axios';import Box from '@mui/material/Box';
+import Divider from '@mui/material/Divider';
+import Button from '@mui/material/Button';
+
+import ReviewDetail from "./ReviewDetail";
 
 const columns = [
     { id: 'title', label: '제목', minWidth: 170 },
@@ -12,7 +16,8 @@ const columns = [
 export default function Reviews() {
 
     const [ getData, setGetData ] = useState(false);
-    const [data, setData] = useState([]);
+    const [ data, setData] = useState([]);
+    const [ clicked, setClicked ] = useState(-1);
 
     async function getReviews() {
         await axios.get(
@@ -36,7 +41,18 @@ export default function Reviews() {
 
     return (
         <PageLayout title={"후기"}>
-            <StickyHeadTable columns={columns} rows={data} ></StickyHeadTable>
+            {clicked === -1
+            ?<StickyHeadTable columns={columns} rows={data} onClick={setClicked} ></StickyHeadTable>
+            :<Box>
+                <Divider></Divider>
+                <ReviewDetail review={data[clicked]}/>
+                <Divider></Divider>
+                <Box sx={{ mt: 3, textAlign: 'right' }}>
+                    <Button variant="outlined" onClick={()=>{setClicked(-1)}}>
+                        목록으로
+                    </Button>
+                </Box>
+            </Box>}
         </PageLayout>
     );
 }
