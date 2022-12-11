@@ -14,7 +14,7 @@ function StickyHeadTable(props) {
     const columns = props.columns;
     const rows = props.rows;
     const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(10);
+    const [rowsPerPage, setRowsPerPage] = React.useState(15);
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -29,7 +29,7 @@ function StickyHeadTable(props) {
         typeof rows === "undefined"|| rows === null || rows.length === 0?
         <React.Fragment></React.Fragment>
         :<Paper sx={{ width: '100%', overflow: 'hidden'}}>
-        <TableContainer sx={{ height: 550 }}>
+        <TableContainer >
             <Table stickyHeader aria-label="sticky table">
             <TableHead>
                 <TableRow>
@@ -49,7 +49,7 @@ function StickyHeadTable(props) {
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, idx) => {
                     return (
-                    <TableRow hover role="checkbox" tabIndex={idx} key={row._id} onClick={()=>{props.onClick(idx)}}>
+                    <TableRow hover role="checkbox" tabIndex={idx} key={row._id} onClick={()=>{props.onClick(idx)}} sx={{ cursor: 'pointer'}}>
                         {columns.map((column) => {
                         const value = row[column.id];
                         if(column.id === 'link'){
@@ -77,7 +77,7 @@ function StickyHeadTable(props) {
             </Table>
         </TableContainer>
         <TablePagination
-            rowsPerPageOptions={[10, 25, 100]}
+            rowsPerPageOptions={[15, 25, 100]}
             component="div"
             count={rows.length}
             rowsPerPage={rowsPerPage}
