@@ -18,7 +18,7 @@ import CustomLink from './CustomLink';
 
 const drawerWidth = 240;
 const navItems = ['MyUni', '비교내신환산', '진학컨설팅', '대학입시소양교육', '후기'];
-const linkTo = ['/', '/grade-conversion', '/consulting-introduction', '/lectures', '/reviews'];
+const linkTo = ['/myuni', '/grade-conversion', '/consulting-introduction', '/lectures', '/reviews'];
 
 function Header(props) {
     const { window } = props;
@@ -68,7 +68,7 @@ function Header(props) {
                     component="div"
                     sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' }, textAlign: 'left' }}
                 >
-                    MYUNI
+                    <CustomLink to="/">MYUNI</CustomLink>
                 </Typography>
                 <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
                     {navItems.map((item, index) => (

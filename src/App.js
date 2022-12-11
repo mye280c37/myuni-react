@@ -11,6 +11,7 @@ import ConsultingIntroduction from './pages/ConsultingIntroduction';
 import GradeConversion from './pages/GradeConversion';
 import YouTubeMaterials from './pages/YoutubeMaterials';
 import Reviews from './pages/Reviews';
+import Main from './pages/Main';
 
 const theme = createTheme();
 
@@ -21,7 +22,8 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Routes>
-          <Route path="/" element={<MyUni/>}></Route>
+          <Route path="/" element={<Main/>}></Route>
+          <Route path="/myuni" element={<MyUni/>}></Route>
           <Route path="/grade-conversion" element={<GradeConversion/>}></Route>
           <Route path="/consulting-introduction" element={<ConsultingIntroduction/>}></Route>
           <Route path="/consulting-request" element={<ConsultingRequest/>}></Route>
