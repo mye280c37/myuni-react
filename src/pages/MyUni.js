@@ -7,7 +7,7 @@ import Grid from '@mui/material/Grid';
 
 import TabContainer from '../components/common/TabContainer';
 import BoxTitle from '../components/common/BoxTitle';
-import Image from '../components/common/image';
+import Image from '../components/common/Image';
 import PageLayout from './PageLayout';
 
 const myUniIntroduction = () => {

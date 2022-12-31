@@ -15,7 +15,7 @@ import BeenhereIcon from '@mui/icons-material/Beenhere';
 import TabContainer from '../components/common/TabContainer';
 import BoxTitle from '../components/common/BoxTitle';
 import ConsultingProcess from '../components/ConsultingIntroduction/ConsultingProcess';
-import Image from '../components/common/image';
+import Image from '../components/common/Image';
 import PageLayout from './PageLayout';
 import TitlebarImageList from '../components/common/TitlebarImageList';
 
