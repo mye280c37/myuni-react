@@ -17,8 +17,8 @@ import Button from '@mui/material/Button';
 import CustomLink from './CustomLink';
 
 const drawerWidth = 240;
-const navItems = ['MyUni', '비교내신환산', '진학컨설팅', '대학입시소양교육', '후기'];
-const linkTo = ['/myuni', '/grade-conversion', '/consulting-introduction', '/lectures', '/reviews'];
+const navItems = ['MyUni', '비교내신환산', '진학컨설팅', '대학입시소양교육', '컨설팅 신청', '후기'];
+const linkTo = ['/myuni', '/grade-conversion', '/consulting-introduction', '/lectures', '/consulting-request', '/reviews'];
 
 function Header(props) {
     const { window } = props;
