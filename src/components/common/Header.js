@@ -17,8 +17,8 @@ import Button from '@mui/material/Button';
 import CustomLink from './CustomLink';
 
 const drawerWidth = 240;
-const navItems = ['MyUni', '비교내신환산', '진학컨설팅', '대학입시소양교육', '컨설팅 신청', '후기'];
-const linkTo = ['/myuni', '/grade-conversion', '/consulting-introduction', '/lectures', '/consulting-request', '/reviews'];
+const navItems = ['MyUni', '비교내신환산', '진학컨설팅', '대학입시소양교육', '후기', '컨설팅 신청'];
+const linkTo = ['/myuni', '/grade-conversion', '/consulting-introduction', '/lectures', '/reviews', '/consulting-request'];
 
 function Header(props) {
     const { window } = props;
@@ -72,6 +72,10 @@ function Header(props) {
                 </Typography>
                 <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
                     {navItems.map((item, index) => (
+                        index===navItems.length-1?
+                        <Button key={item} sx={{ color: '#fff', border: 'solid 1px #fff' }}>
+                            <CustomLink to={linkTo[index]}>{item}</CustomLink>
+                        </Button>:
                         <Button key={item} sx={{ color: '#fff' }}>
                             <CustomLink to={linkTo[index]}>{item}</CustomLink>
                         </Button>
