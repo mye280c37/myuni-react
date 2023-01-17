@@ -11,9 +11,9 @@ export default function Main() {
     const savedCallback = useRef();
 
     const imageList = [
-        'img/main/대학입시전략및실전설명회.jpeg',
-        'img/main/면접컬설팅.jpeg',
-        'img/main/global_hr_forum.jpeg'
+        'img/main/main-image-1.jpeg',
+        'img/main/main-image-2.jpeg',
+        'img/main/main-image-3.jpeg'
     ];
 
     const imageStyle = {
