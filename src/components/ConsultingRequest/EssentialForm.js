@@ -14,8 +14,7 @@ import useUser from "../../hooks/useUser";
 import useEssentialForm from "../../hooks/useEssentialForm";
 import CustomSnackBar from "../common/CustomSnackBar";
 
-// const url = "https://api.hellomyuni.com";
-const url = "http://localhost:8000";
+const url = process.env.REACT_APP_API_URL;
 
 function EssentialForm(props) {
   const { user, onUserChange } = useUser(props.values.user);
@@ -34,12 +33,12 @@ function EssentialForm(props) {
             value: value.date + " " + value.timeFrom + "~" + value.timeTo
           };
         }));
-        if(availableDateList.length === 0) setSnackBarOpen(true);
       }
     })
     .catch(function (error) {
-      console.log(error);
+      // console.log(error);
     });
+    if(availableDateList.length === 0) setSnackBarOpen(true);
   }, [availableDateList]);
 
   const userHandler = (e) => {

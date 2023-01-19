@@ -26,8 +26,7 @@ import CustomSnackBar from '../components/common/CustomSnackBar';
 
 const steps = ['필수 정보', '추가 정보', '공지사항 확인'];
 
-// const url = "https://api.hellomyuni.com";
-const url = "http://localhost:8000";
+const url = process.env.REACT_APP_API_URL;
 
 function getTrueLabelList(form) {
   const keys = Object.keys(form.checked);
