@@ -14,7 +14,7 @@ function StickyHeadTable(props) {
     const columns = props.columns;
     const rows = props.rows;
     const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(15);
+    const [rowsPerPage, setRowsPerPage] = React.useState(props.rowsPerPage);
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -28,8 +28,8 @@ function StickyHeadTable(props) {
     return (
         typeof rows === "undefined"|| rows === null || rows.length === 0?
         <React.Fragment></React.Fragment>
-        :<Paper sx={{ width: '100%', overflow: 'hidden'}}>
-        <TableContainer >
+        :<Paper sx={{ width: '100%', overflow: 'hidden', boxShadow: 'none'}}>
+        <TableContainer>
             <Table stickyHeader aria-label="sticky table">
             <TableHead>
                 <TableRow>
@@ -37,7 +37,7 @@ function StickyHeadTable(props) {
                     <TableCell
                     key={column.id}
                     align={column.align}
-                    style={{ minWidth: column.minWidth }}
+                    style={{ minWidth: column.minWidth? column.minWidth: 0 }}
                     >
                     {column.label}
                     </TableCell>
@@ -77,7 +77,8 @@ function StickyHeadTable(props) {
             </Table>
         </TableContainer>
         <TablePagination
-            rowsPerPageOptions={[15, 25, 100]}
+            // rowsPerPageOptions={[15, 25, 100]}
+            rowsPerPageOptions={rowsPerPage}
             component="div"
             count={rows.length}
             rowsPerPage={rowsPerPage}
@@ -92,7 +93,12 @@ function StickyHeadTable(props) {
 StickyHeadTable.propTypes = {
     columns: PropTypes.array.isRequired,
     rows: PropTypes.array.isRequired,
+    rowsPerPage: PropTypes.number,
     onClick: PropTypes.func
+}
+
+StickyHeadTable.defaultProps = {
+    rowsPerPage: 15
 }
 
 export default StickyHeadTable;
