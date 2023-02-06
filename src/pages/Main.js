@@ -51,7 +51,7 @@ export default function Main() {
                 <img style={imageStyle} alt="main-image" src={imageList[count]} />
             </Box>
             <Typography variant='h3' component='h1' sx={{ textAlign: 'right'}}>MYUNI</Typography>
-            <Typography variant='body2' component='h1' color="text.secondary" sx={{ mb: 8, textAlign: 'right' }}>검정고시 출신자 맞춤 입시 정보 제공 홈페이지</Typography>
+            <Typography variant='body2' component='h1' color="text.secondary" sx={{ mb: 8, textAlign: 'right' }}>검정고시 출신자 전문 진로 진학 홈페이지</Typography>
             <Footer/>
         </Container>
     );
