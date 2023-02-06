@@ -1,11 +1,14 @@
 import React, {useState, useEffect} from "react";
 import StickyHeadTable from '../components/common/StickyHeaderTable';
 import PageLayout from './PageLayout';
-import axios from 'axios';import Box from '@mui/material/Box';
+import axios from 'axios';
+import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
 
 import ReviewDetail from "./ReviewDetail";
+
+const url = process.env.REACT_APP_API_URL;
 
 const columns = [
     { id: 'title', label: '제목', minWidth: 170 },
@@ -21,7 +24,7 @@ export default function Reviews() {
 
     async function getReviews() {
         await axios.get(
-            "https://api.hellomyuni.com/v2/review",
+            url + "/v2/review",
         )
         .then((res) => {
             console.log(res.data.result);
