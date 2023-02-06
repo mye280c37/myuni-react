@@ -9,6 +9,7 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import LinkIcon from '@mui/icons-material/Link';
+import { Typography } from '@mui/material';
 
 function StickyHeadTable(props) {
     const columns = props.columns;
@@ -27,7 +28,26 @@ function StickyHeadTable(props) {
 
     return (
         typeof rows === "undefined"|| rows === null || rows.length === 0?
-        <React.Fragment></React.Fragment>
+        <React.Fragment>
+        <TableContainer>
+            <Table stickyHeader aria-label="sticky table">
+            <TableHead>
+                <TableRow>
+                {columns.map((column) => (
+                    <TableCell
+                    key={column.id}
+                    align={column.align}
+                    style={{ minWidth: column.minWidth? column.minWidth: 0 }}
+                    >
+                    {column.label}
+                    </TableCell>
+                ))}
+                </TableRow>
+            </TableHead>
+            </Table>
+        </TableContainer>
+        <Typography sx={{ p: 4 }}>내용 없음</Typography>
+        </React.Fragment>
         :<Paper sx={{ width: '100%', overflow: 'hidden', boxShadow: 'none'}}>
         <TableContainer>
             <Table stickyHeader aria-label="sticky table">

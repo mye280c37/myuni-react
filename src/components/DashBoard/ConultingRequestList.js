@@ -27,9 +27,9 @@ export default function ConsultingRequestList() {
         columns={columns}
         rows={rows}
       />
-      <Link color="primary" href="#" onClick={preventDefault} sx={{ mt: 3 }}>
-        See more orders
-      </Link>
+        {/* <Link color="primary" href="#" onClick={preventDefault} sx={{ mt: 3 }}>
+          See more orders
+        </Link> */}
     </React.Fragment>
   );
 }

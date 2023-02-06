@@ -22,7 +22,8 @@ import Deposits from '../components/DashBoard/Deposits';
 import ConsultingRequestList from '../components/DashBoard/ConultingRequestList';
 import AvailableDateList from '../components/DashBoard/AvailableDateList';
 
-const drawerWidth = 240;
+// const drawerWidth = 240;
+const drawerWidth = 0;
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
@@ -114,7 +115,7 @@ function DashboardContent() {
             </IconButton>
           </Toolbar>
         </AppBar>
-        <Drawer variant="permanent" open={open}>
+        {/* <Drawer variant="permanent" open={open}>
           <Toolbar
             sx={{
               display: 'flex',
@@ -131,7 +132,7 @@ function DashboardContent() {
           <List component="nav">
             {mainListItems}
           </List>
-        </Drawer>
+        </Drawer> */}
         <Box
           component="main"
           sx={{
@@ -148,13 +149,13 @@ function DashboardContent() {
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
               {/* 신청 가능 날짜 리스트 */}
-              <Grid item xs={12} md={4}>
+              <Grid item xs={12} md={5}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
                   <AvailableDateList />
                 </Paper>
               </Grid>
               {/* 컨설팅 신청 리스트 */}
-              <Grid item xs={12} md={8}>
+              <Grid item xs={12} md={7}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
                   <ConsultingRequestList />
                 </Paper>
