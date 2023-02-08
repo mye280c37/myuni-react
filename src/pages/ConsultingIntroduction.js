@@ -72,16 +72,13 @@ function applicationConsulting() {
     const targets = [
         "검정고시 성적을 환산하고, 입시 결과를 비교해봐도, 희망 대학을 못 정하겠다!",
         "희망 대학-학과는 정했는데, 과연 내가 갈 수 있는 대학인지를 알아보고 싶다!",
-        "대학입시 소양교육 강의를 아무리 돌려봐도 자기소개서 작성이 막막하다!",
-        "자기소개서를 열심히 작성했는데, 주변에 첨삭해주실 분이 계시지 않는다!",
         "혼자서 준비할 면접이 벌써부터 걱정이다!"
     ];
     const contents = [
         "검정고시 출신자 전형 대입 경향 분석",
         "검정고시 성적 맞춤 지원 가능 대학 제시",
         "목표 대학/학과 설정, 지원 전략 수립",
-        "전형(학생부 교과/종합/적성/수능) 선택",
-        "자기소개서 재료 선정 및 첨삭",
+        "전형(학생부 교과/종합/논술/수능) 선택",
         "수시 원서 접수(9월 10일~14일) 교육",
         "면접 준비(기본 문항 분석 및 모의 면접 진행)"
     ];
@@ -119,24 +116,24 @@ function applicationConsulting() {
                 </List>
             </Box>
             <Box sx={subBoxStyle}>
-                <Typography variant='h5' sx={titleStyle}>모집 개요</Typography>
+                <Typography variant='h5' sx={titleStyle}>컨설팅 개요</Typography>
                 <Grid container spacing={4}>
                     <Grid item md={4} sx={{ width: '100%' }}>
-                        <Typography variant='h6'>수업 방식</Typography>
+                        <Typography variant='h6'>컨설팅 방식</Typography>
                         <Divider sx={{ mt: 1, mb: 1 }} />
                         <Typography variant='body1'>
-                            ZOOM을 활용한 온라인 수업(모의 면접은 오프라인이 원칙이지만, 코로나 19 상황을 반영하여 진행합니다.)
+                            진학 컨설팅 MY UNI는 코로나 19 확산 방지를 위해 온라인 화상회의 플랫폼 ZOOM을 활용하고 있으며, 참가 방법은 예약 확정 후 메일/문자로 발송됩니다.
                         </Typography>
                     </Grid>
                     <Grid item md={4} sx={{ width: '100%' }}>
-                        <Typography variant='h6'>수업 시간</Typography>
+                        <Typography variant='h6'>컨설팅 시간</Typography>
                         <Divider sx={{ mt: 1, mb: 1 }} />
                         <Typography variant='body1'>
-                            아래의 설문지에서 희망 컨설팅 시간을 선택해주시면, 개별적으로 연락드리도록 하겠습니다.
+                            1시간 내외
                         </Typography>
                     </Grid>
                     <Grid item md={4} sx={{ width: '100%' }}>
-                        <Typography variant='h6'>수업 대상</Typography>
+                        <Typography variant='h6'>컨설팅 대상</Typography>
                         <Divider sx={{ mt: 1, mb: 1 }} />
                         <Typography variant='body1'>
                             학부모님도 컨설팅 참여 가능합니다.
