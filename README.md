@@ -1,5 +1,14 @@
 # 검정고시 출신자 전문 진로 진학 홈페이지 MYUNI
+
+<div style="display: flex;">
+<div style="backgroud-color: #ffffff; border-radius: 30px; margin-right: 3px;">
+<img src="./public/img/myunilogo@2x.png" />
+</div>
+<div>
 검정고시 출신자 전문 진로 진학 홈페이지 MYUNI 웹사이트의 React Project입니다.
+</div>
+</div>  
+
 
 ## 주요 기능 :mag_right: 
 * 웹사이트/컨설턴트 소개
