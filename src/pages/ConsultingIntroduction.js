@@ -28,6 +28,11 @@ function CustomListItem(props) {
         <ListItemText
             primary={props.primary}
             secondary={props.secondary}
+            primaryTypographyProps={{
+                fontSize: 16,
+                fontWeight: 'medium',
+                letterSpacing: 0,
+            }}
         />
         </ListItem>
     );
