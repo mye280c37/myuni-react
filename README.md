@@ -1,3 +1,24 @@
+# 검정고시 출신자 전문 진로 진학 홈페이지 MYUNI
+검정고시 출신자 전문 진로 진학 홈페이지 MYUNI 웹사이트의 React Project입니다.
+
+## 주요 기능 :mag_right: 
+* 웹사이트/컨설턴트 소개
+* 컨설팅 상세 소개
+* 비교내신 환산 기능
+* 컨설팅 후기
+* 컨설팅 신청
+* 입시 관련 영상 제공
+
+## 홈페이지 바로가기 :clap:
+:point_right: [MYUNI 바로가기](https://www.hellomyuni.com/) :point_left:
+
+## CONTACT INFO :postbox:
+#### :computer: 홈페이지 관련, 개발 관련 
+[![Gmail Badge](https://img.shields.io/badge/-김혜린(mye280c37@gmail.com)-280c37?style=flat-square&labelColor=indigo&logo=Gmail&logoColor=white&link=,ailto:mye280c37@gmail.com)](mailto:mye280c37@gmail.com)
+#### :office: 컨설팅 관련 
+[![Gmail Badge](https://img.shields.io/badge/-강예은(imaginemyuni@gmail.com)-00498c?style=flat-square&labelColor=005baf&logo=Gmail&logoColor=white&link=,ailto:imaginemyuni@gmail.com)](mailto:imaginemyuni@gmail.com)
+
+<!--
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -68,3 +89,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+-->
