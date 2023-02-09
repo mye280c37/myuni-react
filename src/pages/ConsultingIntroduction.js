@@ -149,34 +149,67 @@ function applicationConsulting() {
     );
 }
 
-function selfIntroductionConsulting() {
-    const process = [
-        {primary: "자기소개서/포트폴리오 바탕 예상질문 추출"}, 
-        {primary: "기본질문 연습 및 모의면접"}, 
-        {primary: "심화질문 연습 및 모의면접"}, 
-        {primary: "개인별 맞춤 질문 연습 및 모의면접"}, 
-        {primary: "실전면접"}
+function documentConsulting() {
+    const introduction = [
+        "학생부 미보유자 대체 서식 개요, 실제 서식",
+        "청소년생활기록부 개요",
+        "정시전형 내신반영(수능위주전형 교과 평가)"
     ];
-    const imageList = [
-        {
-            img: 'img/cover_letter_part.png',
-            title: '2020 대입 합격자 자소서 첨삭 과정 중 일부(1년 커리큘럼 이수자)',
-            rows: 4,
-            featured: true,
-        }
+
+    // const process = [
+    //     {primary: "자기소개서/포트폴리오 바탕 예상질문 추출"}, 
+    //     {primary: "기본질문 연습 및 모의면접"}, 
+    //     {primary: "심화질문 연습 및 모의면접"}, 
+    //     {primary: "개인별 맞춤 질문 연습 및 모의면접"}, 
+    //     {primary: "실전면접"}
+    // ];
+
+    const contents = [
+        "대체서식 작성 준비, 작성 방법",
+        "대체서식 활동 선정 예시, 선정 기준",
+        "학업 관련 대체서식 작성 방법",
+        "청소년생활기록부 중점 사항",
+        "증빙 서류 준비 방법 안내"
     ];
+
+    // const imageList = [
+    //     {
+    //         img: 'img/cover_letter_part.png',
+    //         title: '2020 대입 합격자 자소서 첨삭 과정 중 일부(1년 커리큘럼 이수자)',
+    //         rows: 4,
+    //         featured: true,
+    //     }
+    // ];
+
     return (
         <Box sx={{ textAlign: 'left '}}>
-            <BoxTitle>자기소개서 컨설팅</BoxTitle>
-            <Box sx={subBoxStyle}>
+            <BoxTitle>청소년생활기록부, 대체서식 컨설팅</BoxTitle>
+            <Box sx={{ borderRadius: 5, p: 3, backgroundColor: '#e9e9e9' }}>
+                <List dense={true}>
+                    {generate(
+                        introduction,
+                        <CustomListItem/>
+                    )}
+                </List>
+            </Box>
+            {/* <Box sx={subBoxStyle}>
                 <Typography variant='h5' sx={{ mb: 2 }}>자기소개서 컨설팅 프로세스</Typography>
                 <ConsultingProcess process={process} />
-            </Box>
-            <Box sx={subBoxStyle}>
-                <Typography variant='h5'>자기소개서 컨설팅 예시</Typography>
+            </Box> */}
+            {/* <Box sx={subBoxStyle}>
+                <Typography variant='h5'>자기소개서 컨설팅 후기</Typography>
                 <TitlebarImageList
                     itemData={imageList} 
                 />
+            </Box> */}
+            <Box sx={{ mb: 3 }}>
+                <Typography variant='h5' sx={titleStyle}>컨설팅 내용</Typography>
+                <List dense={true}>
+                    {generate(
+                        contents,
+                        <CustomListItem/>
+                    )}
+                </List>
             </Box>
         </Box>
     );
@@ -243,10 +276,10 @@ const essayConsulting = () => {
 }
 
 export default function ConsultingIntroduction() {
-    const labels = ["수시지원 컨설팅", "자기소개서 컨설팅", "면접 컨설팅", "논술 컨설팅"];
+    const labels = ["수시지원 컨설팅", "청소년생활기록부, 대체서식 컨설팅", "면접 컨설팅", "논술 컨설팅"];
     const contents = [
         applicationConsulting(),
-        selfIntroductionConsulting(),
+        documentConsulting(),
         interviewConsulting(),
         essayConsulting()
     ];
