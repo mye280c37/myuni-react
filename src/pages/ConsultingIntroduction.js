@@ -153,6 +153,18 @@ function interviewConsulting() {
         {primary: "개인별 맞춤 질문 연습 및 모의면접"}, 
         {primary: "실전면접", secondary: "집단/개인 면접 + 면접 착장 + 입장부터 퇴장까지"}
     ];
+
+    const contents = [
+        "대입 면접 유의 사항",
+        "지원 희망 학교 분석",
+        "대학 별 특징 파악",
+        "기본 질문 답변 및 피드백",
+        "학과 별 기출문제 답변 피드백",
+        "심화 질문 답변 및 피드백",
+        "면접 답변 소재 파악",
+        "면접 팁 최종 정리",
+    ];
+
     // const imageList = [
     //     {
     //         img: 'img/interview_review_1.png',
@@ -169,6 +181,7 @@ function interviewConsulting() {
     //         featured: true,
     //     }
     // ];
+
     return (
         <Box sx={{ textAlign: 'left '}}>
             <BoxTitle>면접 컨설팅</BoxTitle>
@@ -177,6 +190,9 @@ function interviewConsulting() {
             </ImportantBox>
             <SubSectionBox title='면접 컨설팅 프로세스' secondary={'실시간 피드백 및 약점 보완 + 개인별 면접 영상 촬영 진행'}>
                 <ConsultingProcess process={process} />
+            </SubSectionBox>
+            <SubSectionBox title='컨설팅 내용'>
+                <CustomList contents={contents} />
             </SubSectionBox>
             {/* <Box sx={subBoxStyle}>
                 <Typography variant='h5'>면접 컨설팅 후기</Typography>
