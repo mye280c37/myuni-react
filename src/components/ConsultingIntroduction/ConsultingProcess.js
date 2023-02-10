@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 
 function Item({ index, contents }) {
     return (
-        <Grid item sm={2.4} sx={{width: '100%', mb: { xs: 3 },  pl: {xs: 4, sm: 1}, pr: {xs: 4, sm: 1}}}>
+        <Grid item sm={2.4} sx={{width: '100%',  pl: {xs: 4, sm: 1}, pr: {xs: 4, sm: 1}}}>
             <Card sx={{ 
                     width: '100%',
                     height: { xs: 120, sm: 150 },
