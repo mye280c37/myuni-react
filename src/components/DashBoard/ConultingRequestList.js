@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Link from '@mui/material/Link';
 import Title from './Title';
 import StickyHeadTable from '../common/StickyHeaderTable';
 
@@ -13,11 +12,7 @@ const rows = [
   { desiredDate: '2019-02-04 13:00~14:00', name: '아무개', consultingOption: '수시지원전형' },
   { desiredDate: '2019-02-04 13:00~14:00', name: '아무개', consultingOption: '수시지원전형' },
   { desiredDate: '2019-02-04 13:00~14:00', name: '아무개', consultingOption: '수시지원전형' }
-]
-
-function preventDefault(event) {
-  event.preventDefault();
-}
+];
 
 export default function ConsultingRequestList() {
   return (
@@ -32,4 +27,4 @@ export default function ConsultingRequestList() {
         </Link> */}
     </React.Fragment>
   );
-}
+};

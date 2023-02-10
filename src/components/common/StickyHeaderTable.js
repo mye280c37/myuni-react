@@ -76,7 +76,7 @@ function StickyHeadTable(props) {
                             return(
                                 <TableCell key={column.id} align={column.align}>
                                     {value?
-                                    <a href={value} target="_blank"><LinkIcon/></a>
+                                    <a href={value} target="_blank" rel="noopener noreferrer"><LinkIcon/></a>
                                     : ''}
                                 </TableCell>
                             );

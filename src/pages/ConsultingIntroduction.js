@@ -4,16 +4,15 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Divider from '@mui/material/Divider';
-import { styled } from '@mui/material/styles';
+// import { styled } from '@mui/material/styles';
 
 import SubSectionBox from '../components/ConsultingIntroduction/SubSectionBox';
 import CustomList from '../components/ConsultingIntroduction/CustomList';
 import TabContainer from '../components/common/TabContainer';
 import BoxTitle from '../components/common/BoxTitle';
 import ConsultingProcess from '../components/ConsultingIntroduction/ConsultingProcess';
-import Image from '../components/common/Image';
 import PageLayout from './PageLayout';
-import TitlebarImageList from '../components/common/TitlebarImageList';
+// import TitlebarImageList from '../components/common/TitlebarImageList';
 import ImportantBox from '../components/ConsultingIntroduction/ImportantBox';
 
 

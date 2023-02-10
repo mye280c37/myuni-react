@@ -45,7 +45,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 
 export default function MaterialItem(props) {
 
-    const materialWidth = 720;
+    // const materialWidth = 720;
     const materialHeight = 450;
 
     return (
