@@ -5,66 +5,17 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Divider from '@mui/material/Divider';
 import { styled } from '@mui/material/styles';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import BeenhereIcon from '@mui/icons-material/Beenhere';
-// import YouTube from 'react-youtube';
 
+import SubSectionBox from '../components/ConsultingIntroduction/SubSectionBox';
+import CustomList from '../components/ConsultingIntroduction/CustomList';
 import TabContainer from '../components/common/TabContainer';
 import BoxTitle from '../components/common/BoxTitle';
 import ConsultingProcess from '../components/ConsultingIntroduction/ConsultingProcess';
 import Image from '../components/common/Image';
 import PageLayout from './PageLayout';
 import TitlebarImageList from '../components/common/TitlebarImageList';
+import ImportantBox from '../components/ConsultingIntroduction/ImportantBox';
 
-function CustomListItem(props) {
-    return (
-        <ListItem key={props.key}>
-        <ListItemIcon>
-            <BeenhereIcon fontSize='small'/>
-        </ListItemIcon>
-        <ListItemText
-            primary={props.primary}
-            secondary={props.secondary}
-            primaryTypographyProps={{
-                fontSize: 16,
-                fontWeight: 'medium',
-                letterSpacing: 0,
-            }}
-        />
-        </ListItem>
-    );
-}
-
-CustomListItem.propsType = {
-    key: PropTypes.string.isRequired,
-    primary: PropTypes.string.isRequired,
-    secondary: PropTypes.string
-}
-
-function generate(data, element) {
-    return data.map((value, index) =>
-        React.cloneElement(element, {
-            key: index,
-            primary: value
-        }),
-    );
-}
-
-const titleStyle = {
-    mt: 8,
-    mb: 2
-};
-
-const subBoxStyle = {
-    mb: 4
-};
-
-const Demo = styled('div')(({ theme }) => ({
-    backgroundColor: theme.palette.background.paper,
-}));
 
 function applicationConsulting() {
     const process = [
@@ -91,19 +42,12 @@ function applicationConsulting() {
     return (
         <Box sx={{textAlign: 'left'}}>
             <BoxTitle>수시지원 컨설팅</BoxTitle>
-            <Box sx={subBoxStyle}>
-                <Typography variant='h5' sx={titleStyle}>수시지원 컨설팅 프로세스</Typography>
+            <SubSectionBox title='수시지원 컨설팅'>
                 <ConsultingProcess process={process} />
-            </Box>
-            <Box sx={subBoxStyle}>
-                <Typography variant='h5' sx={titleStyle}>대상</Typography>
-                <List dense={true}>
-                    {generate(
-                        targets,
-                        <CustomListItem/>
-                    )}
-                </List>
-            </Box>
+            </SubSectionBox>
+            <SubSectionBox title='대상'>
+                <CustomList contents={targets} />
+            </SubSectionBox>
             {/* <Box sx={{ mb: 3 }}>
                 <Typography variant='h5' sx={titleStyle}>강사 및 커리큘럼 소개</Typography>
                 <YouTube
@@ -111,17 +55,10 @@ function applicationConsulting() {
                 />
 
             </Box> */}
-            <Box sx={{ mb: 3 }}>
-                <Typography variant='h5' sx={titleStyle}>컨설팅 내용</Typography>
-                <List dense={true}>
-                    {generate(
-                        contents,
-                        <CustomListItem/>
-                    )}
-                </List>
-            </Box>
-            <Box sx={subBoxStyle}>
-                <Typography variant='h5' sx={titleStyle}>컨설팅 개요</Typography>
+            <SubSectionBox title='컨설팅 내용'>
+                <CustomList contents={contents} />
+            </SubSectionBox>
+            <SubSectionBox title='컨설팅 개요'>
                 <Grid container spacing={4}>
                     <Grid item md={4} sx={{ width: '100%' }}>
                         <Typography variant='h6'>컨설팅 방식</Typography>
@@ -145,11 +82,10 @@ function applicationConsulting() {
                         </Typography>
                     </Grid>
                 </Grid>
-            </Box>
-            <Box sx={subBoxStyle}>
-                <Typography variant='h5' sx={titleStyle}>문의 사항</Typography>
+            </SubSectionBox>
+            <SubSectionBox title='문의 사항'>
                 <Typography variant='body1'>진학 컨설팅 관련 문의사항은 imaginemyuni@gmail.com으로 메일 보내주세요.</Typography>
-            </Box>
+            </SubSectionBox>
         </Box>
     );
 }
@@ -189,14 +125,9 @@ function documentConsulting() {
     return (
         <Box sx={{ textAlign: 'left '}}>
             <BoxTitle>청소년생활기록부, 대체서식 컨설팅</BoxTitle>
-            <Box sx={{ borderRadius: 5, p: 3, backgroundColor: '#e9e9e9' }}>
-                <List dense={true}>
-                    {generate(
-                        introduction,
-                        <CustomListItem/>
-                    )}
-                </List>
-            </Box>
+            <ImportantBox>
+                <CustomList contents={introduction} />
+            </ImportantBox>
             {/* <Box sx={subBoxStyle}>
                 <Typography variant='h5' sx={{ mb: 2 }}>자기소개서 컨설팅 프로세스</Typography>
                 <ConsultingProcess process={process} />
@@ -207,15 +138,9 @@ function documentConsulting() {
                     itemData={imageList} 
                 />
             </Box> */}
-            <Box sx={{ mb: 3 }}>
-                <Typography variant='h5' sx={titleStyle}>컨설팅 내용</Typography>
-                <List dense={true}>
-                    {generate(
-                        contents,
-                        <CustomListItem/>
-                    )}
-                </List>
-            </Box>
+            <SubSectionBox title='컨설팅 내용'>
+                <CustomList contents={contents} />
+            </SubSectionBox>
         </Box>
     );
 }
@@ -228,36 +153,37 @@ function interviewConsulting() {
         {primary: "개인별 맞춤 질문 연습 및 모의면접"}, 
         {primary: "실전면접", secondary: "집단/개인 면접 + 면접 착장 + 입장부터 퇴장까지"}
     ];
-    const imageList = [
-        {
-            img: 'img/interview_review_1.png',
-            title: '면접 카톡 후기',
-            rows: 4,
-            cols: 2,
-            featured: true,
-        },
-        {
-            img: 'img/interview_review_2.png',
-            title: '2020 면접 대비 교육 당시 서프라이즈로 합격증 보여주는 학생',
-            rows: 1,
-            cols: 4,
-            featured: true,
-        }
-    ];
+    // const imageList = [
+    //     {
+    //         img: 'img/interview_review_1.png',
+    //         title: '면접 카톡 후기',
+    //         rows: 4,
+    //         cols: 2,
+    //         featured: true,
+    //     },
+    //     {
+    //         img: 'img/interview_review_2.png',
+    //         title: '2020 면접 대비 교육 당시 서프라이즈로 합격증 보여주는 학생',
+    //         rows: 1,
+    //         cols: 4,
+    //         featured: true,
+    //     }
+    // ];
     return (
         <Box sx={{ textAlign: 'left '}}>
             <BoxTitle>면접 컨설팅</BoxTitle>
-            <Box sx={subBoxStyle}>
-                <Typography variant='h5'>면접 컨설팅 프로세스</Typography>
-                <Typography variant='body2' sx={{ mb: 2 }} color='text.secondary'>실시간 피드백 및 약점 보완 + 개인별 면접 영상 촬영 진행</Typography> 
+            <ImportantBox>
+                면접 컨설팅은 모의 면접 방식으로 진행됩니다.<br/> 면접 때 입을 착장을 준비해주시고, 카메라를 켜주시기 바랍니다.
+            </ImportantBox>
+            <SubSectionBox title='면접 컨설팅 프로세스' secondary={'실시간 피드백 및 약점 보완 + 개인별 면접 영상 촬영 진행'}>
                 <ConsultingProcess process={process} />
-            </Box>
-            <Box sx={subBoxStyle}>
+            </SubSectionBox>
+            {/* <Box sx={subBoxStyle}>
                 <Typography variant='h5'>면접 컨설팅 후기</Typography>
                 <TitlebarImageList
                     itemData={imageList} 
                 />
-            </Box>
+            </Box> */}
         </Box>
     );
 }
@@ -266,8 +192,7 @@ const essayConsulting = () => {
     return (
         <Box sx={{ textAlign: 'left '}}>
             <BoxTitle>논술 컨설팅</BoxTitle>
-            <Box sx={subBoxStyle}>
-                <Typography variant='h5'>대학별 채점 기준과 출제 의도를 고려하여 논술 첨삭을 진행합니다. (인문계 한정)</Typography>
+            <SubSectionBox title='대학별 채점 기준과 출제 의도를 고려하여 논술 첨삭을 진행합니다. (인문계 한정)'>
                 <Typography variant="body1" component="div">
                     <ol>
                         <li>원고지에 작성 후, 사진을 촬영해 업로드합니다. (글자가 정확히 보이게 촬영)</li>
@@ -275,7 +200,7 @@ const essayConsulting = () => {
                         <li>신청자가 많을 경우, 1인당 서비스 이용 횟수가 제한됩니다.</li>
                     </ol>
                 </Typography>
-            </Box>
+            </SubSectionBox>
         </Box>
     );
 }
