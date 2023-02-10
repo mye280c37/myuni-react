@@ -4,18 +4,15 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Divider from '@mui/material/Divider';
-import { styled } from '@mui/material/styles';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import BeenhereIcon from '@mui/icons-material/Beenhere';
-// import YouTube from 'react-youtube';
 
 import TabContainer from '../components/common/TabContainer';
 import BoxTitle from '../components/common/BoxTitle';
 import ConsultingProcess from '../components/ConsultingIntroduction/ConsultingProcess';
-import Image from '../components/common/Image';
 import PageLayout from './PageLayout';
 import TitlebarImageList from '../components/common/TitlebarImageList';
 
@@ -56,10 +53,6 @@ const titleStyle = {
 const subBoxStyle = {
     mb: 4
 };
-
-const Demo = styled('div')(({ theme }) => ({
-    backgroundColor: theme.palette.background.paper,
-}));
 
 function applicationConsulting() {
     const process = [

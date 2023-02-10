@@ -1,5 +1,4 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -10,7 +9,6 @@ import CompareArrowsIcon from '@mui/icons-material/CompareArrows';
 import axios from 'axios';
 
 import PageLayout from './PageLayout';
-import ScoreForm from '../components/forms/ScoreForm';
 
 import useScore from '../hooks/useScore';
 import StickyHeadTable from '../components/common/StickyHeaderTable';
@@ -41,11 +39,6 @@ const columns = [
     // },
 ];
 
-function createData(name, region, link, a) {
-    const result = link/ a;
-    return { name, region, link, result};
-}
-
 const titleStyle = {
     mt: 8,
     mb: 2
@@ -53,7 +46,7 @@ const titleStyle = {
 
 export default function GradeConversion() {
     const { score:form, onScoreChange:onChange } = useScore();
-    const { korean, english, math, society, science, history, optional, average } = form;
+    const { korean, english, math, society, science, history, optional } = form;
     const helperText="0과 100사이의 유효한 점수를 입력해주세요.";
 
     const [data, setData] = React.useState([]);
