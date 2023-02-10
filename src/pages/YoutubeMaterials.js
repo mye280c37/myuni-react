@@ -2,7 +2,6 @@ import * as React from 'react';
 import PageLayout from './PageLayout';
 
 import MaterialItem from '../components/YouTubeMaterials/MaterialItem';
-import SubBox from '../components/common/SubBox';
 
 const newContents = [
     {title: "[강남인강] 학교 밖 청소년을 위한 대학 진학 설명회 1편_ 강예은 선생님", src: "https://www.youtube.com/embed/o6TziPFoRU0"},
