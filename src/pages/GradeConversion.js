@@ -13,6 +13,7 @@ import PageLayout from './PageLayout';
 import useScore from '../hooks/useScore';
 import StickyHeadTable from '../components/common/StickyHeaderTable';
 
+const url = process.env.REACT_APP_API_URL;
 
 const columns = [
     { id: 'university', label: '대학명', minWidth: 170 },
@@ -57,7 +58,7 @@ export default function GradeConversion() {
 
     async function getResult() {
         await axios.get(
-            "https://api.hellomyuni.com/v2/converter/score",
+            url + "/v2/converter/score",
             { params: {
                 korean: korean,
                 english: english,
