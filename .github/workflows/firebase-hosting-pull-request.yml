@@ -8,6 +8,8 @@ jobs:
     if: '${{ github.event.pull_request.head.repo.full_name == github.repository }}'
     runs-on: ubuntu-latest
     environment: firebase-deploy
+    env:
+      REACT_APP_API_URL: '${{ secrets.REACT_APP_API_URL }}'
     steps:
       - uses: actions/checkout@v2
       - run: yarn && yarn build
