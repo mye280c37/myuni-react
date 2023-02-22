@@ -66,7 +66,7 @@ export default function MyUni() {
         return (
             <React.Fragment>
                 <Box sx={{ textAlign: 'left '}}>
-                <BoxTitle>학교 밖 청소년 전문 진학 컨설턴트/강사 강예은</BoxTitle>
+                <BoxTitle>진학 컨설팅 MY UNI 대표/<br/>학교 밖 청소년 전문 진로 진학 컨설턴트 강예은</BoxTitle>
                 <Grid container spacing={2}>
                     <Grid item md={5}>
                         <Image alt="consultant_profile" src="img/consultant_profile.jpg" />
@@ -121,7 +121,7 @@ export default function MyUni() {
 
     return (
         <React.Fragment>
-            <PageLayout title={"MYUNI"} secondary={"학교 밖 청소년 전문 진학 컨설팅"}>
+            <PageLayout title={"MYUNI"} secondary={"학교 밖 청소년 전문 진로 진학 컨설팅"}>
                 <TabContainer labels={labels} contents={contents} />
             </PageLayout>
             <Drawer
