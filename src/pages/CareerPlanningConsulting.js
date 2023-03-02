@@ -3,7 +3,6 @@ import Box from '@mui/material/Box';
 
 import SubSectionBox from '../components/ConsultingIntroduction/SubSectionBox';
 import CustomList from '../components/ConsultingIntroduction/CustomList';
-import BoxTitle from '../components/common/BoxTitle';
 import ConsultingProcess from '../components/ConsultingIntroduction/ConsultingProcess';
 import PageLayout from './PageLayout';
 
