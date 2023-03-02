@@ -143,67 +143,12 @@ function interviewConsulting() {
     );
 }
 
-const careerPlanningConsulting = () => {
-
-    const process = [
-        {primary: <span>삶, 경력, 진로, <br/>심층적 자기 이해</span>}, 
-        {primary: <span>진로 탐색 <br/>및 의사 결정</span>}, 
-        {primary: <span>진로 계획 및 준비, <br/>평가 및 피드백</span>}
-    ];
-
-    const stepOneDetail = [
-        "진로 설계의 중요성",
-        "진로 개념 이해",
-        "삶·진로·직업",
-        "직업세계의 이해",
-        "자신의 이해",
-        "검사 도구 진단"
-    ];
-
-    const stepTwoDetail = [
-        "직업 목록 종합하기",
-        "직업 대안 선정",
-        "3가지 진로 탐색",
-        "수행 직무 및 환경",
-        "필요 역량 및 적성",
-        "비전 수립하기"
-    ];
-
-    const stepThreeDetail = [
-        "직업 대안 선택하기",
-        "대안 평가 매트릭스",
-        "진로 과제 도출하기",
-        "진로 비전체계 개발하기",
-        "단계 별 계획 및 준비",
-        "진로 설계 평가 및 피드백"
-    ];
-
-    return (
-        <Box sx={{ textAlign: 'left '}}>
-            <BoxTitle>진로 설계 컨설팅</BoxTitle>
-            <SubSectionBox title='진로 설계 컨설팅 프로세스'>
-                <ConsultingProcess process={process} />
-            </SubSectionBox>
-            <SubSectionBox title='STEP 1. 삶, 경력, 진로, 심층적 자기 이해'>
-                <CustomList contents={stepOneDetail} />
-            </SubSectionBox>
-            <SubSectionBox title='STEP 2. 진로 탐색 및 의사 결정'>
-                <CustomList contents={stepTwoDetail} />
-            </SubSectionBox>
-            <SubSectionBox title='STEP 3. 진로 계획 및 준비, 평가 및 피드백'>
-                <CustomList contents={stepThreeDetail} />
-            </SubSectionBox>
-        </Box>
-    );
-}
-
 export default function ConsultingIntroduction() {
-    const labels = ["수시지원 컨설팅", "청소년생활기록부, 대체서식 컨설팅", "면접 컨설팅", "진로 설계 컨설팅"];
+    const labels = ["수시지원 컨설팅", "청소년생활기록부, 대체서식 컨설팅", "면접 컨설팅"];
     const contents = [
         applicationConsulting(),
         documentConsulting(),
-        interviewConsulting(),
-        careerPlanningConsulting()
+        interviewConsulting()
     ];
 
     return (
