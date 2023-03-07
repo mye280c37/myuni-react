@@ -44,9 +44,12 @@ export default function Reviews() {
 
     return (
         <PageLayout title={"후기"}>
+            <Box sx={{ display: clicked===-1? 'block': 'none' }}>
+                <StickyHeadTable columns={columns} rows={data} onClick={setClicked}></StickyHeadTable>
+            </Box>
             {clicked === -1
-            ?<StickyHeadTable columns={columns} rows={data} onClick={setClicked} ></StickyHeadTable>
-            :<Box>
+            ?<Box></Box>
+            :<Box sx={{ display: clicked===-1? 'none': 'block'}}>
                 <Divider></Divider>
                 <ReviewDetail review={data[clicked]}/>
                 <Divider></Divider>
@@ -55,7 +58,8 @@ export default function Reviews() {
                         목록으로
                     </Button>
                 </Box>
-            </Box>}
+            </Box>
+            }
         </PageLayout>
     );
 }
