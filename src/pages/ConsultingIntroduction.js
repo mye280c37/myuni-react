@@ -3,7 +3,6 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Divider from '@mui/material/Divider';
-// import { styled } from '@mui/material/styles';
 
 import SubSectionBox from '../components/ConsultingIntroduction/SubSectionBox';
 import CustomList from '../components/ConsultingIntroduction/CustomList';
@@ -11,17 +10,16 @@ import TabContainer from '../components/common/TabContainer';
 import BoxTitle from '../components/common/BoxTitle';
 import ConsultingProcess from '../components/ConsultingIntroduction/ConsultingProcess';
 import PageLayout from './PageLayout';
-// import TitlebarImageList from '../components/common/TitlebarImageList';
 import ImportantBox from '../components/ConsultingIntroduction/ImportantBox';
 
 
 function applicationConsulting() {
     const process = [
-        { primary: "준비도/성향 파악"}, 
-        { primary: "희망지원 대학/학과 파악"}, 
-        { primary: "희망 지원 대학/학과 분석"}, 
-        { primary: "입학사례기반 대학선정", secondary: "2015~2021 학교 밖 청소년 진학 사례 보유"}, 
-        { primary: "지원전략 및 월별계획 수립"}
+        { primary: <span>준비도<br/> 및 성향 파악</span>}, 
+        { primary: <span>희망지원 대학/<br/>학과 파악</span>}, 
+        { primary: <span>희망 지원 대학/<br/>학과 분석</span>}, 
+        { primary: <span>입학사례 기반 <br/>대학 선정</span>, secondary: "2015~ 학교 밖 청소년 진학 사례 보유"}, 
+        { primary: <span>지원전략 <br/>및 계획 수립</span>}
     ];
     const targets = [
         "검정고시 성적을 환산하고, 입시 결과를 비교해봐도, 희망 대학을 못 정하겠다!",
@@ -46,13 +44,6 @@ function applicationConsulting() {
             <SubSectionBox title='대상'>
                 <CustomList contents={targets} />
             </SubSectionBox>
-            {/* <Box sx={{ mb: 3 }}>
-                <Typography variant='h5' sx={titleStyle}>강사 및 커리큘럼 소개</Typography>
-                <YouTube
-                    videoId={'7rEQOlXro00'}                  // defaults -> null
-                />
-
-            </Box> */}
             <SubSectionBox title='컨설팅 내용'>
                 <CustomList contents={contents} />
             </SubSectionBox>
@@ -95,14 +86,6 @@ function documentConsulting() {
         "정시전형 내신반영(수능위주전형 교과 평가)"
     ];
 
-    // const process = [
-    //     {primary: "자기소개서/포트폴리오 바탕 예상질문 추출"}, 
-    //     {primary: "기본질문 연습 및 모의면접"}, 
-    //     {primary: "심화질문 연습 및 모의면접"}, 
-    //     {primary: "개인별 맞춤 질문 연습 및 모의면접"}, 
-    //     {primary: "실전면접"}
-    // ];
-
     const contents = [
         "대체서식 작성 준비, 작성 방법",
         "대체서식 활동 선정 예시, 선정 기준",
@@ -111,31 +94,12 @@ function documentConsulting() {
         "증빙 서류 준비 방법 안내"
     ];
 
-    // const imageList = [
-    //     {
-    //         img: 'img/cover_letter_part.png',
-    //         title: '2020 대입 합격자 자소서 첨삭 과정 중 일부(1년 커리큘럼 이수자)',
-    //         rows: 4,
-    //         featured: true,
-    //     }
-    // ];
-
     return (
         <Box sx={{ textAlign: 'left '}}>
             <BoxTitle>청소년생활기록부, 대체서식 컨설팅</BoxTitle>
             <ImportantBox>
                 <CustomList contents={introduction} />
             </ImportantBox>
-            {/* <Box sx={subBoxStyle}>
-                <Typography variant='h5' sx={{ mb: 2 }}>자기소개서 컨설팅 프로세스</Typography>
-                <ConsultingProcess process={process} />
-            </Box> */}
-            {/* <Box sx={subBoxStyle}>
-                <Typography variant='h5'>자기소개서 컨설팅 후기</Typography>
-                <TitlebarImageList
-                    itemData={imageList} 
-                />
-            </Box> */}
             <SubSectionBox title='컨설팅 내용'>
                 <CustomList contents={contents} />
             </SubSectionBox>
@@ -145,10 +109,10 @@ function documentConsulting() {
 
 function interviewConsulting() {
     const process = [
-        {primary: "자기소개서/포트폴리오 바탕 예상질문 추출"}, 
-        {primary: "기본질문 연습 및 모의면접"}, 
-        {primary: "심화질문 연습 및 모의면접"}, 
-        {primary: "개인별 맞춤 질문 연습 및 모의면접"}, 
+        {primary: <span>활동 경험 논의 <br/>및 예상질문 추출</span>}, 
+        {primary: <span>학과 기출 질문 <br/>및 기본 질문 연습</span>}, 
+        {primary: <span>제시문 기반 <br/>심화 질문 <br/>및 토론 면접 연습</span>}, 
+        {primary: <span>개인별 맞춤 질문 <br/>연습 및 모의면접</span>}, 
         {primary: "실전면접", secondary: "집단/개인 면접 + 면접 착장 + 입장부터 퇴장까지"}
     ];
 
@@ -163,23 +127,6 @@ function interviewConsulting() {
         "면접 팁 최종 정리",
     ];
 
-    // const imageList = [
-    //     {
-    //         img: 'img/interview_review_1.png',
-    //         title: '면접 카톡 후기',
-    //         rows: 4,
-    //         cols: 2,
-    //         featured: true,
-    //     },
-    //     {
-    //         img: 'img/interview_review_2.png',
-    //         title: '2020 면접 대비 교육 당시 서프라이즈로 합격증 보여주는 학생',
-    //         rows: 1,
-    //         cols: 4,
-    //         featured: true,
-    //     }
-    // ];
-
     return (
         <Box sx={{ textAlign: 'left '}}>
             <BoxTitle>면접 컨설팅</BoxTitle>
@@ -192,77 +139,16 @@ function interviewConsulting() {
             <SubSectionBox title='컨설팅 내용'>
                 <CustomList contents={contents} />
             </SubSectionBox>
-            {/* <Box sx={subBoxStyle}>
-                <Typography variant='h5'>면접 컨설팅 후기</Typography>
-                <TitlebarImageList
-                    itemData={imageList} 
-                />
-            </Box> */}
-        </Box>
-    );
-}
-
-const careerPlanningConsulting = () => {
-
-    const process = [
-        {primary: "삶, 경력, 진로, 심층적 자기 이해"}, 
-        {primary: "진로 탐색 및 의사 결정"}, 
-        {primary: "진로 계획 및 준비, 평가 및 피드백"}
-    ];
-
-    const stepOneDetail = [
-        "진로 설계의 중요성",
-        "진로 개념 이해",
-        "삶·진로·직업",
-        "직업세계의 이해",
-        "자신의 이해",
-        "검사 도구 진단"
-    ];
-
-    const stepTwoDetail = [
-        "직업 목록 종합하기",
-        "직업 대안 선정",
-        "3가지 진로 탐색",
-        "수행 직무 및 환경",
-        "필요 역량 및 적성",
-        "비전 수립하기"
-    ];
-
-    const stepThreeDetail = [
-        "직업 대안 선택하기",
-        "대안 평가 매트릭스",
-        "진로 과제 도출하기",
-        "진로 비전체계 개발하기",
-        "단계 별 계획 및 준비",
-        "진로 설계 평가 및 피드백"
-    ];
-
-    return (
-        <Box sx={{ textAlign: 'left '}}>
-            <BoxTitle>진로 설계 컨설팅</BoxTitle>
-            <SubSectionBox title='진로 설계 컨설팅 프로세스'>
-                <ConsultingProcess process={process} />
-            </SubSectionBox>
-            <SubSectionBox title='STEP 1. 삶, 경력, 진로, 심층적 자기 이해'>
-                <CustomList contents={stepOneDetail} />
-            </SubSectionBox>
-            <SubSectionBox title='STEP 2. 진로 탐색 및 의사 결정'>
-                <CustomList contents={stepTwoDetail} />
-            </SubSectionBox>
-            <SubSectionBox title='STEP 3. 진로 계획 및 준비, 평가 및 피드백'>
-                <CustomList contents={stepThreeDetail} />
-            </SubSectionBox>
         </Box>
     );
 }
 
 export default function ConsultingIntroduction() {
-    const labels = ["수시지원 컨설팅", "청소년생활기록부, 대체서식 컨설팅", "면접 컨설팅", "진로 설계 컨설팅"];
+    const labels = ["수시지원 컨설팅", "청소년생활기록부, 대체서식 컨설팅", "면접 컨설팅"];
     const contents = [
         applicationConsulting(),
         documentConsulting(),
-        interviewConsulting(),
-        careerPlanningConsulting()
+        interviewConsulting()
     ];
 
     return (

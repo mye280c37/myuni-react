@@ -12,6 +12,7 @@ import GradeConversion from './pages/GradeConversion';
 import YouTubeMaterials from './pages/YoutubeMaterials';
 import Reviews from './pages/Reviews';
 import Main from './pages/Main';
+import CareerPlanningConsulting from './pages/CareerPlanningConsulting';
 
 const theme = createTheme();
 
@@ -26,6 +27,7 @@ function App() {
           <Route path="/myuni" element={<MyUni/>}></Route>
           <Route path="/grade-conversion" element={<GradeConversion/>}></Route>
           <Route path="/consulting-introduction" element={<ConsultingIntroduction/>}></Route>
+          <Route path="/career-planning-consulting" element={<CareerPlanningConsulting/>}></Route>
           <Route path="/consulting-request" element={<ConsultingRequest/>}></Route>
           <Route path="/lectures" element={<YouTubeMaterials/>}></Route>
           <Route path="/reviews" element={<Reviews/>}></Route>
