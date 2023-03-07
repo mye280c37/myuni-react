@@ -26,7 +26,7 @@ function Item({ index, contents }) {
                     <Typography 
                         variant="body1" 
                         sx={{ 
-                            fontSize: { xs:'3.6vw', sm: '2.5vw', lg:'1.3vw' }, 
+                            fontSize: { xs:'4.1vw', sm: '20px', md: '23px' }, 
                             mt: { xs: 2, sm: 3, lg: 4 }, 
                             fontWeight: 'bold' 
                         }} 
