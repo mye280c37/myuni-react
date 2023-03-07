@@ -22,7 +22,7 @@ export default function Main() {
 
     const imageStyle = {
         'width': '100%',
-        'height': '70vh',
+        'height': '73vh',
         'filter': 'brightness(60%)',
         'object-fit': 'cover'
     }
@@ -49,19 +49,17 @@ export default function Main() {
 
     return (
         <Container 
-            component="main" 
+            component="main"
             sx={{ 
-                pt: { xs: 12, sm:15}, 
-                pb: 4, 
-                pl: { xs: 3, md: 0 }, 
-                pr: { xs: 3, md: 0 }, 
-                maxWidth: { lg: '1500px' },
+                pt: { xs: 10, sm: 13 }, 
+                pb: 4,
+                maxWidth : { md: '85vw', lg: '77vw' },
                 height: '100vh'
             }}
             >
             <Header/>
             {/* {count} */}
-            <Box sx={{ pl: {sm: 10, md: 1}, pr: {sm: 10, md: 0}, mb : {sm: 5, md: 3}, maxHeight: '900px' }}>
+            <Box sx={{ pl: {sm: 10, md: 1}, pr: {sm: 10, md: 0}, mb : {sm: 3, md: 1} }}>
                 <img style={imageStyle} alt="main" src={imageList[count]} />
             </Box>
             <Typography variant='h3' component='h1' sx={{ textAlign: 'right'}}>MYUNI</Typography>
