@@ -44,6 +44,13 @@ function Header(props) {
                     </ListItemButton>
                 </ListItem>
             ))}
+            <ListItem disablePadding>
+                <ListItemButton sx={{ textAlign: 'center' }}>
+                    <CustomLink to={'/consulting-request'}>
+                        <ListItemText primary={'컨설팅 신청'} />
+                    </CustomLink>
+                </ListItemButton>
+            </ListItem>
         </List>
         </Box>
     );
