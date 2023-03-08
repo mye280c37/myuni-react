@@ -31,7 +31,7 @@ function EssentialForm(props) {
         setAvailableDateList(res.data.result.map((value)=>{
           return {
             key: value._id,
-            value: value.date + " " + value.timeFrom + "~" + value.timeTo
+            value: value.date
           };
         }));
         if (res.data.result.length === 0) setSnackBarOpen(true);
@@ -171,7 +171,7 @@ function EssentialForm(props) {
                   onChange={formHandler}
               >
                 {availableDateList.map((item)=>{
-                  return <MenuItem key={item.key} value={item.key}>{item.value}</MenuItem>
+                  return <MenuItem key={item.key} value={item.value}>{item.value}</MenuItem>
                 })}
               </Select>
             </FormControl>
