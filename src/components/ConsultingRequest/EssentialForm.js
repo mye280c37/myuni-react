@@ -30,7 +30,7 @@ function EssentialForm(props) {
         setAvailableDateList(res.data.result.map((value)=>{
           return {
             key: value._id,
-            value: value.date + " " + value.timeFrom + "~" + value.timeTo
+            value: value.date
           };
         }));
         if (res.data.result.length === 0) setSnackBarOpen(true);
@@ -155,24 +155,24 @@ function EssentialForm(props) {
       </GridFormTemplate>
       <GridFormTemplate title={'컨설팅 날짜'}>
         <Grid item xs={12}>
-            <FormControl required variant="standard" fullWidth>
-                <InputLabel id="date">컨설팅 날짜</InputLabel>
-                {availableDateList.length === 0
-                ? <Typography variant="body2" color={"darkred"}>선택 가능한 날짜가 없습니다.</Typography>
-                : <Typography variant="body2" color={"text.secondary"}>희망하시는 컨설팅 날짜를 선택하시면 이를 바탕으로 협의 후 컨설팅 날짜가 정해집니다.</Typography>
-                }
-                <Select
-                    labelId="desiredDate"
-                    id="desiredDate"
-                    name="desiredDate"
-                    value={form.desiredDate}
-                    label="컨설팅 날짜"
-                    onChange={formHandler}
-                >
-                  {availableDateList.map((item)=>{
-                    return <MenuItem key={item.key} value={item.key}>{item.value}</MenuItem>
-                  })}
-                </Select>
+            {availableDateList.length === 0
+            ? <Typography variant="body2" color={"darkred"} sx={{ pb: 3 }}>선택 가능한 날짜가 없습니다.</Typography>
+            : <Typography variant="body2" color={"text.secondary"} sx={{ pb: 3 }}>희망하시는 컨설팅 날짜를 선택하시면 이를 바탕으로 협의 후 컨설팅 날짜가 정해집니다.</Typography>
+            }
+            <FormControl required variant="standard" fullWidth >
+              <InputLabel id="date">컨설팅 날짜</InputLabel>
+              <Select
+                  labelId="desiredDate"
+                  id="desiredDate"
+                  name="desiredDate"
+                  value={form.desiredDate}
+                  label="컨설팅 날짜"
+                  onChange={formHandler}
+              >
+                {availableDateList.map((item)=>{
+                  return <MenuItem key={item.key} value={item.value}>{item.value}</MenuItem>
+                })}
+              </Select>
             </FormControl>
         </Grid>
       </GridFormTemplate>

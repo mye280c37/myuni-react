@@ -22,32 +22,14 @@ function NoticeForm(props) {
             컨설팅 진행 전 공지사항
         </Typography>
       <React.Fragment>
-        <Typography variant="body1" sx={{ textAlign: "left", color:"darkred" }} gutterBottom>
-        첨삭을 위한 자기소개서는 컨설팅 3일 전까지 imaginemyuni@gmail.com으로 보내주세요.*
-        </Typography>
-        <Grid container spacing={3} sx={{ mb: 10 }}>
-          <Grid item xs={12}>
-            <Typography variant="body2" sx={{ color: "text.secondary", textAlign: "left" }} gutterBottom>
-            제목: [자기소개서_000(이름)], 형식: 한글/워드, 파일 상단에 지원하고자 하는 학교와 학과를 명시해주시고, 문항도 함께 작성해주세요.
-            </Typography>
-            <FormControl>
-                <RadioGroup
-                    aria-labelledby="noticeCheck"
-                    name="check"
-                >
-                    <FormControlLabel value="check" control={<Radio />} label="확인했습니다." />
-                </RadioGroup>
-            </FormControl>
-          </Grid>
-        </Grid>
       </React.Fragment>
       <React.Fragment>
         <Typography variant="body1" sx={{ textAlign: "left", color:"darkred" }} gutterBottom>
-        컨설팅 비용은 25만원이며, 컨설팅 신청서 작성 여부 및 입금 확인 후 컨설팅 진행합니다.*
+        컨설팅 비용은 385,000원이며, 컨설팅 신청서 작성 여부 및 입금 확인 후 컨설팅 진행합니다.*
         </Typography>
         <Typography variant="body1" sx={{ textAlign: "left" }} gutterBottom>
-        계좌번호: 1002-857-980326 우리은행 강예은<br/>
-        입금자명: 진학 컨설팅 000 ⇒ 진학 컨설팅 강예은 (학생 본인의 이름을 넣어주시면 됩니다.)
+        계좌번호 1005-604-229273 우리은행 (진학 컨설팅 MY UNI)<br/>
+        입금자명: 진학 컨설팅 000 ⇒ 진학 컨설팅 강예은 (신청자 본인의 이름을 넣어주시면 됩니다.)
         </Typography>
         <Grid container spacing={3} sx={{ mb: 10 }}>
           <Grid item xs={12}>

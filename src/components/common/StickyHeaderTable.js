@@ -69,7 +69,7 @@ function StickyHeadTable(props) {
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, idx) => {
                     return (
-                    <TableRow hover role="checkbox" tabIndex={idx} key={row._id} onClick={()=>{props.onClick(idx)}} sx={{ cursor: 'pointer'}}>
+                    <TableRow hover role="checkbox" tabIndex={idx} key={row._id} onClick={()=>{props.onClick(idx + page * rowsPerPage)}} sx={{ cursor: 'pointer'}}>
                         {columns.map((column) => {
                         const value = row[column.id];
                         if(column.id === 'link'){
