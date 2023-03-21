@@ -1,29 +1,28 @@
 import * as React from 'react';
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-// import MuiDrawer from '@mui/material/Drawer';
+import MuiDrawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
 import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-// import List from '@mui/material/List';
+import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
-// import Divider from '@mui/material/Divider';
+import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Badge from '@mui/material/Badge';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-// import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
-// import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-// import { mainListItems } from '../components/DashBoard/listItems';
-// import Deposits from '../components/DashBoard/Deposits';
+
+import DrawerContents from '../components/DashBoard/DrawerContents';
 import ConsultingRequestList from '../components/DashBoard/ConultingRequestList';
 import AvailableDateList from '../components/DashBoard/AvailableDateList';
+import AdminReviews from '../components/DashBoard/Reviews';
 
-// const drawerWidth = 240;
-const drawerWidth = 0;
+const drawerWidth = 240;
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
@@ -43,31 +42,37 @@ const AppBar = styled(MuiAppBar, {
   }),
 }));
 
-// const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
-//   ({ theme, open }) => ({
-//     '& .MuiDrawer-paper': {
-//       position: 'relative',
-//       whiteSpace: 'nowrap',
-//       width: drawerWidth,
-//       transition: theme.transitions.create('width', {
-//         easing: theme.transitions.easing.sharp,
-//         duration: theme.transitions.duration.enteringScreen,
-//       }),
-//       boxSizing: 'border-box',
-//       ...(!open && {
-//         overflowX: 'hidden',
-//         transition: theme.transitions.create('width', {
-//           easing: theme.transitions.easing.sharp,
-//           duration: theme.transitions.duration.leavingScreen,
-//         }),
-//         width: theme.spacing(7),
-//         // [theme.breakpoints.up('sm')]: {
-//         //   width: theme.spacing(9),
-//         // },
-//       }),
-//     },
-//   }),
-// );
+const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
+  ({ theme, open }) => ({
+    '& .MuiDrawer-paper': {
+      position: 'relative',
+      whiteSpace: 'nowrap',
+      width: drawerWidth,
+      transition: theme.transitions.create('width', {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.enteringScreen,
+      }),
+      boxSizing: 'border-box',
+      ...(!open && {
+        overflowX: 'hidden',
+        transition: theme.transitions.create('width', {
+          easing: theme.transitions.easing.sharp,
+          duration: theme.transitions.duration.leavingScreen,
+        }),
+        width: theme.spacing(7),
+        // [theme.breakpoints.up('sm')]: {
+        //   width: theme.spacing(9),
+        // },
+      }),
+    },
+  }),
+);
+
+const contentsList = [
+  <ConsultingRequestList/>,
+  <AvailableDateList/>,
+  <AdminReviews/>
+];
 
 const mdTheme = createTheme();
 
@@ -76,6 +81,7 @@ function DashboardContent() {
   const toggleDrawer = () => {
     setOpen(!open);
   };
+  const [clicked, setClicked] = React.useState(0);
 
   return (
     <ThemeProvider theme={mdTheme}>
@@ -115,7 +121,7 @@ function DashboardContent() {
             </IconButton>
           </Toolbar>
         </AppBar>
-        {/* <Drawer variant="permanent" open={open}>
+        <Drawer variant="permanent" open={open}>
           <Toolbar
             sx={{
               display: 'flex',
@@ -130,9 +136,9 @@ function DashboardContent() {
           </Toolbar>
           <Divider />
           <List component="nav">
-            {mainListItems}
+            <DrawerContents onClick={setClicked}/>
           </List>
-        </Drawer> */}
+        </Drawer>
         <Box
           component="main"
           sx={{
@@ -147,7 +153,10 @@ function DashboardContent() {
         >
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            <Grid container spacing={3}>
+            <Paper sx={{ p: 3, m: 6 }}>
+              {contentsList[clicked]}
+            </Paper>
+            <Grid container spacing={3} sx={{ display: 'none' }}>
               {/* 신청 가능 날짜 리스트 */}
               <Grid item xs={12} md={5}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
