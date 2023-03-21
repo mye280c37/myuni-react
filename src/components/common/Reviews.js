@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from "react";
-import StickyHeadTable from '../components/common/StickyHeaderTable';
-import PageLayout from './PageLayout';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
 
+import StickyHeadTable from "./StickyHeaderTable";
 import ReviewDetail from "./ReviewDetail";
 
 const url = process.env.REACT_APP_API_URL;
@@ -16,18 +16,25 @@ const columns = [
     { id: 'consultingTime', label: '상담 날짜', minWidth: 100 },
 ];
 
-export default function Reviews() {
+function Reviews(props) {
 
     const [ getData, setGetData ] = useState(false);
     const [ data, setData] = useState([]);
     const [ clicked, setClicked ] = useState(-1);
+
+    useEffect(()=>{
+        console.log(clicked);
+        if (props.onClick){
+            props.onClick(clicked);
+        }
+    }, [clicked]);
 
     async function getReviews() {
         await axios.get(
             url + "/v2/review",
         )
         .then((res) => {
-            console.log(res.data.result);
+            // console.log(res.data.result);
             setData(res.data.result);
         })
         .catch((error) => {
@@ -43,7 +50,7 @@ export default function Reviews() {
     },[getData, getReviews]);
 
     return (
-        <PageLayout title={"후기"}>
+        <React.Fragment>
             <Box sx={{ display: clicked===-1? 'block': 'none' }}>
                 <StickyHeadTable columns={columns} rows={data} onClick={setClicked}></StickyHeadTable>
             </Box>
@@ -60,6 +67,12 @@ export default function Reviews() {
                 </Box>
             </Box>
             }
-        </PageLayout>
+        </React.Fragment>
     );
 }
+
+Reviews.propTypes = {
+    onClick: PropTypes.func
+}
+
+export default Reviews;
