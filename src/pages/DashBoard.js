@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useState} from "react";
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import MuiDrawer from '@mui/material/Drawer';
@@ -21,6 +21,7 @@ import DrawerContents from '../components/DashBoard/DrawerContents';
 import ConsultingRequestList from '../components/DashBoard/ConultingRequestList';
 import AvailableDateList from '../components/DashBoard/AvailableDateList';
 import AdminReviews from '../components/DashBoard/Reviews';
+import SignIn from "../components/DashBoard/SignIn";
 
 const drawerWidth = 240;
 
@@ -178,5 +179,13 @@ function DashboardContent() {
 }
 
 export default function Dashboard() {
-  return <DashboardContent />;
+  const [ signIn, getSignIn ] = useState(false);
+  return (
+    <React.Fragment>
+      {signIn?
+        <DashboardContent />:
+        <SignIn/> 
+      }
+    </React.Fragment> 
+  );
 }
