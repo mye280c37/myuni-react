@@ -23,6 +23,8 @@ import AvailableDateList from '../components/DashBoard/AvailableDateList';
 import AdminReviews from '../components/DashBoard/Reviews';
 import SignIn from "../components/DashBoard/SignIn";
 
+import { getCookie } from "../utils/cookie";
+
 const drawerWidth = 240;
 
 const AppBar = styled(MuiAppBar, {
@@ -179,12 +181,14 @@ function DashboardContent() {
 }
 
 export default function Dashboard() {
-  const [ signIn, getSignIn ] = useState(false);
+  const auth = getCookie('Authentication')? true: false;
+  const [ signIn, getSignIn ] = useState(auth);
+
   return (
     <React.Fragment>
       {signIn?
         <DashboardContent />:
-        <SignIn/> 
+        <SignIn setResult={getSignIn}/> 
       }
     </React.Fragment> 
   );
