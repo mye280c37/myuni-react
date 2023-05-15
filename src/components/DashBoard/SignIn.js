@@ -1,24 +1,59 @@
-import * as React from 'react';
+import React, {useState, useEffect} from "react";
+import PropTypes from 'prop-types';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import axios from 'axios';
+
+import { setCookie } from "../../utils/cookies";
 
 const theme = createTheme();
+const url = process.env.REACT_APP_API_URL;
 
-export default function SignIn() {
+function SignIn(props) {
+
+    const [ loginForm, setLoginForm ] = useState({
+        email : '',
+        password : ''
+    });
+
+    const handleChange = (e) => {
+        setLoginForm({
+            ...loginForm,
+            [e.target.name]: e.target.value,
+        });
+    }
+
     const handleSubmit = (event) => {
         event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-        email: data.get('email'),
-        password: data.get('password'),
+        axios.post(
+            url+"/v2/auth/login", loginForm
+        ).then(function (res) {
+            if(res.status === 200) {
+                props.setResult(true);
+                // console.log(res.data.result.jwtToken);
+                let expiredDate = new Date();
+                expiredDate = expiredDate.setHours(expiredDate.getHours()+2);
+                setCookie('test', 'test', {
+                    path: '/',
+                    expires: expiredDate.toUTCString()
+                });
+                // console.log(getCookie('Authentication'));
+            }
+            else {
+                console.log(res.status);
+            }
+        })
+        .catch(function (error) {
+            // if(error.response.data.statusCode >= 400) {
+            //     alert(error.response.data.message);
+            // }
         });
     };
 
@@ -48,6 +83,8 @@ export default function SignIn() {
                 id="email"
                 label="Email Address"
                 name="email"
+                value={loginForm.email}
+                onChange={handleChange}
                 autoComplete="email"
                 autoFocus
                 />
@@ -55,10 +92,12 @@ export default function SignIn() {
                 margin="normal"
                 required
                 fullWidth
-                name="password"
+                id="password"
                 label="Password"
                 type="password"
-                id="password"
+                name="password"
+                value={loginForm.password}
+                onChange={handleChange}
                 autoComplete="current-password"
                 />
                 <Button
@@ -75,3 +114,9 @@ export default function SignIn() {
         </ThemeProvider>
     );
 }
+
+SignIn.propTypes = {
+    setResult: PropTypes.func
+}
+
+export default SignIn;
