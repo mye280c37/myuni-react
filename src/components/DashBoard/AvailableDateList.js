@@ -49,7 +49,7 @@ export default function AvailableDateList() {
 
     async function getAvailableDates() {
         await axios.get(
-            url + "/v2/available-date",
+            url + "/v2/available-date/admin",
         )
         .then((res) => {
             console.log(res.data.result);
