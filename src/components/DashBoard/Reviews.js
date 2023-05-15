@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 
@@ -18,7 +18,7 @@ export default function AdminReviews() {
             </Button>
         </Box>
         }
-        <Reviews onClick={setClicked}/>
+        <Reviews onClick={setClicked} apiUrl={"/v2/review/admin"}/>
     </React.Fragment>
     );
 };

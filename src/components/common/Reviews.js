@@ -25,13 +25,14 @@ function Reviews(props) {
     useEffect(()=>{
         console.log(clicked);
         if (props.onClick){
-            props.onClick(clicked);
         }
+            props.onClick(clicked);
     }, [clicked]);
 
     async function getReviews() {
+        const apiUrl = props.apiUrl?props.apiUrl:"/v2/review";
         await axios.get(
-            url + "/v2/review",
+            url + apiUrl
         )
         .then((res) => {
             // console.log(res.data.result);
@@ -72,7 +73,8 @@ function Reviews(props) {
 }
 
 Reviews.propTypes = {
-    onClick: PropTypes.func
+    onClick: PropTypes.func,
+    apiUrl: PropTypes.string
 }
 
 export default Reviews;
