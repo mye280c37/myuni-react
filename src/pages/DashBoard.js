@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import MuiDrawer from '@mui/material/Drawer';
@@ -181,14 +181,19 @@ function DashboardContent() {
 }
 
 export default function Dashboard() {
-  const auth = getCookie('Authentication')? true: false;
-  const [ signIn, getSignIn ] = useState(auth);
+
+  const [ signIn, setSignIn ] = useState(false);
+
+  useEffect(()=>{
+    const isCookie = getCookie('Authentication')? true: false;
+    setSignIn(isCookie);
+  }, []);
 
   return (
     <React.Fragment>
       {signIn?
         <DashboardContent />:
-        <SignIn setResult={getSignIn}/> 
+        <SignIn setResult={setSignIn}/> 
       }
     </React.Fragment> 
   );
