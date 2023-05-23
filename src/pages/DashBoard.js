@@ -23,7 +23,7 @@ import AvailableDateList from '../components/DashBoard/AvailableDateList';
 import AdminReviews from '../components/DashBoard/Reviews';
 import SignIn from "../components/DashBoard/SignIn";
 
-import { getCookie } from "../utils/cookie";
+import { getCookie } from "../utils/cookies";
 
 const drawerWidth = 240;
 
