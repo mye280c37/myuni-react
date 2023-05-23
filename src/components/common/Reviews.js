@@ -1,14 +1,11 @@
 import React, {useState, useEffect} from "react";
 import PropTypes from 'prop-types';
-import axios from 'axios';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
 
 import StickyHeadTable from "./StickyHeaderTable";
 import ReviewDetail from "./ReviewDetail";
-
-const url = process.env.REACT_APP_API_URL;
 
 const columns = [
     { id: 'title', label: '제목', minWidth: 170 },
@@ -18,37 +15,14 @@ const columns = [
 
 function Reviews(props) {
 
-    const [ getData, setGetData ] = useState(false);
-    const [ data, setData] = useState([]);
+    const data = props.data;
     const [ clicked, setClicked ] = useState(-1);
 
     useEffect(()=>{
-        console.log(clicked);
         if (props.onClick){
-        }
             props.onClick(clicked);
-    }, [clicked]);
-
-    async function getReviews() {
-        const apiUrl = props.apiUrl?props.apiUrl:"/v2/review";
-        await axios.get(
-            url + apiUrl
-        )
-        .then((res) => {
-            // console.log(res.data.result);
-            setData(res.data.result);
-        })
-        .catch((error) => {
-            console.log(error);
-        })
-    }
-
-    useEffect(()=>{
-        if (!getData){
-            getReviews();
         }
-        setGetData(true);
-    },[getData, getReviews]);
+    }, [clicked]);
 
     return (
         <React.Fragment>
@@ -73,8 +47,8 @@ function Reviews(props) {
 }
 
 Reviews.propTypes = {
-    onClick: PropTypes.func,
-    apiUrl: PropTypes.string
+    data: PropTypes.array.isRequired,
+    onClick: PropTypes.func
 }
 
 export default Reviews;
