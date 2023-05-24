@@ -16,13 +16,16 @@ const columns = [
 function Reviews(props) {
 
     const data = props.data;
-    const [ clicked, setClicked ] = useState(-1);
+    const [ clicked, setClicked ] = useState(props.clicked?props.clicked:-1);
 
     useEffect(()=>{
-        if (props.onClick){
+        if(props.clicked===-2){
+            setClicked(-1);
+        }
+        else if (props.onClick){
             props.onClick(clicked);
         }
-    }, [clicked]);
+    }, [clicked, props.clicked]);
 
     return (
         <React.Fragment>
@@ -48,6 +51,7 @@ function Reviews(props) {
 
 Reviews.propTypes = {
     data: PropTypes.array.isRequired,
+    clicked: PropTypes.number,
     onClick: PropTypes.func
 }
 

@@ -12,17 +12,31 @@ export default function AdminReviews() {
 
     const [ getData, setGetData ] = useState(false);
     const [ data, setData] = useState([]);
-    const apiUrl = "/v2/review/admin";
     
     const [clicked, setClicked] = useState(-1);
 
     async function getReviews() {
         await axios.post(
-            url + apiUrl
+            url + "/v2/review/admin"
         )
         .then((res) => {
             // console.log(res.data.result);
             setData(res.data.result);
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+    }
+
+    async function deleteReview() {
+        const reviewId = data[clicked]._id;
+
+        await axios.delete(
+            url + "/v2/review/admin/" + reviewId
+        )
+        .then((res) => {
+            setGetData(false);
+            setClicked(-2);
         })
         .catch((error) => {
             console.log(error);
@@ -38,15 +52,15 @@ export default function AdminReviews() {
 
     return (
     <React.Fragment>
-        {clicked===-1?
+        {clicked<=-1?
         <Title>컨설팅 후기</Title>:
         <Box sx={{ mb: 2, textAlign: 'right' }}>
-            <Button variant="outlined" color="error" onClick={()=>{setClicked(-1)}}>
+            <Button variant="outlined" color="error" onClick={()=>{deleteReview()}}>
                 삭제
             </Button>
         </Box>
         }
-        <Reviews onClick={setClicked} data={data}/>
+        <Reviews clicked={clicked} onClick={setClicked} data={data}/>
     </React.Fragment>
     );
 };
