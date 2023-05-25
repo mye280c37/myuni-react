@@ -155,8 +155,9 @@ function DashboardContent() {
         >
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4, height: containerHeight }}>
-            {clicked===-1?
             <Grid container spacing={3} sx={{ height: '100%' }}>
+              {clicked===-1?
+              <React.Fragment>
               {/* 컨설팅 신청 리스트 */}
               <Grid item xs={12} md={8}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', height: '100%' }}>
@@ -169,11 +170,14 @@ function DashboardContent() {
                   <AvailableDateList />
                 </Paper>
               </Grid>
-            </Grid>:
-            <Paper sx={{ p: 3, m: 6 }}>
-              {contentsList[clicked]}
-            </Paper>
-            }
+              </React.Fragment>:
+              <Grid item xs={12}>
+                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', height: '100%' }}>
+                  {contentsList[clicked]}
+                </Paper>
+              </Grid>
+              }
+            </Grid>
           </Container>
         </Box>
       </Box>
