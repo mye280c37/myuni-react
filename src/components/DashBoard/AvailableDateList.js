@@ -11,11 +11,14 @@ import TableRow from '@mui/material/TableRow';
 import Button from '@mui/material/Button';
 import { Typography } from "@mui/material";
 import TextField from '@mui/material/TextField';
+import Input from '@mui/material/Input';
 import DeleteIcon from '@mui/icons-material/Delete';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 const url = process.env.REACT_APP_API_URL;
+
+const rowHeight = '42px';
 
 const columns = [
     { id: 'date', label: '날짜' }
@@ -23,16 +26,17 @@ const columns = [
 
 const AvailableDateField = () => {
     return (
-        <TableRow>
-            <TableCell>
-                <TextField
+        <TableRow sx={{height: rowHeight, p: 0}}>
+            <TableCell sx={{ p: 0 }}>
+                <Input 
                     id={'date'}
                     name={'date'}
                     // value={form.value}
                     // onChange={additionalFormItemHandler}
-                    fullWidth
                     variant="outlined"
                     size="small"
+                    aria-label="form"
+                    sx={{ ml: 2 }}
                 />
             </TableCell>
             <TableCell>
@@ -81,12 +85,12 @@ export default function AvailableDateList() {
         <TableContainer>
             <Table size="small">
             <TableHead>
-                <TableRow>
+                <TableRow sx={{ height: rowHeight }}>
                 {columns.map((column) => (
                     <TableCell
                     key={column.id}
                     align={column.align}
-                    style={{ minWidth: column.minWidth? column.minWidth: 0 }}
+                    sx={{ minWidth: column.minWidth? column.minWidth: 0 }}
                     >
                     {column.label}
                     </TableCell>
@@ -99,7 +103,7 @@ export default function AvailableDateList() {
                 .map((row, idx) => {
                     if(row._id != null){
                         return (
-                            <TableRow tabIndex={idx} key={row._id} sx={{ cursor: 'pointer'}}>
+                            <TableRow tabIndex={idx} key={row._id} sx={{ cursor: 'pointer', height: rowHeight }}>
                                 {columns.map((column) => {
                                 const value = row[column.id];
                                 return (
