@@ -64,6 +64,18 @@ export default function AvailableDateList() {
         })
     }
 
+    const deleteAvailableDate = async (availableDateId) => {
+        await axios.delete(
+            url + "/v2/available-date/admin/" + availableDateId,
+        )
+        .then((res) => {
+            setGetData(false);
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+    };
+
     useEffect(()=>{
         if (!getData){
             getAvailableDates();
@@ -115,7 +127,7 @@ export default function AvailableDateList() {
                                 );
                                 })}
                                 <TableCell>
-                                    <DeleteIcon color="error" fontSize="small"></DeleteIcon>
+                                    <DeleteIcon color="error" fontSize="small" onClick={()=>deleteAvailableDate(row._id)}></DeleteIcon>
                                 </TableCell>
                             </TableRow>
                         );
