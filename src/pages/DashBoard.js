@@ -26,6 +26,7 @@ import SignIn from "../components/DashBoard/SignIn";
 import { getCookie } from "../utils/cookies";
 
 const drawerWidth = 240;
+const containerHeight = '85%';
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
@@ -72,8 +73,6 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 const contentsList = [
-  <ConsultingRequestList/>,
-  <AvailableDateList/>,
   <AdminReviews/>
 ];
 
@@ -84,7 +83,7 @@ function DashboardContent() {
   const toggleDrawer = () => {
     setOpen(!open);
   };
-  const [clicked, setClicked] = React.useState(0);
+  const [clicked, setClicked] = React.useState(-1);
 
   return (
     <ThemeProvider theme={mdTheme}>
@@ -155,24 +154,26 @@ function DashboardContent() {
           }}
         >
           <Toolbar />
-          <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            <Paper sx={{ p: 3, m: 6 }}>
-              {contentsList[clicked]}
-            </Paper>
-            <Grid container spacing={3} sx={{ display: 'none' }}>
-              {/* 신청 가능 날짜 리스트 */}
-              <Grid item xs={12} md={5}>
-                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <AvailableDateList />
-                </Paper>
-              </Grid>
+          <Container maxWidth="lg" sx={{ mt: 4, mb: 4, height: containerHeight }}>
+            {clicked===-1?
+            <Grid container spacing={3} sx={{ height: '100%' }}>
               {/* 컨설팅 신청 리스트 */}
-              <Grid item xs={12} md={7}>
-                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
+              <Grid item xs={12} md={8}>
+                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', height: '100%' }}>
                   <ConsultingRequestList />
                 </Paper>
               </Grid>
-            </Grid>
+              {/* 신청 가능 날짜 리스트 */}
+              <Grid item xs={12} md={4}>
+                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', height: '100%' }}>
+                  <AvailableDateList />
+                </Paper>
+              </Grid>
+            </Grid>:
+            <Paper sx={{ p: 3, m: 6 }}>
+              {contentsList[clicked]}
+            </Paper>
+            }
           </Container>
         </Box>
       </Box>
