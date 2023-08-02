@@ -17,8 +17,8 @@ import Button from '@mui/material/Button';
 import CustomLink from './CustomLink';
 
 const drawerWidth = 240;
-const navItems = ['MyUni', '비교내신환산', '진학컨설팅', '대학입시소양교육', '컨설팅 후기', '컨설팅 신청'];
-const linkTo = ['/myuni', '/grade-conversion', '/consulting-introduction', '/lectures', '/reviews', '/consulting-request'];
+const navItems = ['MyUni', '비교내신환산', '진학컨설팅', '진로설계컨설팅', '대학입시소양교육', '컨설팅 후기'];
+const linkTo = ['/myuni', '/grade-conversion', '/consulting-introduction', '/career-planning-consulting', '/lectures', '/reviews'];
 
 function Header(props) {
     const { window } = props;
@@ -44,6 +44,13 @@ function Header(props) {
                     </ListItemButton>
                 </ListItem>
             ))}
+            <ListItem disablePadding>
+                <ListItemButton sx={{ textAlign: 'center' }}>
+                    <CustomLink to={'/consulting-request'}>
+                        <ListItemText primary={'컨설팅 신청'} />
+                    </CustomLink>
+                </ListItemButton>
+            </ListItem>
         </List>
         </Box>
     );
@@ -51,7 +58,7 @@ function Header(props) {
     const container = window !== undefined ? () => window().document.body : undefined;
 
     return (
-        <Box sx={{ display: 'flex' }}>
+        <Box sx={{ display: 'flex', justifyContent: 'flex-start' }}>
         <AppBar component="nav" sx={{ backgroundColor: '#363636' }}>
             <Toolbar>
                 <IconButton
@@ -66,20 +73,21 @@ function Header(props) {
                 <Typography
                     variant="h6"
                     component="div"
-                    sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' }, textAlign: 'left' }}
+                    sx={{ mr: 4, flexGrow: 0.5, display: { xs: 'none', sm: 'block' }, textAlign: 'left' }}
                 >
                     <CustomLink to="/">MYUNI</CustomLink>
                 </Typography>
-                <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+                <Box sx={{ flexGrow: 35, display: { xs: 'none', sm: 'block' }, textAlign: 'left' }}>
                     {navItems.map((item, index) => (
-                        index===navItems.length-1?
-                        <Button key={item} sx={{ color: '#fff', border: 'solid 1px #fff' }}>
-                            <CustomLink to={linkTo[index]}>{item}</CustomLink>
-                        </Button>:
-                        <Button key={item} sx={{ color: '#fff' }}>
+                        <Button key={index} sx={{ color: '#fff' }}>
                             <CustomLink to={linkTo[index]}>{item}</CustomLink>
                         </Button>
                     ))}
+                </Box>
+                <Box sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}>
+                    <Button sx={{ color: '#fff', border: 'solid 1px #fff' }}>
+                        <CustomLink to={'/consulting-request'}>컨설팅 신청</CustomLink>
+                    </Button>
                 </Box>
             </Toolbar>
         </AppBar>

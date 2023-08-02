@@ -11,14 +11,18 @@ export default function Main() {
     const savedCallback = useRef();
 
     const imageList = [
-        'img/main/main-image-1.jpeg',
-        'img/main/main-image-2.jpeg',
-        'img/main/main-image-3.jpeg'
+        'img/main/main1.jpeg',
+        'img/main/main2.jpeg',
+        'img/main/main3.jpeg',
+        'img/main/main4.jpeg',
+        'img/main/main5.jpeg',
+        'img/main/main6.jpeg',
+        'img/main/main7.jpeg'
     ];
 
     const imageStyle = {
         'width': '100%',
-        'height': '70vh',
+        'height': '73vh',
         'filter': 'brightness(60%)',
         'object-fit': 'cover'
     }
@@ -44,10 +48,18 @@ export default function Main() {
     }, []);
 
     return (
-        <Container component="main" maxWidth="lg" sx={{ pt: { xs: 12, sm:15}, pb: 4, pl: { xs: 3, md: 3 }, pr: { xs: 3, md: 3 }, height: '100vh'}}>
+        <Container 
+            component="main"
+            sx={{ 
+                pt: { xs: 10, sm: 13 }, 
+                pb: 4,
+                maxWidth : { md: '85vw', lg: '77vw' },
+                height: '100vh'
+            }}
+            >
             <Header/>
             {/* {count} */}
-            <Box sx={{ pl: {sm: 10, md: 1}, pr: {sm: 10, md: 1}, pb : {sm: 5, md: 1} }}>
+            <Box sx={{ pl: {sm: 10, md: 1}, pr: {sm: 10, md: 0}, mb : {sm: 3, md: 1} }}>
                 <img style={imageStyle} alt="main" src={imageList[count]} />
             </Box>
             <Typography variant='h3' component='h1' sx={{ textAlign: 'right'}}>MYUNI</Typography>

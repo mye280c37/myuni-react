@@ -8,10 +8,10 @@ import Typography from '@mui/material/Typography';
 
 function Item({ index, contents }) {
     return (
-        <Grid item sm={2.4} sx={{width: '100%',  pl: {xs: 4, sm: 1}, pr: {xs: 4, sm: 1}}}>
+        <Grid item xs={5.5} sm={3.3} sx={{width: '100%'}}>
             <Card sx={{ 
                     width: '100%',
-                    height: { xs: 120, sm: 150 },
+                    height: { xs: 140, sm: 185, lg: 190 },
                     mb: 1,
                     textAlign: 'center', 
                     backgroundColor: 'rgba(132, 132, 132, 0.2)',
@@ -19,16 +19,24 @@ function Item({ index, contents }) {
                     borderRadius: '20px'
                 }}
             >
-                <CardContent>
-                    <Typography sx={{ fontSize: 10, mb: 2 }} color="text.secondary" gutterBottom>
+                <CardContent sx={{ pl:{xs: 1, sm: 2}, pr:{xs: 1, sm: 2},}}>
+                    <Typography sx={{ fontSize: 13, mb: { xs: 1, sm: 2} }} color="text.secondary" gutterBottom>
                         STEP {index}
                     </Typography>
-                    <Typography variant="body1" sx={{ fontSize: 16, fontWeight: 'bold' }} component="div">
+                    <Typography 
+                        variant="body1" 
+                        sx={{ 
+                            fontSize: { xs:'4.1vw', sm: '20px', md: '23px' }, 
+                            mt: { xs: 2, sm: 3, lg: 4 }, 
+                            fontWeight: 'bold' 
+                        }} 
+                        component="div"
+                    >
                         {contents.primary}
                     </Typography>
                 </CardContent>
             </Card>
-            <Typography variant='body2' color="text.secondary" sx={{ fontSize: 11 }}>
+            <Typography variant='body2' color="text.secondary" sx={{ fontSize: 12 }}>
                 {contents.secondary? '* ': ''}{contents.secondary}
             </Typography>
         </Grid>
