@@ -5,16 +5,10 @@ import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
 
 import StickyHeadTable from "./StickyHeaderTable";
-import ReviewDetail from "./ReviewDetail";
 
-const columns = [
-    { id: 'title', label: '제목', minWidth: 170 },
-    { id: 'author', label: '작성자', minWidth: 100 },
-    { id: 'consultingTime', label: '상담 날짜', minWidth: 100 },
-];
+function PreviewTable(props) {
 
-function Reviews(props) {
-
+    const columns = props.columns;
     const data = props.data;
     const [ clicked, setClicked ] = useState(props.clicked?props.clicked:-1);
 
@@ -36,7 +30,7 @@ function Reviews(props) {
             ?<Box></Box>
             :<Box sx={{ display: clicked===-1? 'none': 'block'}}>
                 <Divider></Divider>
-                <ReviewDetail review={data[clicked]}/>
+                {props.detail(data[clicked])}
                 <Divider></Divider>
                 <Box sx={{ mt: 3, textAlign: 'right' }}>
                     <Button variant="outlined" onClick={()=>{setClicked(-1)}}>
@@ -49,10 +43,12 @@ function Reviews(props) {
     );
 }
 
-Reviews.propTypes = {
+PreviewTable.propTypes = {
+    columns: PropTypes.array.isRequired,
     data: PropTypes.array.isRequired,
-    clicked: PropTypes.number,
-    onClick: PropTypes.func
+    clicked: PropTypes.number.isRequired,
+    onClick: PropTypes.func.isRequired,
+    detail: PropTypes.func.isRequired
 }
 
-export default Reviews;
+export default PreviewTable;

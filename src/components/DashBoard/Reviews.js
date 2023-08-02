@@ -4,9 +4,20 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 
 import Title from './Title';
-import Reviews from '../common/Reviews';
+import PreviewTable from "../common/PreviewTable";
+import ReviewDetail from "../common/ReviewDetail";
 
 const url = process.env.REACT_APP_API_URL;
+
+const columns = [
+    { id: 'title', label: '제목', minWidth: 170 },
+    { id: 'author', label: '작성자', minWidth: 100 },
+    { id: 'consultingTime', label: '상담 날짜', minWidth: 100 },
+];
+
+function clickedHandler(data) {
+    return <ReviewDetail review={data} />
+}
 
 export default function AdminReviews() {
 
@@ -60,7 +71,7 @@ export default function AdminReviews() {
             </Button>
         </Box>
         }
-        <Reviews clicked={clicked} onClick={setClicked} data={data}/>
+        <PreviewTable clicked={clicked} onClick={setClicked} columns={columns} data={data} detail={clickedHandler}/>
     </React.Fragment>
     );
 };
