@@ -58,7 +58,7 @@ function DrawerContents(props) {
           <ListItemText primary="컨설팅 신청 관리" />
         </Link>
       </ListItemButton>
-      <ListItemButton sx={{ pt:0, pb:0, minHeight: 48 }} onClick={()=>props.onClick(0)}>
+      <ListItemButton disabled sx={{ pt:0, pb:0, minHeight: 48 }} onClick={()=>props.onClick(0)}>
         <ListItemIcon>
           <DashboardIcon />
         </ListItemIcon>
@@ -66,42 +66,6 @@ function DrawerContents(props) {
           <ListItemText primary="컨설팅 신청 폼 관리" />
         </Link>
       </ListItemButton>
-      {/* <ListItemButton sx={{ p:0 }}>
-      <Accordion sx={{ width: drawerWidth }}>
-              <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1a-content"
-              id="consulting-request"
-              >   
-                <ListItemIcon sx={{ mt: '4px' }}>
-                    <BarChartIcon />
-                </ListItemIcon>
-                <ListItemText primary="컨설팅 신청 관리" />
-              </AccordionSummary>
-              <AccordionDetails>
-                  <ListItemButton onClick={()=>props.onClick(0)}>
-                      <ListItemIcon>
-                        <BarChartIcon />
-                      </ListItemIcon>
-                      <ListItemText primary="컨설팅 신청 관리" />
-                  </ListItemButton>
-                  <ListItemButton onClick={()=>props.onClick(1)}>
-                      <ListItemIcon>
-                        <BarChartIcon />
-                      </ListItemIcon>
-                      <ListItemText primary="신청 날짜 관리" />
-                  </ListItemButton>
-                  <ListItemButton>
-                      <ListItemIcon>
-                        <BarChartIcon />
-                      </ListItemIcon>
-                      <Link href='#' color="inherit" underline="none">
-                          <ListItemText primary="신청 폼 관리" />
-                      </Link>
-                  </ListItemButton>
-              </AccordionDetails>
-          </Accordion>
-      </ListItemButton> */}
       <ListItemButton sx={{ pt:0, pb:0, minHeight: 48 }} onClick={()=>props.onClick(0)}>
         <ListItemIcon>
           <PeopleIcon />

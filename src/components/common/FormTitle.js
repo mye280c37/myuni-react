@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography';
 
 function FormTitle(props) {
     return (
-        <Typography variant="h6" gutterBottom>
+        <Typography variant="h6" sx={props.sx} gutterBottom>
             {props.children}
         </Typography>
     )
@@ -12,6 +12,7 @@ function FormTitle(props) {
 
 FormTitle.propTypes = {
     children: PropTypes.node,
+    sx: PropTypes.object,
 };
 
 export default FormTitle;

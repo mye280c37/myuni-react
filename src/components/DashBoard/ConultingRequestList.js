@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from "react";
 import Title from './Title';
-import PreviewTable from "../common/PreviewTable";
 import axios from 'axios';
-import ReviewDetail from "../common/ReviewDetail";
+
+import PreviewTable from "../common/PreviewTable";
+import ConsultingRequestDetail from "../common/ConsultingRequestDetail";
 
 const url = process.env.REACT_APP_API_URL;
 
@@ -12,6 +13,22 @@ const columns = [
   { id: 'consultingOption', label: '컨설팅 옵션'},
   { id: 'checked', label: '확인', align: 'center'}
 ];
+
+const ProcessData = (data) => {
+  return data.map((d) => { 
+    return {
+      name: d.user.name,
+      desiredDate: d.desiredDate,
+      consultingOption: d.consultingOption.join(', '),
+      checked: d.checked? "O" : "X",
+      origin: d
+    }
+  });
+};
+
+const clickedHandler = (data) => {
+  return <ConsultingRequestDetail data={data}/>
+}
 
 export default function ConsultingRequestList() {
 
@@ -26,7 +43,7 @@ export default function ConsultingRequestList() {
     )
     .then((res) => {
         console.log(res.data.result);
-        setData(res.data.result);
+        setData(ProcessData(res.data.result));
     })
     .catch((error) => {
         console.log(error);
@@ -43,7 +60,7 @@ export default function ConsultingRequestList() {
   return (
     <React.Fragment>
       <Title>컨설팅 신청</Title>
-      <PreviewTable clicked={clicked} onClick={setClicked} columns={columns} data={data} detail={<ReviewDetail/>}/>
+      <PreviewTable clicked={clicked} onClick={setClicked} columns={columns} data={data} detail={clickedHandler}/>
     </React.Fragment>
   );
 };
