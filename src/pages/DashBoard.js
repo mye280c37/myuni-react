@@ -172,7 +172,7 @@ function DashboardContent() {
               </Grid>
               </React.Fragment>:
               <Grid item xs={12}>
-                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', height: '100%' }}>
+                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', mb: 4 }}>
                   {contentsList[clicked]}
                 </Paper>
               </Grid>
