@@ -26,9 +26,8 @@ function PreviewTable(props) {
             <Box sx={{ display: clicked===-1? 'block': 'none' }}>
                 <StickyHeadTable columns={columns} rows={data} onClick={setClicked}></StickyHeadTable>
             </Box>
-            {clicked === -1
-            ?<Box></Box>
-            :<Box sx={{ display: clicked===-1? 'none': 'block'}}>
+            {clicked === -1?null:
+            <Box sx={{ display: clicked===-1? 'none': 'block', height: '100%'}}>
                 <Divider></Divider>
                 {props.detail(data[clicked])}
                 <Divider></Divider>

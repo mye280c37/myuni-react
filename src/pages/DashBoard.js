@@ -159,13 +159,13 @@ function DashboardContent() {
               {clicked===-1?
               <React.Fragment>
               {/* 컨설팅 신청 리스트 */}
-              <Grid item xs={12} md={8}>
+              <Grid item xs={12} md={8} sx={{ height: '100%' }}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', height: '100%' }}>
                   <ConsultingRequestList />
                 </Paper>
               </Grid>
               {/* 신청 가능 날짜 리스트 */}
-              <Grid item xs={12} md={4}>
+              <Grid item xs={12} md={4} sx={{ height: '100%' }}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', height: '100%' }}>
                   <AvailableDateList />
                 </Paper>
