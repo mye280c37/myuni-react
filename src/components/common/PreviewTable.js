@@ -16,7 +16,7 @@ function PreviewTable(props) {
         if (props.onClick){
             props.onClick(clicked);
         }
-    }, [clicked, props.clicked]);
+    }, [clicked, props]);
 
     return (
         <React.Fragment>
