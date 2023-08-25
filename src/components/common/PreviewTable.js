@@ -4,35 +4,32 @@ import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
 
-import StickyHeadTable from "./StickyHeaderTable";
+import StickyHeaderTable from "./StickyHeaderTable";
 
 function PreviewTable(props) {
 
     const columns = props.columns;
     const data = props.data;
-    const [ clicked, setClicked ] = useState(props.clicked?props.clicked:-1);
+    const [ clicked, setClicked ] = useState(props.clicked);
 
     useEffect(()=>{
-        if(props.clicked===-2){
-            setClicked(-1);
-        }
-        else if (props.onClick){
+        if (props.onClick){
             props.onClick(clicked);
         }
     }, [clicked, props.clicked]);
 
     return (
         <React.Fragment>
-            <Box sx={{ display: clicked===-1? 'block': 'none' }}>
-                <StickyHeadTable columns={columns} rows={data} onClick={setClicked}></StickyHeadTable>
+            <Box sx={{ display: clicked<0? 'block': 'none' }}>
+                <StickyHeaderTable columns={columns} rows={data} onClick={setClicked}></StickyHeaderTable>
             </Box>
-            {clicked === -1?null:
-            <Box sx={{ display: clicked===-1? 'none': 'block', height: '100%'}}>
+            {clicked < 0?null:
+            <Box sx={{ display: clicked===-2? 'none': 'block', height: '100%'}}>
                 <Divider></Divider>
                 {props.detail(data[clicked])}
                 <Divider></Divider>
                 <Box sx={{ mt: 3, textAlign: 'right' }}>
-                    <Button variant="outlined" onClick={()=>{setClicked(-1)}}>
+                    <Button variant="outlined" onClick={()=>{setClicked(-2)}}>
                         목록으로
                     </Button>
                 </Box>

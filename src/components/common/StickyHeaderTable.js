@@ -11,7 +11,7 @@ import TableRow from '@mui/material/TableRow';
 import LinkIcon from '@mui/icons-material/Link';
 import { Typography } from '@mui/material';
 
-function StickyHeadTable(props) {
+function StickyHeaderTable(props) {
     const columns = props.columns;
     const rows = props.rows;
     const [page, setPage] = React.useState(0);
@@ -32,7 +32,7 @@ function StickyHeadTable(props) {
         <TableContainer>
             <Table stickyHeader aria-label="sticky table">
             <TableHead>
-                <TableRow>
+                <TableRow key={'header'}>
                 {columns.map((column) => (
                     <TableCell
                     key={column.id}
@@ -52,7 +52,7 @@ function StickyHeadTable(props) {
         <TableContainer>
             <Table stickyHeader aria-label="sticky table">
             <TableHead>
-                <TableRow>
+                <TableRow key={'header'}>
                 {columns.map((column) => (
                     <TableCell
                     key={column.id}
@@ -110,15 +110,15 @@ function StickyHeadTable(props) {
     );
 }
 
-StickyHeadTable.propTypes = {
+StickyHeaderTable.propTypes = {
     columns: PropTypes.array.isRequired,
     rows: PropTypes.array.isRequired,
     rowsPerPage: PropTypes.number,
     onClick: PropTypes.func
 }
 
-StickyHeadTable.defaultProps = {
+StickyHeaderTable.defaultProps = {
     rowsPerPage: 15
 }
 
-export default StickyHeadTable;
+export default StickyHeaderTable;

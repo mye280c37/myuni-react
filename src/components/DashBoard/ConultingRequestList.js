@@ -32,10 +32,8 @@ const clickedHandler = (data) => {
 
 export default function ConsultingRequestList() {
 
-  const [ getData, setGetData ] = useState(false);
   const [ data, setData] = useState([]);
-
-  const [clicked, setClicked] = useState(-1);
+  const [clicked, setClicked] = useState(-2);
 
   const getConsultingRequests = async () => {
     await axios.get(
@@ -51,11 +49,11 @@ export default function ConsultingRequestList() {
   };
 
   useEffect(()=>{
-    if (!getData){
+    if (clicked === -2){
       getConsultingRequests();
     }
-    setGetData(true);
-  },[getData, getConsultingRequests]);
+    setClicked(-1);
+  },[clicked, setClicked, getConsultingRequests]);
 
   return (
     <React.Fragment>
