@@ -1,4 +1,5 @@
-import React, {useState, useEffect, useCallback} from "react";
+/* eslint-disable */
+import React, {useState, useEffect} from "react";
 import Title from './Title';
 import axios from 'axios';
 import Box from '@mui/material/Box';
@@ -29,7 +30,7 @@ export default function AvailableDateList() {
     const [ data, setData] = useState([]);
     const [ newData, setNewData ] = useState([]);
 
-    const getAvailableDates = useCallback(async () => {
+    const getAvailableDates = async () => {
         await axios.get(
             url + "/v2/available-date",
         )
@@ -40,7 +41,7 @@ export default function AvailableDateList() {
         .catch((error) => {
             console.log(error);
         })
-    }, []);
+    };
 
     async function postAvailableDates() {
         const dataList = newData.map((data) => {

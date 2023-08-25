@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, {useState, useEffect, useCallback} from "react";
 import PropTypes from 'prop-types';
 import Grid from '@mui/material/Grid';
@@ -40,7 +41,7 @@ function EssentialForm(props) {
       // console.log(error);
       alert("현재 서버 오류로 신청이 불가능한 상태입니다. 관리자에게 직접 문의해주세요.");
     });
-  }, []);
+  }, [availableDateList]);
 
   const userHandler = (e) => {
     onUserChange(e);

@@ -1,4 +1,5 @@
-import React, {useState, useEffect, useCallback} from "react";
+/* eslint-disable */
+import React, {useState, useEffect} from "react";
 import Title from './Title';
 import axios from 'axios';
 
@@ -35,7 +36,7 @@ export default function ConsultingRequestList() {
   const [ data, setData] = useState([]);
   const [clicked, setClicked] = useState(-2);
 
-  const getConsultingRequests = useCallback(async () => {
+  const getConsultingRequests = async () => {
     await axios.get(
         url + "/v2/consulting-request/admin",
     )
@@ -46,7 +47,7 @@ export default function ConsultingRequestList() {
     .catch((error) => {
         console.log(error);
     });
-  }, []);
+  };
 
   useEffect(()=>{
     if (clicked === -2){
