@@ -24,40 +24,38 @@ const columns = [
     { id: 'date', label: '날짜' }
 ];
 
-const AvailableDateField = () => {
-    return (
-        <TableRow sx={{height: rowHeight, p: 0}}>
-            <TableCell sx={{ p: 0 }}>
-                <Input 
-                    id={'date'}
-                    name={'date'}
-                    // value={form.value}
-                    // onChange={additionalFormItemHandler}
-                    variant="outlined"
-                    size="small"
-                    aria-label="form"
-                    sx={{ ml: 2 }}
-                />
-            </TableCell>
-            <TableCell>
-                <RemoveCircleOutlineIcon fontSize="small" color="action"></RemoveCircleOutlineIcon>
-            </TableCell>
-        </TableRow>
-    );
-}
-
 export default function AvailableDateList() {
 
     const [ getData, setGetData ] = useState(false);
     const [ data, setData] = useState([]);
+    const [ newData, setNewData ] = useState([]);
 
     async function getAvailableDates() {
         await axios.get(
-            url + "/v2/available-date/admin",
+            url + "/v2/available-date",
         )
         .then((res) => {
             console.log(res.data.result);
             setData(res.data.result);
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+    }
+
+    async function postAvailableDates() {
+        const dataList = newData.map((data) => {
+            return data.date;
+        });
+        console.log(dataList);
+        await axios.post(
+            url + "/v2/available-date/admin", {
+                dateList: dataList
+            }
+        )
+        .then((res) => {
+            console.log(res.data.result);
+            setGetData(false);
         })
         .catch((error) => {
             console.log(error);
@@ -81,15 +79,49 @@ export default function AvailableDateList() {
             getAvailableDates();
         }
         setGetData(true);
+        setNewData([]);
     },[getData, getAvailableDates]);
 
     const addAvailableDateField = () => {
-        setData(
-            [...data, {date: "", timeFrom: "", timeTo: ""}]
+        setNewData(
+            [...newData, {id: newData.length, date: ""}]
         );
-        console.log(data);
+        console.log(newData);
     };
 
+    const AvailableDateField = (idx) => {
+        return (
+            <TableRow tabIndex={idx} sx={{height: rowHeight, p: 0}}>
+                <TableCell sx={{ p: 0 }}>
+                    <Input 
+                        id={'date'}
+                        name={'date'}
+                        value={newData[idx].date}
+                        onChange={(e)=>{
+                            setNewData(
+                                newData.map(data =>
+                                    data.id === idx ? { ...data, date: e.target.value } : data
+                                )
+                            );
+                        }}
+                        variant="outlined"
+                        size="small"
+                        aria-label="form"
+                        sx={{ ml: 2 }}
+                    />
+                </TableCell>
+                <TableCell>
+                    <RemoveCircleOutlineIcon 
+                        fontSize="small" 
+                        color="action" 
+                        onClick={() => {
+                            setNewData(newData.filter(data => data.id !== idx));
+                        }}
+                    ></RemoveCircleOutlineIcon>
+                </TableCell>
+            </TableRow>
+        );
+    };
 
     return (
         <React.Fragment>
@@ -111,30 +143,27 @@ export default function AvailableDateList() {
                 </TableRow>
             </TableHead>
             <TableBody>
-                {data
-                .map((row, idx) => {
-                    if(row._id != null){
-                        return (
-                            <TableRow tabIndex={idx} key={row._id} sx={{ cursor: 'pointer', height: rowHeight }}>
-                                {columns.map((column) => {
-                                const value = row[column.id];
-                                return (
-                                    <TableCell key={column.id} align={column.align}>
-                                    {column.format && typeof value === 'number'
-                                        ? column.format(value)
-                                        : value}
-                                    </TableCell>
-                                );
-                                })}
-                                <TableCell>
-                                    <DeleteIcon color="error" fontSize="small" onClick={()=>deleteAvailableDate(row._id)}></DeleteIcon>
+                {data.map((row, idx) => {
+                    return (
+                        <TableRow tabIndex={idx} key={row._id} sx={{ cursor: 'pointer', height: rowHeight }}>
+                            {columns.map((column) => {
+                            const value = row[column.id];
+                            return (
+                                <TableCell align={column.align}>
+                                {column.format && typeof value === 'number'
+                                    ? column.format(value)
+                                    : value}
                                 </TableCell>
-                            </TableRow>
-                        );
-                    }
-                    else{
-                        return AvailableDateField();
-                    }
+                            );
+                            })}
+                            <TableCell>
+                                <DeleteIcon color="error" fontSize="small" onClick={()=>deleteAvailableDate(row._id)}></DeleteIcon>
+                            </TableCell>
+                        </TableRow>
+                    );
+                })}
+                {newData.map((row, idx) => {
+                    return AvailableDateField(idx);
                 })}
             </TableBody>
             </Table>
@@ -147,7 +176,7 @@ export default function AvailableDateList() {
             <AddCircleIcon color="primary" onClick={addAvailableDateField} sx={{ cursor: 'pointer'}}></AddCircleIcon>
         </Box>
         <Box sx={{ ml: "auto" }}>
-            <Button variant="outlined">추가</Button>
+            <Button variant="outlined" onClick={()=>{postAvailableDates()}}>추가</Button>
         </Box>
         </React.Fragment>
     );
