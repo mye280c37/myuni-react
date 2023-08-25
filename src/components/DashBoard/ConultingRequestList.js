@@ -1,30 +1,64 @@
-import * as React from 'react';
+import React, {useState, useEffect} from "react";
 import Title from './Title';
-import StickyHeadTable from '../common/StickyHeaderTable';
+import axios from 'axios';
+
+import PreviewTable from "../common/PreviewTable";
+import ConsultingRequestDetail from "../common/ConsultingRequestDetail";
+
+const url = process.env.REACT_APP_API_URL;
 
 const columns = [
-  { id: 'desiredDate', label: '신청 날짜' },
   { id: 'name', label: '이름'},
-  { id: 'consultingOption', label: '컨설팅 옵션'}
+  { id: 'desiredDate', label: '신청 날짜' },
+  { id: 'consultingOption', label: '컨설팅 옵션'},
+  { id: 'checked', label: '확인', align: 'center'}
 ];
 
-const rows = [
-  { desiredDate: '2019-02-04 13:00~14:00', name: '아무개', consultingOption: '수시지원전형' },
-  { desiredDate: '2019-02-04 13:00~14:00', name: '아무개', consultingOption: '수시지원전형' },
-  { desiredDate: '2019-02-04 13:00~14:00', name: '아무개', consultingOption: '수시지원전형' }
-];
+const ProcessData = (data) => {
+  return data.map((d) => { 
+    return {
+      name: d.user.name,
+      desiredDate: d.desiredDate,
+      consultingOption: d.consultingOption.join(', '),
+      checked: d.checked? "O" : "X",
+      origin: d
+    }
+  });
+};
+
+const clickedHandler = (data) => {
+  return <ConsultingRequestDetail data={data}/>
+}
 
 export default function ConsultingRequestList() {
+
+  const [ data, setData] = useState([]);
+  const [clicked, setClicked] = useState(-2);
+
+  const getConsultingRequests = async () => {
+    await axios.get(
+        url + "/v2/consulting-request/admin",
+    )
+    .then((res) => {
+        console.log(res.data.result);
+        setData(ProcessData(res.data.result));
+    })
+    .catch((error) => {
+        console.log(error);
+    });
+  };
+
+  useEffect(()=>{
+    if (clicked === -2){
+      getConsultingRequests();
+    }
+    setClicked(-1);
+  },[clicked, setClicked, getConsultingRequests]);
+
   return (
     <React.Fragment>
       <Title>컨설팅 신청</Title>
-      <StickyHeadTable
-        columns={columns}
-        rows={rows}
-      />
-        {/* <Link color="primary" href="#" onClick={preventDefault} sx={{ mt: 3 }}>
-          See more orders
-        </Link> */}
+      <PreviewTable clicked={clicked} onClick={setClicked} columns={columns} data={data} detail={clickedHandler}/>
     </React.Fragment>
   );
 };

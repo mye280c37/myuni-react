@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import { Grid, Typography } from "@mui/material";
 
-import BoxTitle from "../components/common/BoxTitle";
+import BoxTitle from "./BoxTitle";
 
 function ReviewDetail(props) {
     return (

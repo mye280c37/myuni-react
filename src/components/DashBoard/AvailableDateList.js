@@ -11,65 +11,24 @@ import TableRow from '@mui/material/TableRow';
 import Button from '@mui/material/Button';
 import { Typography } from "@mui/material";
 import TextField from '@mui/material/TextField';
+import Input from '@mui/material/Input';
 import DeleteIcon from '@mui/icons-material/Delete';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 const url = process.env.REACT_APP_API_URL;
 
-const columns = [
-    { id: 'date', label: '날짜' },
-    { id: 'timeFrom', label: '시작 시간'},
-    { id: 'timeTo', label: '종료 시간'}
-];
+const rowHeight = '42px';
 
-const AvailableDateField = () => {
-    return (
-        <TableRow>
-            <TableCell>
-                <TextField
-                    id={'date'}
-                    name={'date'}
-                    // value={form.value}
-                    // onChange={additionalFormItemHandler}
-                    fullWidth
-                    variant="outlined"
-                    size="small"
-                />
-            </TableCell>
-            <TableCell>
-                <TextField
-                    id={'timeFrom'}
-                    name={'timeFrom'}
-                    // value={form.value}
-                    // onChange={additionalFormItemHandler}
-                    fullWidth
-                    variant="outlined"
-                    size="small"
-                />
-            </TableCell>
-            <TableCell>
-                <TextField
-                    id={'timeTo'}
-                    name={'timeTo'}
-                    // value={form.value}
-                    // onChange={additionalFormItemHandler}
-                    fullWidth
-                    variant="outlined"
-                    size="small"
-                />
-            </TableCell>
-            <TableCell>
-                <RemoveCircleOutlineIcon fontSize="small" color="action"></RemoveCircleOutlineIcon>
-            </TableCell>
-        </TableRow>
-    );
-}
+const columns = [
+    { id: 'date', label: '날짜' }
+];
 
 export default function AvailableDateList() {
 
     const [ getData, setGetData ] = useState(false);
     const [ data, setData] = useState([]);
+    const [ newData, setNewData ] = useState([]);
 
     async function getAvailableDates() {
         await axios.get(
@@ -84,20 +43,85 @@ export default function AvailableDateList() {
         })
     }
 
+    async function postAvailableDates() {
+        const dataList = newData.map((data) => {
+            return data.date;
+        });
+        console.log(dataList);
+        await axios.post(
+            url + "/v2/available-date/admin", {
+                dateList: dataList
+            }
+        )
+        .then((res) => {
+            console.log(res.data.result);
+            setGetData(false);
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+    }
+
+    const deleteAvailableDate = async (availableDateId) => {
+        await axios.delete(
+            url + "/v2/available-date/admin/" + availableDateId,
+        )
+        .then((res) => {
+            setGetData(false);
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+    };
+
     useEffect(()=>{
         if (!getData){
             getAvailableDates();
         }
         setGetData(true);
+        setNewData([]);
     },[getData, getAvailableDates]);
 
     const addAvailableDateField = () => {
-        setData(
-            [...data, {date: "", timeFrom: "", timeTo: ""}]
+        setNewData(
+            [...newData, {id: newData.length, date: ""}]
         );
-        console.log(data);
+        console.log(newData);
     };
 
+    const AvailableDateField = (idx) => {
+        return (
+            <TableRow tabIndex={idx} sx={{height: rowHeight, p: 0}}>
+                <TableCell sx={{ p: 0 }}>
+                    <Input 
+                        id={'date'}
+                        name={'date'}
+                        value={newData[idx].date}
+                        onChange={(e)=>{
+                            setNewData(
+                                newData.map(data =>
+                                    data.id === idx ? { ...data, date: e.target.value } : data
+                                )
+                            );
+                        }}
+                        variant="outlined"
+                        size="small"
+                        aria-label="form"
+                        sx={{ ml: 2 }}
+                    />
+                </TableCell>
+                <TableCell>
+                    <RemoveCircleOutlineIcon 
+                        fontSize="small" 
+                        color="action" 
+                        onClick={() => {
+                            setNewData(newData.filter(data => data.id !== idx));
+                        }}
+                    ></RemoveCircleOutlineIcon>
+                </TableCell>
+            </TableRow>
+        );
+    };
 
     return (
         <React.Fragment>
@@ -105,12 +129,12 @@ export default function AvailableDateList() {
         <TableContainer>
             <Table size="small">
             <TableHead>
-                <TableRow>
+                <TableRow sx={{ height: rowHeight }}>
                 {columns.map((column) => (
                     <TableCell
                     key={column.id}
                     align={column.align}
-                    style={{ minWidth: column.minWidth? column.minWidth: 0 }}
+                    sx={{ minWidth: column.minWidth? column.minWidth: 0 }}
                     >
                     {column.label}
                     </TableCell>
@@ -119,30 +143,27 @@ export default function AvailableDateList() {
                 </TableRow>
             </TableHead>
             <TableBody>
-                {data
-                .map((row, idx) => {
-                    if(row._id != null){
-                        return (
-                            <TableRow tabIndex={idx} key={row._id} sx={{ cursor: 'pointer'}}>
-                                {columns.map((column) => {
-                                const value = row[column.id];
-                                return (
-                                    <TableCell key={column.id} align={column.align}>
-                                    {column.format && typeof value === 'number'
-                                        ? column.format(value)
-                                        : value}
-                                    </TableCell>
-                                );
-                                })}
-                                <TableCell>
-                                    <DeleteIcon color="error" fontSize="small"></DeleteIcon>
+                {data.map((row, idx) => {
+                    return (
+                        <TableRow tabIndex={idx} key={row._id} sx={{ cursor: 'pointer', height: rowHeight }}>
+                            {columns.map((column) => {
+                            const value = row[column.id];
+                            return (
+                                <TableCell align={column.align}>
+                                {column.format && typeof value === 'number'
+                                    ? column.format(value)
+                                    : value}
                                 </TableCell>
-                            </TableRow>
-                        );
-                    }
-                    else{
-                        return AvailableDateField();
-                    }
+                            );
+                            })}
+                            <TableCell>
+                                <DeleteIcon color="error" fontSize="small" onClick={()=>deleteAvailableDate(row._id)}></DeleteIcon>
+                            </TableCell>
+                        </TableRow>
+                    );
+                })}
+                {newData.map((row, idx) => {
+                    return AvailableDateField(idx);
                 })}
             </TableBody>
             </Table>
@@ -155,7 +176,7 @@ export default function AvailableDateList() {
             <AddCircleIcon color="primary" onClick={addAvailableDateField} sx={{ cursor: 'pointer'}}></AddCircleIcon>
         </Box>
         <Box sx={{ ml: "auto" }}>
-            <Button variant="outlined">추가</Button>
+            <Button variant="outlined" onClick={()=>{postAvailableDates()}}>추가</Button>
         </Box>
         </React.Fragment>
     );
