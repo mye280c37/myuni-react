@@ -61,7 +61,7 @@ function EssentialForm(props) {
 
   return (
     <React.Fragment>
-      <CustomSnackBar open={snackBarOpen} onClose={()=>setSnackBarOpen(false)} title={"신청 가능한 날짜가 없어 현재 신청이 불가능합니다."} ></CustomSnackBar>
+      <CustomSnackBar open={snackBarOpen} onClose={()=>setSnackBarOpen(false)} title={"지금 너무 예약 신청이 많이 들어와 홈페이지로는 신청을 받지 않고 있으니 메일로 연락 주시길 바랍니다. (imaginemyuni@gmail.com)"} ></CustomSnackBar>
       <Typography variant="body1" sx={{ color: "darkred", mb: 5 }} gutterBottom>
         해당 페이지의 정보는 모두 필수사항입니다. 빠짐없이 채워주세요.
       </Typography>
