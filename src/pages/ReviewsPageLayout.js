@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useCallback} from "react";
 import axios from "axios";
 
 import PageLayout from './PageLayout';
@@ -26,7 +26,7 @@ export default function ReviewsPageLayout() {
 
     const apiUrl = "/v2/review";
 
-    async function getReviews() {
+    const getReviews = useCallback(async () => {
         await axios.get(
             url + apiUrl
         )
@@ -37,7 +37,7 @@ export default function ReviewsPageLayout() {
         .catch((error) => {
             console.log(error);
         })
-    }
+    }, []);
 
     useEffect(()=>{
         if (!getData){
