@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useCallback} from "react";
 import axios from "axios";
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -26,7 +26,7 @@ export default function AdminReviews() {
     
     const [clicked, setClicked] = useState(-1);
 
-    async function getReviews() {
+    const getReviews = useCallback(async () => {
         await axios.post(
             url + "/v2/review/admin"
         )
@@ -37,7 +37,7 @@ export default function AdminReviews() {
         .catch((error) => {
             console.log(error);
         })
-    }
+    }, []);
 
     async function deleteReview() {
         const reviewId = data[clicked]._id;

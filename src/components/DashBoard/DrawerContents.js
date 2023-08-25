@@ -14,7 +14,7 @@ import BarChartIcon from '@mui/icons-material/BarChart';
 // import MuiAccordion from '@mui/material/Accordion';
 // import MuiAccordionSummary from '@mui/material/AccordionSummary';
 
-const drawerWidth = 240;
+// const drawerWidth = 240;
 
 const ListItemIcon = styled((props) => (
     <MuiListItemIcon {...props} />

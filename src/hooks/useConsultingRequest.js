@@ -56,16 +56,15 @@ export default function useConsultingRequest(values=null) {
         checked: false,
     }: values);
 
-    const handleChange = (name, value) => {
-        setConsultingRequest({
-            ...consultingRequest,
-            [name]: value,
-        });
-    };
+    // const handleChange = (name, value) => {
+    //     setConsultingRequest({
+    //         ...consultingRequest,
+    //         [name]: value,
+    //     });
+    // };
 
     return{
         consultingRequest,
-        setConsultingRequest,
-        handleChange
+        setConsultingRequest
     }; 
 }

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useCallback} from "react";
 import Title from './Title';
 import axios from 'axios';
 import Box from '@mui/material/Box';
@@ -10,7 +10,6 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Button from '@mui/material/Button';
 import { Typography } from "@mui/material";
-import TextField from '@mui/material/TextField';
 import Input from '@mui/material/Input';
 import DeleteIcon from '@mui/icons-material/Delete';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
@@ -30,7 +29,7 @@ export default function AvailableDateList() {
     const [ data, setData] = useState([]);
     const [ newData, setNewData ] = useState([]);
 
-    async function getAvailableDates() {
+    const getAvailableDates = useCallback(async () => {
         await axios.get(
             url + "/v2/available-date",
         )
@@ -41,7 +40,7 @@ export default function AvailableDateList() {
         .catch((error) => {
             console.log(error);
         })
-    }
+    }, []);
 
     async function postAvailableDates() {
         const dataList = newData.map((data) => {

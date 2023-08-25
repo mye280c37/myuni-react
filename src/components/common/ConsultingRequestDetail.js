@@ -31,7 +31,7 @@ const gridContainerStyle = {
 
 function ConsultingRequestDetail(props) {
     // const consultingRequest = props.data.origin;
-    const { consultingRequest, setConsultingRequest, handleChange } = useConsultingRequest(props.data.origin);
+    const { consultingRequest, setConsultingRequest } = useConsultingRequest(props.data.origin);
 
     const updateConsultingRequest = async () => {
         console.log(!consultingRequest.checked);
