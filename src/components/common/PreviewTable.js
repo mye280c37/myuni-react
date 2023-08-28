@@ -13,9 +13,7 @@ function PreviewTable(props) {
     const [ clicked, setClicked ] = useState(props.clicked);
 
     useEffect(()=>{
-        if (props.onClick){
-            props.onClick(clicked);
-        }
+        props.onClick(clicked);
     }, [clicked, props]);
 
     return (
@@ -25,14 +23,14 @@ function PreviewTable(props) {
             </Box>
             {clicked < 0?null:
             <Box sx={{ display: clicked===-2? 'none': 'block', height: '100%'}}>
-                <Divider></Divider>
-                {props.detail(data[clicked])}
-                <Divider></Divider>
-                <Box sx={{ mt: 3, textAlign: 'right' }}>
+                <Box sx={{ mb: 2, textAlign: 'right' }}>
                     <Button variant="outlined" onClick={()=>{setClicked(-2)}}>
                         목록으로
                     </Button>
                 </Box>
+                <Divider></Divider>
+                {props.detail(data[clicked])}
+                <Divider></Divider>
             </Box>
             }
         </React.Fragment>

@@ -10,7 +10,7 @@ import MyUni from './pages/MyUni';
 import ConsultingIntroduction from './pages/ConsultingIntroduction';
 import GradeConversion from './pages/GradeConversion';
 import YouTubeMaterials from './pages/YoutubeMaterials';
-import ReviewsPageLayout from './pages/ReviewsPageLayout';
+import Reviews from './pages/Reviews';
 import Main from './pages/Main';
 import CareerPlanningConsulting from './pages/CareerPlanningConsulting';
 
@@ -30,7 +30,7 @@ function App() {
           <Route path="/career-planning-consulting" element={<CareerPlanningConsulting/>}></Route>
           <Route path="/consulting-request" element={<ConsultingRequest/>}></Route>
           <Route path="/lectures" element={<YouTubeMaterials/>}></Route>
-          <Route path="/reviews" element={<ReviewsPageLayout/>}></Route>
+          <Route path="/reviews" element={<Reviews/>}></Route>
           <Route path="/admin" element={<Dashboard/>}></Route>
         </Routes>
       </ThemeProvider>

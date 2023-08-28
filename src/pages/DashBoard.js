@@ -20,7 +20,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import DrawerContents from '../components/DashBoard/DrawerContents';
 import ConsultingRequestList from '../components/DashBoard/ConultingRequestList';
 import AvailableDateList from '../components/DashBoard/AvailableDateList';
-import AdminReviews from '../components/DashBoard/Reviews';
+import AdminReviews from '../components/DashBoard/AdminReviews';
 import SignIn from "../components/DashBoard/SignIn";
 
 import { getCookie } from "../utils/cookies";
